@@ -1,0 +1,35 @@
+plugin.tx_imagecarousel_pi1 {
+	# cat=plugin.tx_imagecarousel.basic/enable/010; type=options[jquery]; label=JS Library: JS-Library to use
+	jsLibrary = jquery
+
+
+	# cat=plugin.tx_imagecarousel.basic/file/010; type=file[html,htm,tmpl,txt]; label=HTML-Template File: Location of the used template
+	file.templateFile = EXT:imagecarousel/pi1/tx_imagecarousel_pi1.tmpl
+
+	# cat=plugin.tx_imagecarousel.basic/file/020; type=file[css]; label=CSS file: CSS-File to include
+	file.cssFile = EXT:imagecarousel/pi1/tx_imagecarousel_pi1.css
+
+	# cat=plugin.tx_imagecarousel.basic/file/030; type=string; label=Skin Folder: Folder where the skins are located, subfolders will be shown as dropdown
+	skinFolder = EXT:imagecarousel/res/skins/
+
+
+	# cat=plugin.tx_imagecarousel.basic/dims/040; type=string; label=Image width: Width of the images
+	imagewidth = 200c
+
+	# cat=plugin.tx_imagecarousel.basic/dims/050; type=string; label=Image height: Height of the images
+	imageheight = 200c
+
+	# cat=plugin.tx_imagecarousel.basic/dims/060; type=string; label=Carousel width: Width of the carousel if not vertically
+	carouselwidth = 
+
+	# cat=plugin.tx_imagecarousel.basic/dims/070; type=string; label=Carousel height: Height of the carousel if vertically
+	carouselheight = 
+
+
+	# cat=plugin.tx_imagecarousel.jquery/enable/010; type=boolean; label=jQuery noConflict: Use the noConflict methode
+	jQueryNoConflict = 1
+
+	# cat=plugin.tx_imagecarousel.jquery/file/020; type=file[js]; label=jQuery Library: Location of the jQuery Lib
+	file.jQueryLibrary = EXT:imagecarousel/res/jquery/js/jquery-1.3.2.min.js
+}
+

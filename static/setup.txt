@@ -1,0 +1,16 @@
+plugin.tx_imagecarousel_pi1 {
+	jsLibrary = {$plugin.tx_imagecarousel_pi1.jsLibrary}
+
+	templateFile = {$plugin.tx_imagecarousel_pi1.file.templateFile}
+	cssFile = {$plugin.tx_imagecarousel_pi1.file.cssFile}
+	skinFolder = {$plugin.tx_imagecarousel_pi1.skinFolder}
+
+	imagewidth = {$plugin.tx_imagecarousel_pi1.imagewidth}
+	imageheight = {$plugin.tx_imagecarousel_pi1.imageheight}
+	carouselwidth = {$plugin.tx_imagecarousel_pi1.carouselwidth}
+	carouselheight = {$plugin.tx_imagecarousel_pi1.carouselheight}
+
+	jQueryNoConflict = {$plugin.tx_imagecarousel_pi1.jQueryNoConflict}
+	jQueryLibrary = {$plugin.tx_imagecarousel_pi1.file.jQueryLibrary}
+}
+
