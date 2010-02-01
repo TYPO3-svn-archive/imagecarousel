@@ -91,7 +91,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 		}
 
 		// define the key of the element
-		$this->contentKey = "jfmulticontent_c" . $this->cObj->data['uid'];
+		$this->contentKey = "imagecarousel_c" . $this->cObj->data['uid'];
 
 		// define th images
 		if ($this->lConf['images']) {
