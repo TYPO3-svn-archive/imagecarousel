@@ -46,7 +46,6 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 	var $extKey        = 'imagecarousel';	// The extension key.
 	var $pi_checkCHash = true;
 	var $lConf = array();
-	var $templateFile = null;
 	var $templatePart = null;
 	var $contentKey = null;
 	var $jsFiles = array();
@@ -57,6 +56,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 	var $hrefs = array();
 	var $captions = array();
 	var $imageDir = 'uploads/tx_imagecarousel/';
+	var $type = 'normal';
 
 	/**
 	 * The main method of the PlugIn
@@ -80,9 +80,6 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 				}
 			}
 		}
-
-		// add the CSS file
-		$this->addCssFile($this->conf['cssFile']);
 
 		// add CSS file for skin
 		if ($this->lConf['skin']) {
@@ -114,13 +111,6 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 		} else {
 			$jQueryNoConflict = "";
 			$jQuery = "$";
-		}
-
-		// The template
-		if ($this->conf['templateFile']) {
-			$this->templateFile = $this->cObj->fileResource($this->conf['templateFile']);
-		} else {
-			return "<p>NO TEMPLATE FOUND!</p>";
 		}
 
 		// define the js files
@@ -200,8 +190,10 @@ $jQueryNoConflict . "
 	height: {$this->lConf['carouselheight']}px;
 }");
 		}
+
 		preg_match("/^([0-9]*)/i", $this->lConf['imagewidth'], $reg_width);
 		preg_match("/^([0-9]*)/i", $this->lConf['imageheight'], $reg_height);
+
 		$this->addCSS("
 #c{$this->cObj->data['uid']} .jcarousel-item {
 	width: {$reg_width[1]}px;
@@ -211,54 +203,32 @@ $jQueryNoConflict . "
 		// Add the ressources
 		$this->addResources();
 
-		// Render the Template
-		$markerArray = array();
-		// get the template
-		$templateCode = $this->cObj->getSubpart($this->templateFile, "###TEMPLATE_CAROUSEL###");
-		// Get the images template
-		$imagesCode = $this->cObj->getSubpart($templateCode, "###IMAGES###");
-		// Replace default values
-		$markerArray["KEY"] = $this->contentKey;
-		$markerArray["CLASS"] = $skin_class;
-		$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
-		if (count($this->images) < 1) {
-			return '<p>NOTHING TO DISPLAY</p>';
-		} else {
+		$return_string = null;
+		$images = null;
+		$GLOBALS['TSFE']->register['key'] = $this->contentKey;
+		$GLOBALS['TSFE']->register['class'] = $skin_class;
+		$GLOBALS['TSFE']->register['imagewidth']  = $this->conf['imagewidth'];
+		$GLOBALS['TSFE']->register['imageheight'] = $this->conf['imageheight'];
+		$GLOBALS['TSFE']->register['IMAGE_NUM_CURRENT'] = 0;
+		if (count($this->images) > 0) {
 			foreach ($this->images as $key => $image) {
-				$markerArray = array();
-				$image_config = array();
-				// render the image to the gifen size
-				$image_config['img'] = 'IMAGE';
-				if (! $this->hrefs[$key]) {
-					$image_config['img.'] = $GLOBALS['TSFE']->tmpl->setup['tt_content.']['image.']['20.']['1.'];
-					unset($image_config['img.']['file.']['import.']);
-					unset($image_config['img.']['altText.']);
-					unset($image_config['img.']['titleText.']);
-					unset($image_config['img.']['file.']['width.']);
+				$imgConf = $this->conf['carousel.'][$this->type.'.']['image.'];
+				$totalImagePath = $this->imageDir . $image;
+				$GLOBALS['TSFE']->register['file']    = $totalImagePath;
+				$GLOBALS['TSFE']->register['href']    = $this->hrefs[$key];
+				$GLOBALS['TSFE']->register['caption'] = $this->captions[$key];
+				$link = $this->cObj->imageLinkWrap('', $totalImagePath, $imgConf['imageLinkWrap.']);
+				if ($link) {
+					unset($imgConf['titleText']);
+					unset($imgConf['titleText.']);
+					$imgConf['emptyTitleHandling'] = 'removeAttr';
 				}
-				$image_config['img.']['file'] = $this->imageDir . $image;
-				$image_config['img.']['file.']['width']  = $this->lConf['imagewidth'];
-				$image_config['img.']['file.']['height'] = $this->lConf['imageheight'];
-				$image_config['img.']['altText'] = $this->captions[$key];
-				$image_config['img.']['altText.']['stripHtml'] = 1;
-				$image_config['img.']['titleText'] = $this->captions[$key];
-				$image_config['img.']['titleText.']['stripHtml'] = 1;
-				$image = $this->cObj->IMAGE($image_config['img.']);
-				if ($this->hrefs[$key]) {
-					$link_config = array(
-						'parameter' => $this->hrefs[$key],
-						'title' =>     $this->captions[$key],
-					);
-					$markerArray["IMAGE"] = $this->cObj->typolink($image, $link_config);
-				} else {
-					$markerArray["IMAGE"] = $image;
-				}
-				$images .= $this->cObj->substituteMarkerArray($imagesCode, $markerArray, '###|###', 0);
+				$image = $this->cObj->IMAGE($imgConf);
+				$images .= $this->cObj->typolink($image, $imgConf['imageLinkWrap.']);
+				$GLOBALS['TSFE']->register['IMAGE_NUM_CURRENT'] ++;
 			}
-			$return_string = $templateCode;
-			$return_string = $this->cObj->substituteSubpart($return_string, '###IMAGES###', $images, 0);
+			$return_string = $this->cObj->stdWrap($images, $this->conf['carousel.'][$this->type.'.']['stdWrap.']);
 		}
-
 		return $this->pi_wrapInBaseClass($return_string);
 	}
 

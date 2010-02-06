@@ -1,9 +1,10 @@
 plugin.tx_imagecarousel_pi1 {
 	jsLibrary = {$plugin.tx_imagecarousel_pi1.jsLibrary}
 
-	templateFile = {$plugin.tx_imagecarousel_pi1.file.templateFile}
-	cssFile = {$plugin.tx_imagecarousel_pi1.file.cssFile}
 	skinFolder = {$plugin.tx_imagecarousel_pi1.skinFolder}
+
+	linkTarget = {$plugin.tx_imagecarousel_pi1.linkTarget}
+	extlinkTarget = {$plugin.tx_imagecarousel_pi1.extlinkTarget}
 
 	imagewidth = {$plugin.tx_imagecarousel_pi1.imagewidth}
 	imageheight = {$plugin.tx_imagecarousel_pi1.imageheight}
@@ -12,5 +13,46 @@ plugin.tx_imagecarousel_pi1 {
 
 	jQueryNoConflict = {$plugin.tx_imagecarousel_pi1.jQueryNoConflict}
 	jQueryLibrary = {$plugin.tx_imagecarousel_pi1.file.jQueryLibrary}
+
+	carousel {
+		normal {
+			image {
+				file.import.data = register:file
+				file.width.data = register:imagewidth
+				file.height.data = register:imageheight
+				imageLinkWrap = 1
+				imageLinkWrap {
+					enable.data = register:href
+					typolink {
+						parameter.data = register:href
+						title.data = register:caption
+						target = {$plugin.tx_imagecarousel_pi1.linkTarget}
+						extTarget = {$plugin.tx_imagecarousel_pi1.extlinkTarget}
+					}
+				}
+				altText = TEXT
+				altText {
+					value.data = register:caption
+					stripHtml = 1
+				}
+				titleText < .altText
+				longdescURL < .altText
+				wrap = <li> | </li>
+			}
+			stdWrap {
+				dataWrap = <ul id="{register:key}" class="{register:class}"> | </ul>
+				required = 1
+			}
+		}
+		content < .normal
+	}
+	_CSS_DEFAULT_STYLE (
+.jcarousel-container { position: relative; }
+.jcarousel-clip { z-index: 2; padding: 0; margin: 0; overflow: hidden; position: relative; }
+.jcarousel-list { z-index: 1; overflow: hidden; position: relative; top: 0; left: 0; margin: 0; padding: 0; }
+.jcarousel-list li,.jcarousel-item { float: left; list-style: none; margin: 0 10px 0 0; }
+.jcarousel-next { z-index: 3; display: none; }
+.jcarousel-prev { z-index: 3; display: none; }
+	)
 }
 
