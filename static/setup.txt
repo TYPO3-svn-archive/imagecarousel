@@ -30,9 +30,8 @@ plugin.tx_imagecarousel_pi1 {
 						extTarget = {$plugin.tx_imagecarousel_pi1.extlinkTarget}
 					}
 				}
-				altText = TEXT
 				altText {
-					value.data = register:caption
+					data = register:caption
 					stripHtml = 1
 				}
 				titleText < .altText
