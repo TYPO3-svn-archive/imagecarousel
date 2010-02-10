@@ -211,19 +211,25 @@ $jQueryNoConflict . "
 		$GLOBALS['TSFE']->register['imageheight'] = $this->conf['imageheight'];
 		$GLOBALS['TSFE']->register['IMAGE_NUM_CURRENT'] = 0;
 		if (count($this->images) > 0) {
-			foreach ($this->images as $key => $image) {
+			foreach ($this->images as $key => $image_name) {
+				$image = null;
 				$imgConf = $this->conf['carousel.'][$this->type.'.']['image.'];
-				$totalImagePath = $this->imageDir . $image;
+				$totalImagePath = $this->imageDir . $image_name;
 				$GLOBALS['TSFE']->register['file']    = $totalImagePath;
 				$GLOBALS['TSFE']->register['href']    = $this->hrefs[$key];
 				$GLOBALS['TSFE']->register['caption'] = $this->captions[$key];
-				$link = $this->cObj->imageLinkWrap('', $totalImagePath, $imgConf['imageLinkWrap.']);
-				if ($link) {
-					unset($imgConf['titleText']);
-					unset($imgConf['titleText.']);
-					$imgConf['emptyTitleHandling'] = 'removeAttr';
+				if ($this->hrefs[$key]) {
+					$imgConf['imageLinkWrap.'] = $imgConf['imageHrefWrap.'];
+					$image = $this->cObj->IMAGE($imgConf);
+				} else {
+					$link = $this->cObj->imageLinkWrap('', $totalImagePath, $imgConf['imageLinkWrap.']);
+					if ($link) {
+						unset($imgConf['titleText']);
+						unset($imgConf['titleText.']);
+						$imgConf['emptyTitleHandling'] = 'removeAttr';
+					}
+					$image = $this->cObj->IMAGE($imgConf);
 				}
-				$image = $this->cObj->IMAGE($imgConf);
 				$images .= $this->cObj->typolink($image, $imgConf['imageLinkWrap.']);
 				$GLOBALS['TSFE']->register['IMAGE_NUM_CURRENT'] ++;
 			}

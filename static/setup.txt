@@ -20,8 +20,8 @@ plugin.tx_imagecarousel_pi1 {
 				file.import.data = register:file
 				file.width.data = register:imagewidth
 				file.height.data = register:imageheight
-				imageLinkWrap = 1
-				imageLinkWrap {
+				imageLinkWrap < tt_content.image.20.1.imageLinkWrap
+				imageHrefWrap {
 					enable.data = register:href
 					typolink {
 						parameter.data = register:href
