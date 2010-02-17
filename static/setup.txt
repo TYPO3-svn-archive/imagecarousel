@@ -1,5 +1,4 @@
 plugin.tx_imagecarousel_pi1 {
-	jsLibrary = {$plugin.tx_imagecarousel_pi1.jsLibrary}
 
 	skinFolder = {$plugin.tx_imagecarousel_pi1.skinFolder}
 

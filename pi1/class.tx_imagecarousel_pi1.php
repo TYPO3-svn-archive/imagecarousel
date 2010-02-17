@@ -107,10 +107,8 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 		// define the jQuery mode and function
 		if ($this->conf['jQueryNoConflict']) {
 			$jQueryNoConflict = "jQuery.noConflict();";
-			$jQuery = "jQuery";
 		} else {
 			$jQueryNoConflict = "";
-			$jQuery = "$";
 		}
 
 		// define the js files
@@ -168,8 +166,8 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 
 		$this->addJS(
 $jQueryNoConflict . "
-{$jQuery}(document).ready(function() {
-	{$jQuery}('#{$this->contentKey}').jcarousel(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "").");
+jQuery(document).ready(function() {
+	jQuery('#{$this->contentKey}').jcarousel(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "").");
 });");
 
 		if (is_numeric($this->lConf['carouselwidth'])) {

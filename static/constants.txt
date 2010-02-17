@@ -1,7 +1,4 @@
 plugin.tx_imagecarousel_pi1 {
-	# cat=plugin.tx_imagecarousel.basic/enable/010; type=options[jquery]; label=JS Library: JS-Library to use
-	jsLibrary = jquery
-
 
 	# cat=plugin.tx_imagecarousel.basic/file/030; type=string; label=Skin Folder: Folder where the skins are located, subfolders will be shown as dropdown
 	skinFolder = EXT:imagecarousel/res/skins/
@@ -28,7 +25,7 @@ plugin.tx_imagecarousel_pi1 {
 
 
 	# cat=plugin.tx_imagecarousel.jquery/enable/010; type=boolean; label=jQuery noConflict: Use the noConflict methode
-	jQueryNoConflict = 1
+	jQueryNoConflict = 0
 
 	# cat=plugin.tx_imagecarousel.jquery/file/020; type=file[js]; label=jQuery Library: Location of the jQuery Lib
 	file.jQueryLibrary = EXT:imagecarousel/res/jquery/js/jquery-1.4.1.min.js
