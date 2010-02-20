@@ -1,5 +1,8 @@
 plugin.tx_imagecarousel_pi1 {
 
+	jQueryNoConflict = {$plugin.tx_imagecarousel_pi1.jQueryNoConflict}
+	jQueryLibrary = {$plugin.tx_imagecarousel_pi1.file.jQueryLibrary}
+	jQueryCarousel = {$plugin.tx_imagecarousel_pi1.file.jQueryCarousel}
 	skinFolder = {$plugin.tx_imagecarousel_pi1.skinFolder}
 
 	linkTarget = {$plugin.tx_imagecarousel_pi1.linkTarget}
@@ -9,9 +12,6 @@ plugin.tx_imagecarousel_pi1 {
 	imageheight = {$plugin.tx_imagecarousel_pi1.imageheight}
 	carouselwidth = {$plugin.tx_imagecarousel_pi1.carouselwidth}
 	carouselheight = {$plugin.tx_imagecarousel_pi1.carouselheight}
-
-	jQueryNoConflict = {$plugin.tx_imagecarousel_pi1.jQueryNoConflict}
-	jQueryLibrary = {$plugin.tx_imagecarousel_pi1.file.jQueryLibrary}
 
 	carousel {
 		normal {

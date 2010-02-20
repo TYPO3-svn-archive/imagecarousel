@@ -1,33 +1,35 @@
 plugin.tx_imagecarousel_pi1 {
 
-	# cat=plugin.tx_imagecarousel.basic/file/030; type=string; label=Skin Folder: Folder where the skins are located, subfolders will be shown as dropdown
+	# cat=plugin.tx_imagecarousel/file/010; type=boolean; label=jQuery noConflict: Use the noConflict methode
+	jQueryNoConflict = 0
+
+	# cat=plugin.tx_imagecarousel/file/020; type=file[js]; label=jQuery Library: Location of the jQuery Lib
+	file.jQueryLibrary = EXT:imagecarousel/res/jquery/js/jquery-1.4.2.min.js
+
+	# cat=plugin.tx_imagecarousel/file/030; type=file[js]; label=jQuery Carousel: Location of the jQuery Carousel
+	file.jQueryCarousel = EXT:imagecarousel/res/jquery/js/jquery.jcarousel.pack.js
+
+	# cat=plugin.tx_imagecarousel/file/040; type=string; label=Skin Folder: Folder where the skins are located, subfolders will be shown as dropdown
 	skinFolder = EXT:imagecarousel/res/skins/
 
 
-	# cat=plugin.tx_imagecarousel.basic/enable/010; type=options[_self,_new,_top,_parent]; label=Internal linktarget:The target where internal links will be opend
+	# cat=plugin.tx_imagecarousel/enable/010; type=options[_self,_new,_top,_parent]; label=Internal linktarget:The target where internal links will be opend
 	linkTarget = _self
 
-	# cat=plugin.tx_imagecarousel.basic/enable/020; type=options[_self,_new,_top,_parent]; label=External linktarget:The target where external links will be opend
+	# cat=plugin.tx_imagecarousel/enable/020; type=options[_self,_new,_top,_parent]; label=External linktarget:The target where external links will be opend
 	extlinkTarget = _new
 
 
-	# cat=plugin.tx_imagecarousel.basic/dims/040; type=string; label=Image width: Width of the images
+	# cat=plugin.tx_imagecarousel/dims/040; type=string; label=Image width: Width of the images
 	imagewidth = 200c
 
-	# cat=plugin.tx_imagecarousel.basic/dims/050; type=string; label=Image height: Height of the images
+	# cat=plugin.tx_imagecarousel/dims/050; type=string; label=Image height: Height of the images
 	imageheight = 200c
 
-	# cat=plugin.tx_imagecarousel.basic/dims/060; type=string; label=Carousel width: Width of the carousel if not vertically
+	# cat=plugin.tx_imagecarousel/dims/060; type=string; label=Carousel width: Width of the carousel if not vertically
 	carouselwidth = 
 
-	# cat=plugin.tx_imagecarousel.basic/dims/070; type=string; label=Carousel height: Height of the carousel if vertically
+	# cat=plugin.tx_imagecarousel/dims/070; type=string; label=Carousel height: Height of the carousel if vertically
 	carouselheight = 
-
-
-	# cat=plugin.tx_imagecarousel.jquery/enable/010; type=boolean; label=jQuery noConflict: Use the noConflict methode
-	jQueryNoConflict = 0
-
-	# cat=plugin.tx_imagecarousel.jquery/file/020; type=file[js]; label=jQuery Library: Location of the jQuery Lib
-	file.jQueryLibrary = EXT:imagecarousel/res/jquery/js/jquery-1.4.1.min.js
 }
 

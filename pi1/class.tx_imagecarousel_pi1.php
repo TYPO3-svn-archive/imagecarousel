@@ -112,7 +112,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 		}
 
 		// define the js files
-		$this->addJsFile("EXT:imagecarousel/res/jquery/js/jquery.jcarousel.min.js");
+		$this->addJsFile($this->conf['jQueryCarousel']);
 		$this->addJsFile("EXT:imagecarousel/res/jquery/js/imagecarousel.js");
 
 		// get the options from flexform
