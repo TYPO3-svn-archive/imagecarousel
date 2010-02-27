@@ -68,7 +68,7 @@ plugin.tx_imagecarousel_pi1 {
 #
 # For content elements
 #
-#includeLibs.imagecycle = EXT:imagecarousel/class.tx_imagecarousel.php
+#includeLibs.imagecarousel = EXT:imagecarousel/class.tx_imagecarousel.php
 #lib.tt_content_image_20 < tt_content.image.20
 #lib.imagecarousel < tt_content.image.20
 #lib.imagecarousel {
