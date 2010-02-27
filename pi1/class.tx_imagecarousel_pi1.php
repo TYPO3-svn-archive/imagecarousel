@@ -70,38 +70,113 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
 
-		// Set the Flexform information
-		$this->pi_initPIflexForm();
-		$piFlexForm = $this->cObj->data['pi_flexform'];
-		foreach ($piFlexForm['data'] as $sheet => $data) {
-			foreach ($data as $lang => $value) {
-				foreach ($value as $key => $val) {
-					$this->lConf[$key] = $this->pi_getFFvalue($piFlexForm, $key, $sheet);
+		// define the key of the element
+		$this->contentKey = "imagecarousel";
+
+		$pageID = false;
+		if ($this->cObj->data['list_type'] == $this->extKey.'_pi1') {
+			$this->type = 'normal';
+			// It's a content, al data from flexform
+			// Set the Flexform information
+			$this->pi_initPIflexForm();
+			$piFlexForm = $this->cObj->data['pi_flexform'];
+			foreach ($piFlexForm['data'] as $sheet => $data) {
+				foreach ($data as $lang => $value) {
+					foreach ($value as $key => $val) {
+						$this->lConf[$key] = $this->pi_getFFvalue($piFlexForm, $key, $sheet);
+					}
 				}
 			}
+
+			// define the key of the element
+			$this->contentKey .= "_c" . $this->cObj->data['uid'];
+
+			// define th images
+			if ($this->lConf['images']) {
+				$this->images = t3lib_div::trimExplode(',', $this->lConf['images']);
+			}
+			// define the hrefs
+			if ($this->lConf['hrefs']) {
+				$this->hrefs = t3lib_div::trimExplode(chr(10), $this->lConf['hrefs']);
+			}
+			// define the captions
+			if ($this->lConf['captions']) {
+				$this->captions = t3lib_div::trimExplode(chr(10), $this->lConf['captions']);
+			}
+			// overwrite the config
+			if ($this->lConf['skin']) {
+				$this->conf['skin'] = $this->lConf['skin'];
+			}
+			// 
+			if ($this->lConf['imagewidth']) {
+				$this->conf['imagewidth'] = $this->lConf['imagewidth'];
+			}
+			// 
+			if ($this->lConf['imageheight']) {
+				$this->conf['imageheight'] = $this->lConf['imageheight'];
+			}
+			// 
+			if (is_numeric($this->lConf['carouselwidth'])) {
+				$this->conf['carouselwidth'] = $this->lConf['carouselwidth'];
+			}
+			// 
+			if (is_numeric($this->lConf['carouselheight'])) {
+				$this->conf['carouselheight'] = $this->lConf['carouselheight'];
+			}
+			// 
+			if ($this->lConf['auto'] > 0) {
+				$this->conf['auto'] = $this->lConf['auto'];
+			}
+			// 
+			if ($this->lConf['transition']) {
+				$this->conf['transition'] = $this->lConf['transition'];
+			}
+			// 
+			if ($this->lConf['transitiondir']) {
+				$this->conf['transitiondir'] = $this->lConf['transitiondir'];
+			}
+			// 
+			if ($this->lConf['transitionduration'] > 0) {
+				$this->conf['transitionduration'] = $this->lConf['transitionduration'];
+			}
+			// 
+			if ($this->lConf['wrap']) {
+				$this->conf['movewrap'] = $this->lConf['wrap'];
+			}
+			// 
+			if ($this->lConf['scroll'] > 0) {
+				$this->conf['scroll'] = $this->lConf['scroll'];
+			}
+			// 
+			$this->conf['vertical'] = $this->lConf['vertical'];
+			$this->conf['stoponmouseover'] = $this->lConf['stoponmouseover'];
+
+			return $this->pi_wrapInBaseClass($this->parseTemplate());
+		}
+	}
+
+
+	/**
+	 * Parse all images into the template
+	 * @param $data
+	 * @return string
+	 */
+	function parseTemplate($dir='', $onlyJS=false)
+	{
+		// define the directory of images
+		if ($dir == '') {
+			$dir = $this->imageDir;
+		}
+
+		// define the contentKey if not exist
+		if ($this->contentKey == '') {
+			$this->contentKey = "imagecarousel_key";
 		}
 
 		// add CSS file for skin
-		if ($this->lConf['skin']) {
-			$this->addCssFile("{$this->conf['skinFolder']}/{$this->lConf['skin']}/skin.css");
-			$skin_class = "jcarousel-skin-{$this->lConf['skin']}";
-		}
-
-		// define the key of the element
-		$this->contentKey = "imagecarousel_c" . $this->cObj->data['uid'];
-
-		// define th images
-		if ($this->lConf['images']) {
-			$this->images = t3lib_div::trimExplode(',', $this->lConf['images']);
-		}
-		// define the hrefs
-		if ($this->lConf['hrefs']) {
-			$this->hrefs = t3lib_div::trimExplode(chr(10), $this->lConf['hrefs']);
-		}
-
-		// define the captions
-		if ($this->lConf['captions']) {
-			$this->captions = t3lib_div::trimExplode(chr(10), $this->lConf['captions']);
+		if ($this->conf['skin']) {
+			$this->addCssFile("{$this->conf['skinFolder']}/{$this->conf['skin']}/skin.css");
+			$skin_class = "jcarousel-skin-{$this->conf['skin']}";
 		}
 
 		// define the jQuery mode and function
@@ -115,50 +190,37 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 		$this->addJsFile($this->conf['jQueryCarousel']);
 		$this->addJsFile("EXT:imagecarousel/res/jquery/js/imagecarousel.js");
 
-		// get the options from flexform
+		// get the options from config
 		$options = array();
 		$options[] = "size: ".count($this->images);
-		if ($this->lConf['vertical'] == 1) {
-			// TODO: vertical movement 
+		if ($this->conf['vertical']) {
 			$options[] = "vertical: true";
 		}
-		if (! $this->lConf['imagewidth']) {
-			$this->lConf['imagewidth'] = ($this->conf['imagewidth'] ? $this->conf['imagewidth'] : "200c");
+		if ($this->conf['auto'] > 0) {
+			$options[] = "auto: ".($this->conf['auto']/1000);
 		}
-		if (! $this->lConf['imageheight']) {
-			$this->lConf['imageheight'] = ($this->conf['imageheight'] ? $this->conf['imageheight'] : "200c");
+		if (in_array($this->conf['transition'], array('linear', 'swing'))) {
+			$options[] = "easing: '{$this->conf['transition']}'";
+		} elseif ($this->conf['transitiondir'] && $this->conf['transition']) {
+			$options[] = "easing: 'ease{$this->conf['transitiondir']}{$this->conf['transition']}'";
 		}
-		if (! is_numeric($this->lConf['carouselwidth'])) {
-			$this->lConf['carouselwidth'] = $this->conf['carouselwidth'];
+		if ($this->conf['transitionduration'] > 0) {
+			$options[] = "animation: {$this->conf['transitionduration']}";
 		}
-		if (! is_numeric($this->lConf['carouselheight'])) {
-			$this->lConf['carouselheight'] = $this->conf['carouselheight'];
+		if (in_array($this->conf['movewrap'], array("first", "last", "both", "circular"))) {
+			$options[] = "wrap: '{$this->conf['movewrap']}'";
 		}
-		if ($this->lConf['auto'] > 0) {
-			$options[] = "auto: ".($this->lConf['auto']/1000);
-		}
-		if (in_array($this->lConf['transition'], array('linear', 'swing'))) {
-			$options[] = "easing: '{$this->lConf['transition']}'";
-		} elseif ($this->lConf['transitiondir'] && $this->lConf['transition']) {
-			$options[] = "easing: 'ease{$this->lConf['transitiondir']}{$this->lConf['transition']}'";
-		}
-		if ($this->lConf['transitionduration'] > 0) {
-			$options[] = "animation: {$this->lConf['transitionduration']}";
-		}
-		if (in_array($this->lConf['wrap'], array("first", "last", "both", "circular"))) {
-			$options[] = "wrap: '{$this->lConf['wrap']}'";
-		}
-		if ($this->lConf['scroll'] > 0) {
-			if ($this->lConf['scroll'] > count($this->images)) {
-				$this->lConf['scroll'] = count($this->images);
+		if ($this->conf['scroll'] > 0) {
+			if ($this->conf['scroll'] > count($this->images)) {
+				$this->conf['scroll'] = count($this->images);
 			}
-			$options[] = "scroll: {$this->lConf['scroll']}";
+			$options[] = "scroll: {$this->conf['scroll']}";
 		}
-		if ($this->lConf['wrap'] == "circular") {
+		if ($this->conf['movewrap'] == "circular") {
 			$options[] = "itemVisibleInCallback:  {onBeforeAnimation: imagecarousel.itemVisibleInCallback}";
 			$options[] = "itemVisibleOutCallback: {onAfterAnimation:  imagecarousel.itemVisibleOutCallback}";
 		}
-		if ($this->lConf['stoponmouseover'] == 1) {
+		if ($this->conf['stoponmouseover'] == 1) {
 			$options[] = "initCallback: imagecarousel.initCallbackMouseover";
 		} else {
 			$options[] = "initCallback: imagecarousel.initCallback";
@@ -170,27 +232,27 @@ jQuery(document).ready(function() {
 	jQuery('#{$this->contentKey}').jcarousel(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "").");
 });");
 
-		if (is_numeric($this->lConf['carouselwidth'])) {
+		if (is_numeric($this->conf['carouselwidth'])) {
 			$this->addCSS("
 #c{$this->cObj->data['uid']} .jcarousel-clip-horizontal {
-	width: {$this->lConf['carouselwidth']}px;
+	width: {$this->conf['carouselwidth']}px;
 }
 #c{$this->cObj->data['uid']} .jcarousel-container-horizontal {
-	width: {$this->lConf['carouselwidth']}px;
+	width: {$this->conf['carouselwidth']}px;
 }");
 		}
-		if (is_numeric($this->lConf['carouselheight'])) {
+		if (is_numeric($this->conf['carouselheight'])) {
 			$this->addCSS("
 #c{$this->cObj->data['uid']} .jcarousel-clip-vartical {
-	height: {$this->lConf['carouselheight']}px;
+	height: {$this->conf['carouselheight']}px;
 }
 #c{$this->cObj->data['uid']} .jcarousel-container-vartical {
-	height: {$this->lConf['carouselheight']}px;
+	height: {$this->conf['carouselheight']}px;
 }");
 		}
 
-		preg_match("/^([0-9]*)/i", $this->lConf['imagewidth'], $reg_width);
-		preg_match("/^([0-9]*)/i", $this->lConf['imageheight'], $reg_height);
+		preg_match("/^([0-9]*)/i", $this->conf['imagewidth'], $reg_width);
+		preg_match("/^([0-9]*)/i", $this->conf['imageheight'], $reg_height);
 
 		$this->addCSS("
 #c{$this->cObj->data['uid']} .jcarousel-item {
@@ -200,6 +262,10 @@ jQuery(document).ready(function() {
 
 		// Add the ressources
 		$this->addResources();
+
+		if ($onlyJS === true) {
+			return true;
+		}
 
 		$return_string = null;
 		$images = null;

@@ -8,10 +8,20 @@ plugin.tx_imagecarousel_pi1 {
 	linkTarget = {$plugin.tx_imagecarousel_pi1.linkTarget}
 	extlinkTarget = {$plugin.tx_imagecarousel_pi1.extlinkTarget}
 
+	vertical = {$plugin.tx_imagecarousel_pi1.vertical}
 	imagewidth = {$plugin.tx_imagecarousel_pi1.imagewidth}
 	imageheight = {$plugin.tx_imagecarousel_pi1.imageheight}
 	carouselwidth = {$plugin.tx_imagecarousel_pi1.carouselwidth}
 	carouselheight = {$plugin.tx_imagecarousel_pi1.carouselheight}
+
+	skin = {$plugin.tx_imagecarousel_pi1.skin}
+	auto = {$plugin.tx_imagecarousel_pi1.auto}
+	transition = {$plugin.tx_imagecarousel_pi1.transition}
+	transitiondir = {$plugin.tx_imagecarousel_pi1.transitiondir}
+	transitionduration = {$plugin.tx_imagecarousel_pi1.transitionduration}
+	movewrap = {$plugin.tx_imagecarousel_pi1.movewrap}
+	scroll = {$plugin.tx_imagecarousel_pi1.scroll}
+	stoponmouseover = {$plugin.tx_imagecarousel_pi1.stoponmouseover}
 
 	carousel {
 		normal {
@@ -51,6 +61,62 @@ plugin.tx_imagecarousel_pi1 {
 .jcarousel-list li,.jcarousel-item { float: left; list-style: none; margin: 0 10px 0 0; }
 .jcarousel-next { z-index: 3; display: none; }
 .jcarousel-prev { z-index: 3; display: none; }
+.csc-textpic-intext-left .jcarousel-clip ul { padding:0; overflow:hidden; position:relative; }
 	)
 }
 
+#
+# For content elements
+#
+#includeLibs.imagecycle = EXT:imagecarousel/class.tx_imagecarousel.php
+#lib.tt_content_image_20 < tt_content.image.20
+#lib.imagecarousel < tt_content.image.20
+#lib.imagecarousel {
+#	imgMax = 1000
+#	maxH.field = imageheight
+#	imageStdWrap.dataWrap = <div class="csc-textpic-imagewrap"><ul id="imagecarousel_{field:uid}" class="jcarousel-skin-{$plugin.tx_imagecarousel_pi1.skin}" style="height:{field:imageheight}px;"> | </ul></div>
+#	imageStdWrapNoWidth < .imageStdWrap
+#	rendering.ul {
+#		imageRowStdWrap.dataWrap = |
+#		imageLastRowStdWrap.dataWrap = |
+#		noRowsStdWrap.wrap = |
+#		oneImageStdWrap.dataWrap = <li class="csc-textpic-image###CLASSES###" style="width:{register:imagespace}px;"> | </li>
+#		imgTagStdWrap.wrap =
+#		editIconsStdWrap.wrap = |
+#		caption >
+#	}
+#	renderMethod = ul
+#	stdWrap.preUserFunc = tx_imagecarousel->getSlideshow
+#}
+#tt_content.image.20 >
+#tt_content.image.20 = CASE
+#tt_content.image.20 {
+#	 key.field = tx_imagecarousel_activate
+#	 default < lib.tt_content_image_20
+#	 1 < lib.imagecarousel
+#}
+#tt_content.textpic.20 >
+#tt_content.textpic.20 = CASE
+#tt_content.textpic.20 {
+#	key.field = tx_imagecarousel_activate
+#	default < tt_content.image.20.default
+#	default {
+#		text {
+#			10 < tt_content.textpic.20.1.text.10
+#			20 < tt_content.text.20
+#			wrap = <div class="csc-textpic-text"> | </div>
+#		}
+#	}
+#	1 < tt_content.image.20.1
+#	1 {
+#		text.10 = COA
+#		text.10 {
+#			if.value = 24
+#			if.isGreaterThan.field = imageorient
+#			10 =< lib.stdheader
+#			10.stdWrap.dataWrap = <div class="csc-textpicHeader csc-textpicHeader-{field:imageorient}">|</div>
+#		}
+#		text.20 < tt_content.text.20
+#		text.wrap = <div class="csc-textpic-text"> | </div>
+#	}
+#}

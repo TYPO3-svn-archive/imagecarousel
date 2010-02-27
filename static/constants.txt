@@ -12,6 +12,9 @@ plugin.tx_imagecarousel_pi1 {
 	# cat=plugin.tx_imagecarousel/file/040; type=string; label=Skin Folder: Folder where the skins are located, subfolders will be shown as dropdown
 	skinFolder = EXT:imagecarousel/res/skins/
 
+	# cat=plugin.tx_imagecarousel/file/050; type=options[ie7,tango]; label=Skin: Skin to use as default
+	skin = tango
+
 
 	# cat=plugin.tx_imagecarousel/enable/010; type=options[_self,_new,_top,_parent]; label=Internal linktarget:The target where internal links will be opend
 	linkTarget = _self
@@ -20,16 +23,42 @@ plugin.tx_imagecarousel_pi1 {
 	extlinkTarget = _new
 
 
-	# cat=plugin.tx_imagecarousel/dims/040; type=string; label=Image width: Width of the images
+	# cat=plugin.tx_imagecarousel/dims/010; type=boolean; label=Vertical: Displays carousel varousel
+	vertical = 0
+
+	# cat=plugin.tx_imagecarousel/dims/020; type=string; label=Image width: Width of the images
 	imagewidth = 200c
 
-	# cat=plugin.tx_imagecarousel/dims/050; type=string; label=Image height: Height of the images
+	# cat=plugin.tx_imagecarousel/dims/030; type=string; label=Image height: Height of the images
 	imageheight = 200c
 
-	# cat=plugin.tx_imagecarousel/dims/060; type=string; label=Carousel width: Width of the carousel if not vertically
-	carouselwidth = 
+	# cat=plugin.tx_imagecarousel/dims/040; type=string; label=Carousel width: Width of the carousel if not vertically
+	carouselwidth = 400
 
-	# cat=plugin.tx_imagecarousel/dims/070; type=string; label=Carousel height: Height of the carousel if vertically
-	carouselheight = 
+	# cat=plugin.tx_imagecarousel/dims/050; type=string; label=Carousel height: Height of the carousel if vertically
+	carouselheight = 400
+
+
+	# cat=plugin.tx_imagecarousel/typo/010; type=boolean; label=Auto scroll (in ms):
+	auto = 0
+
+	# cat=plugin.tx_imagecarousel/typo/020; type=boolean; label=Stop on mouseover:
+	stoponmouseover = 0
+
+	# cat=plugin.tx_imagecarousel/typo/030; type=options[swing,linear,Quad,Cubic,Quart,Quint,Sine,Expo,Circ,Back,Bounce,Elastic]; label=Transition:
+	transition = swing
+
+	# cat=plugin.tx_imagecarousel/typo/040; type=options[In,Out,InOut]; label=Direction of transition:
+	transitiondir = Out
+
+	# cat=plugin.tx_imagecarousel/typo/050; type=int; label=Duration of transition (in ms):
+	transitionduration = 3000
+
+	# cat=plugin.tx_imagecarousel/typo/060; type=int+; label=Scroll by x images:
+	scroll = 3
+
+	# cat=plugin.tx_imagecarousel/typo/070; type=options[,first,last,both,circular]; label=Wrap back at position:
+	movewrap = 
+
 }
 

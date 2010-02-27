@@ -3,10 +3,23 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
+// Content
+$tempColumns = Array (
+	"tx_imagecarousel_activate" => Array (
+		"exclude" => 1,
+		"label" => "LLL:EXT:imagecarousel/locallang_db.xml:tt_content.tx_imagecarousel_activate",
+		"config" => Array (
+			"type" => "check",
+		)
+	),
+);
+
 t3lib_div::loadTCA('tt_content');
+t3lib_extMgm::addTCAcolumns('tt_content', $tempColumns,1);
+$GLOBALS['TCA']['tt_content']['palettes']['7']['showitem'] .= ',tx_imagecarousel_activate';
+
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1'] = 'layout,select_key,pages';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1'] = 'pi_flexform,image_zoom';
-
 
 t3lib_extMgm::addPlugin(array(
 	'LLL:EXT:imagecarousel/locallang_db.xml:tt_content.list_type_pi1',

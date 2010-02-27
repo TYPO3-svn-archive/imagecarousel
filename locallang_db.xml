@@ -7,6 +7,7 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index="tt_content.list_type_pi1">Image carousel</label>
+			<label index="tt_content.tx_imagecarousel_activate">Activate image carousel</label>
 
 			<label index="tt_content.pi_flexform.sheet_general">General</label>
 			<label index="tt_content.pi_flexform.images">Images</label>
@@ -38,6 +39,7 @@
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="tt_content.list_type_pi1">Bilder Karussell</label>
+			<label index="tt_content.tx_imagecarousel_activate">Image carousel aktivieren</label>
 
 			<label index="tt_content.pi_flexform.sheet_general">General</label>
 			<label index="tt_content.pi_flexform.images">Bilder</label>
