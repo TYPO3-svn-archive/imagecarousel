@@ -9,9 +9,9 @@
 			<label index="pi1_title">Image carousel</label>
 			<label index="pi1_plus_wiz_description">Add an image carousel to your content</label>
 		</languageKey>
-		<languageKey index="de" type="array">
-			<label index="pi1_title">Bilder Karussell</label>
-			<label index="pi1_plus_wiz_description">Fügt ein Bilder Karussell hinzu</label>
-		</languageKey>
 	</data>
+	<orig_hash type="array">
+	</orig_hash>
+	<orig_text type="array">
+	</orig_text>
 </T3locallang>

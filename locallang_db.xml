@@ -8,12 +8,10 @@
 		<languageKey index="default" type="array">
 			<label index="tt_content.list_type_pi1">Image carousel</label>
 			<label index="tt_content.tx_imagecarousel_activate">Activate image carousel</label>
-
 			<label index="tt_content.pi_flexform.sheet_general">General</label>
 			<label index="tt_content.pi_flexform.images">Images</label>
 			<label index="tt_content.pi_flexform.hrefs">Image links</label>
 			<label index="tt_content.pi_flexform.captions">Image Captions</label>
-
 			<label index="tt_content.pi_flexform.sheet_control">Control / Style</label>
 			<label index="tt_content.pi_flexform.skin">Skin</label>
 			<label index="tt_content.pi_flexform.vertical">Vertical</label>
@@ -21,7 +19,6 @@
 			<label index="tt_content.pi_flexform.imageheight">Image height</label>
 			<label index="tt_content.pi_flexform.carouselwidth">Carousel width</label>
 			<label index="tt_content.pi_flexform.carouselheight">Carousel height</label>
-
 			<label index="tt_content.pi_flexform.sheet_movement">Movement</label>
 			<label index="tt_content.pi_flexform.auto">Auto scroll (in ms)</label>
 			<label index="tt_content.pi_flexform.stoponmouseover">Stop on mouse over</label>
@@ -35,39 +32,10 @@
 			<label index="tt_content.pi_flexform.wrap.I.2">Last</label>
 			<label index="tt_content.pi_flexform.wrap.I.3">First + Last</label>
 			<label index="tt_content.pi_flexform.wrap.I.4">Circular</label>
-
-		</languageKey>
-		<languageKey index="de" type="array">
-			<label index="tt_content.list_type_pi1">Bilder Karussell</label>
-			<label index="tt_content.tx_imagecarousel_activate">Image carousel aktivieren</label>
-
-			<label index="tt_content.pi_flexform.sheet_general">General</label>
-			<label index="tt_content.pi_flexform.images">Bilder</label>
-			<label index="tt_content.pi_flexform.hrefs">Bilder Links</label>
-			<label index="tt_content.pi_flexform.captions">Bilder Beschreibungen</label>
-
-			<label index="tt_content.pi_flexform.sheet_control">Kontrolle / Darstellung</label>
-			<label index="tt_content.pi_flexform.skin">Skin</label>
-			<label index="tt_content.pi_flexform.vertical">Vertikal</label>
-			<label index="tt_content.pi_flexform.imagewidth">Bildbreite</label>
-			<label index="tt_content.pi_flexform.imageheight">Bildhöhe</label>
-			<label index="tt_content.pi_flexform.carouselwidth">Karussellbreite</label>
-			<label index="tt_content.pi_flexform.carouselheight">Karussellhöhe</label>
-
-			<label index="tt_content.pi_flexform.sheet_movement">Bewegung</label>
-			<label index="tt_content.pi_flexform.auto">Automatisch weiter (in ms)</label>
-			<label index="tt_content.pi_flexform.stoponmouseover">Animation stoppen wenn sich die Maus über dem Karussell befindet</label>
-			<label index="tt_content.pi_flexform.transition">Übergangsart</label>
-			<label index="tt_content.pi_flexform.transitiondir">Übergangsrichtung</label>
-			<label index="tt_content.pi_flexform.transitionduration">Übergangsdauer (in ms)</label>
-			<label index="tt_content.pi_flexform.scroll">Anzahl Bilder pro Bewegung</label>
-			<label index="tt_content.pi_flexform.wrap">Rückbewegung an der Stelle</label>
-			<label index="tt_content.pi_flexform.wrap.I.0">keine</label>
-			<label index="tt_content.pi_flexform.wrap.I.1">Erste</label>
-			<label index="tt_content.pi_flexform.wrap.I.2">Letzte</label>
-			<label index="tt_content.pi_flexform.wrap.I.3">Erste + Letzte</label>
-			<label index="tt_content.pi_flexform.wrap.I.4">Kreisförmig</label>
-
 		</languageKey>
 	</data>
+	<orig_hash type="array">
+	</orig_hash>
+	<orig_text type="array">
+	</orig_text>
 </T3locallang>

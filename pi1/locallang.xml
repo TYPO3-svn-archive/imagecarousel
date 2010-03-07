@@ -3,10 +3,16 @@
 	<meta type="array">
 		<type>module</type>
 		<description>Language labels for plugin &quot;tx_imagecarousel_pi1&quot;</description>
+		<labelContext type="array">
+		</labelContext>
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="list_mode_1"></label>
+			<label index="list_mode_1">list</label>
 		</languageKey>
 	</data>
+	<orig_hash type="array">
+	</orig_hash>
+	<orig_text type="array">
+	</orig_text>
 </T3locallang>

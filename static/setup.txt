@@ -1,12 +1,14 @@
 plugin.tx_imagecarousel_pi1 {
 
+	linkTarget = {$plugin.tx_imagecarousel_pi1.linkTarget}
+	extlinkTarget = {$plugin.tx_imagecarousel_pi1.extlinkTarget}
 	jQueryNoConflict = {$plugin.tx_imagecarousel_pi1.jQueryNoConflict}
+	jsInFooter = {$plugin.tx_imagecarousel_pi1.jsInFooter}
+
 	jQueryLibrary = {$plugin.tx_imagecarousel_pi1.file.jQueryLibrary}
 	jQueryCarousel = {$plugin.tx_imagecarousel_pi1.file.jQueryCarousel}
 	skinFolder = {$plugin.tx_imagecarousel_pi1.skinFolder}
-
-	linkTarget = {$plugin.tx_imagecarousel_pi1.linkTarget}
-	extlinkTarget = {$plugin.tx_imagecarousel_pi1.extlinkTarget}
+	skin = {$plugin.tx_imagecarousel_pi1.skin}
 
 	vertical = {$plugin.tx_imagecarousel_pi1.vertical}
 	imagewidth = {$plugin.tx_imagecarousel_pi1.imagewidth}
@@ -14,14 +16,13 @@ plugin.tx_imagecarousel_pi1 {
 	carouselwidth = {$plugin.tx_imagecarousel_pi1.carouselwidth}
 	carouselheight = {$plugin.tx_imagecarousel_pi1.carouselheight}
 
-	skin = {$plugin.tx_imagecarousel_pi1.skin}
 	auto = {$plugin.tx_imagecarousel_pi1.auto}
+	stoponmouseover = {$plugin.tx_imagecarousel_pi1.stoponmouseover}
 	transition = {$plugin.tx_imagecarousel_pi1.transition}
 	transitiondir = {$plugin.tx_imagecarousel_pi1.transitiondir}
 	transitionduration = {$plugin.tx_imagecarousel_pi1.transitionduration}
-	movewrap = {$plugin.tx_imagecarousel_pi1.movewrap}
 	scroll = {$plugin.tx_imagecarousel_pi1.scroll}
-	stoponmouseover = {$plugin.tx_imagecarousel_pi1.stoponmouseover}
+	movewrap = {$plugin.tx_imagecarousel_pi1.movewrap}
 
 	carousel {
 		normal {
