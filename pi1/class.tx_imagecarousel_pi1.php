@@ -148,6 +148,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 				$this->conf['scroll'] = $this->lConf['scroll'];
 			}
 			// 
+			$this->conf['random'] = $this->lConf['random'];
 			$this->conf['vertical'] = $this->lConf['vertical'];
 			$this->conf['stoponmouseover'] = $this->lConf['stoponmouseover'];
 
@@ -188,7 +189,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 
 		// define the js files
 		$this->addJsFile($this->conf['jQueryCarousel']);
-		$this->addJsFile("EXT:imagecarousel/res/jquery/js/imagecarousel.js");
+		$this->addJsFile("EXT:imagecarousel/res/jquery/js/imagecarousel-0.4.0.js");
 
 		// get the options from config
 		$options = array();
@@ -225,10 +226,18 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 		} else {
 			$options[] = "initCallback: imagecarousel.initCallback";
 		}
+		// fallback for childElem
+		if (! $this->conf['carousel.'][$this->type.'.']['childElem']) {
+			$this->conf['carousel.'][$this->type.'.']['childElem'] = 'li';
+		}
+		$random_script = null;
+		if ($this->conf['random']) {
+			$random_script = "\n	imagecarousel.randomize('#{$this->contentKey}','{$this->conf['carousel.'][$this->type.'.']['childElem']}');";
+		}
 
 		$this->addJS(
 $jQueryNoConflict . "
-jQuery(document).ready(function() {
+jQuery(document).ready(function() { {$random_script}
 	jQuery('#{$this->contentKey}').jcarousel(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "").");
 });");
 
@@ -313,7 +322,7 @@ jQuery(document).ready(function() {
 			tx_t3jquery::addJqJS();
 		} else {
 			$this->addJsFile($this->conf['jQueryLibrary'], true);
-			$this->addJsFile("EXT:imagecarousel/res/jquery/js/jquery.easing-1.3.js");
+			$this->addJsFile($this->conf['jQueryEasing']);
 		}
 		// add all defined JS files
 		if (count($this->jsFiles) > 0) {

@@ -91,6 +91,16 @@
 							</config>
 						</TCEforms>
 					</vertical>
+					<random>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.random</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</random>
 					<imagewidth>
 						<TCEforms>
 							<exclude>1</exclude>

@@ -6,11 +6,13 @@ plugin.tx_imagecarousel_pi1 {
 	jsInFooter = {$plugin.tx_imagecarousel_pi1.jsInFooter}
 
 	jQueryLibrary = {$plugin.tx_imagecarousel_pi1.file.jQueryLibrary}
+	jQueryEasing = {$plugin.tx_imagecarousel_pi1.file.jQueryEasing}
 	jQueryCarousel = {$plugin.tx_imagecarousel_pi1.file.jQueryCarousel}
 	skinFolder = {$plugin.tx_imagecarousel_pi1.skinFolder}
 	skin = {$plugin.tx_imagecarousel_pi1.skin}
 
 	vertical = {$plugin.tx_imagecarousel_pi1.vertical}
+	random = {$plugin.tx_imagecarousel_pi1.random}
 	imagewidth = {$plugin.tx_imagecarousel_pi1.imagewidth}
 	imageheight = {$plugin.tx_imagecarousel_pi1.imageheight}
 	carouselwidth = {$plugin.tx_imagecarousel_pi1.carouselwidth}
@@ -52,6 +54,7 @@ plugin.tx_imagecarousel_pi1 {
 				dataWrap = <ul id="{register:key}" class="{register:class}"> | </ul>
 				required = 1
 			}
+			childElem = li
 		}
 		content < .normal
 	}

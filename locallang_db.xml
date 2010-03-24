@@ -15,6 +15,7 @@
 			<label index="tt_content.pi_flexform.sheet_control">Control / Style</label>
 			<label index="tt_content.pi_flexform.skin">Skin</label>
 			<label index="tt_content.pi_flexform.vertical">Vertical</label>
+			<label index="tt_content.pi_flexform.random">Random order</label>
 			<label index="tt_content.pi_flexform.imagewidth">Image width</label>
 			<label index="tt_content.pi_flexform.imageheight">Image height</label>
 			<label index="tt_content.pi_flexform.carouselwidth">Carousel width</label>
