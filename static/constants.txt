@@ -69,5 +69,11 @@ plugin.tx_imagecarousel_pi1 {
 	# cat=plugin.tx_imagecarousel/typo/070; type=options[,first,last,both,circular]; label=Wrap back at position:
 	movewrap = 
 
+
+	# cat=plugin.tx_imagecarousel/basic/010; type=string; label=DAM caption fields: Comma seperated string with tx_dam fields
+	damCaptionFields = caption,description,title
+
+	# cat=plugin.tx_imagecarousel/basic/020; type=string; label=DAM href field: Witch field will be used for href in tx_dam
+	damHrefFields = tx_jfdam_link
 }
 
