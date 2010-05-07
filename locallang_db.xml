@@ -6,15 +6,25 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
+			<label index="tx_dam.tx_jfdam_link">Link</label>
 			<label index="tt_content.list_type_pi1">Image carousel</label>
 			<label index="tt_content.tx_imagecarousel_activate">Activate image carousel</label>
 			<label index="tt_content.pi_flexform.sheet_general">General</label>
+			<label index="tt_content.pi_flexform.mode">Mode (DAM)</label>
+			<label index="tt_content.pi_flexform.mode.I.upload">Upload Images</label>
+			<label index="tt_content.pi_flexform.mode.I.folder">Folder</label>
+			<label index="tt_content.pi_flexform.mode.I.dam">DAM (dam)</label>
+			<label index="tt_content.pi_flexform.mode.I.dam_catedit">DAM category (dam_catedit)</label>
+			<label index="tt_content.pi_flexform.damimages">Images in DAM (dam)</label>
+			<label index="tt_content.pi_flexform.damcategories">Images from DAM category (dam_catedit)</label>
+			<label index="tt_content.pi_flexform.folder">Image folder</label>
 			<label index="tt_content.pi_flexform.images">Images</label>
 			<label index="tt_content.pi_flexform.hrefs">Image links</label>
 			<label index="tt_content.pi_flexform.captions">Image Captions</label>
 			<label index="tt_content.pi_flexform.sheet_control">Control / Style</label>
 			<label index="tt_content.pi_flexform.skin">Skin</label>
 			<label index="tt_content.pi_flexform.vertical">Vertical</label>
+			<label index="tt_content.pi_flexform.random">Random order</label>
 			<label index="tt_content.pi_flexform.imagewidth">Image width</label>
 			<label index="tt_content.pi_flexform.imageheight">Image height</label>
 			<label index="tt_content.pi_flexform.carouselwidth">Carousel width</label>
