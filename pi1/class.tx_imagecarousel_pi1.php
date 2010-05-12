@@ -474,6 +474,9 @@ jQuery(document).ready(function() { {$random_script}
 			foreach ($this->js as $jsToPut) {
 				$temp_js .= $jsToPut;
 			}
+			if ($this->conf['jsMinify']) {
+				$temp_js = t3lib_div::minifyJavaScript($temp_js);
+			}
 			if ($this->conf['jsInFooter']) {
 				$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);
 			} else {

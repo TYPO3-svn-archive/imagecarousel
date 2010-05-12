@@ -4,6 +4,7 @@ plugin.tx_imagecarousel_pi1 {
 	extlinkTarget = {$plugin.tx_imagecarousel_pi1.extlinkTarget}
 	jQueryNoConflict = {$plugin.tx_imagecarousel_pi1.jQueryNoConflict}
 	jsInFooter = {$plugin.tx_imagecarousel_pi1.jsInFooter}
+	jsMinify = {$plugin.tx_imagecarousel_pi1.jsMinify}
 
 	jQueryLibrary = {$plugin.tx_imagecarousel_pi1.file.jQueryLibrary}
 	jQueryEasing = {$plugin.tx_imagecarousel_pi1.file.jQueryEasing}

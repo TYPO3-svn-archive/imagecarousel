@@ -12,6 +12,9 @@ plugin.tx_imagecarousel_pi1 {
 	# cat=plugin.tx_imagecarousel/enable/040; type=boolean; label=Javascript in Footer: If set, the Javascript will be rendered in Footer
 	jsInFooter = 0
 
+	# cat=plugin.tx_imagecarousel/enable/050; type=boolean; label=Minify Javascript: If set, the Javascript will be minified
+	jsMinify = 0
+
 
 	# cat=plugin.tx_imagecarousel/file/010; type=file[js]; label=jQuery Library: Location of the jQuery Lib
 	file.jQueryLibrary = EXT:imagecarousel/res/jquery/js/jquery-1.4.2.min.js
