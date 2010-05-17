@@ -55,7 +55,7 @@ plugin.tx_imagecarousel_pi1 {
 				wrap = <li> | </li>
 			}
 			stdWrap {
-				dataWrap = <ul id="{register:key}" class="{register:class}"> | </ul>
+				dataWrap = <div id="{register:key}-outer"><ul id="{register:key}" class="{register:class}"> | </ul></div>
 				required = 1
 			}
 			childElem = li

@@ -374,6 +374,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 		$this->addJS(
 $jQueryNoConflict . "
 jQuery(document).ready(function() { {$random_script}
+	jQuery('#{$this->contentKey}-outer').css('display', 'block');
 	jQuery('#{$this->contentKey}').jcarousel(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "").");
 });");
 
@@ -400,6 +401,9 @@ jQuery(document).ready(function() { {$random_script}
 		preg_match("/^([0-9]*)/i", $this->conf['imageheight'], $reg_height);
 
 		$this->addCSS("
+#{$this->contentKey}-outer {
+	display: none;
+}
 #c{$this->cObj->data['uid']} .jcarousel-item {
 	width: {$reg_width[1]}px;
 	height: {$reg_height[1]}px;
@@ -452,7 +456,8 @@ jQuery(document).ready(function() { {$random_script}
 	 *
 	 * @return void
 	 */
-	function addResources() {
+	function addResources()
+	{
 		// checks if t3jquery is loaded
 		if (T3JQUERY === true) {
 			tx_t3jquery::addJqJS();
@@ -463,9 +468,13 @@ jQuery(document).ready(function() { {$random_script}
 		// add all defined JS files
 		if (count($this->jsFiles) > 0) {
 			foreach ($this->jsFiles as $jsToLoad) {
-				// Add script only once
-				if (! preg_match("/".preg_quote($this->getPath($jsToLoad), "/")."/", $GLOBALS['TSFE']->additionalHeaderData['jsFile_'.$this->extKey])) {
-					$GLOBALS['TSFE']->additionalHeaderData['jsFile_'.$this->extKey] .= ($this->getPath($jsToLoad) ? '<script src="'.$this->getPath($jsToLoad).'" type="text/javascript"></script>'.chr(10) :'');
+				if (T3JQUERY === true) {
+					tx_t3jquery::addJS('', array('jsfile' => $this->getPath($jsToLoad)));
+				} else {
+					// Add script only once
+					if (! preg_match("/".preg_quote($this->getPath($jsToLoad), "/")."/", $GLOBALS['TSFE']->additionalHeaderData['jsFile_'.$this->extKey])) {
+						$GLOBALS['TSFE']->additionalHeaderData['jsFile_'.$this->extKey] .= ($this->getPath($jsToLoad) ? '<script src="'.$this->getPath($jsToLoad).'" type="text/javascript"></script>'.chr(10) :'');
+					}
 				}
 			}
 		}
@@ -477,10 +486,22 @@ jQuery(document).ready(function() { {$random_script}
 			if ($this->conf['jsMinify']) {
 				$temp_js = t3lib_div::minifyJavaScript($temp_js);
 			}
-			if ($this->conf['jsInFooter']) {
-				$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);
+			$conf = array();
+			$conf['jsdata'] = $temp_js;
+			if (T3JQUERY === true && t3lib_div::int_from_ver($this->getExtensionVersion('t3jquery')) >= 1002000) {
+				if ($this->conf['jsInFooter']) {
+					$conf['tofooter'] = true;
+					tx_t3jquery::addJS('', $conf);
+				} else {
+					$conf['tofooter'] = false;
+					tx_t3jquery::addJS('', $conf);
+				}
 			} else {
-				$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);
+				if ($this->conf['jsInFooter']) {
+					$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);
+				} else {
+					$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);
+				}
 			}
 		}
 		// add all defined CSS files
@@ -572,6 +593,21 @@ jQuery(document).ready(function() { {$random_script}
 		if (! in_array($script, $this->css)) {
 			$this->css[] = $script;
 		}
+	}
+
+	/**
+	 * Returns the version of an extension (in 4.4 its possible to this with t3lib_extMgm::getExtensionVersion)
+	 * @param string $key
+	 * @return string
+	 */
+	function getExtensionVersion($key)
+	{
+		if (! t3lib_extMgm::isLoaded($key)) {
+			return '';
+		}
+		$_EXTKEY = $key;
+		include(t3lib_extMgm::extPath($key) . 'ext_emconf.php');
+		return $EM_CONF[$key]['version'];
 	}
 }
 
