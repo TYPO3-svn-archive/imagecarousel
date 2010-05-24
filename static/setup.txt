@@ -80,51 +80,50 @@ plugin.tx_imagecarousel_pi1 {
 #lib.tt_content_image_20 < tt_content.image.20
 #lib.imagecarousel < tt_content.image.20
 #lib.imagecarousel {
-#	imgMax = 1000
-#	maxH.field = imageheight
-#	imageStdWrap.dataWrap = <div class="csc-textpic-imagewrap"><ul id="imagecarousel_{field:uid}" class="jcarousel-skin-{$plugin.tx_imagecarousel_pi1.skin}" style="height:{field:imageheight}px;"> | </ul></div>
-#	imageStdWrapNoWidth < .imageStdWrap
-#	rendering.ul {
-#		imageRowStdWrap.dataWrap = |
-#		imageLastRowStdWrap.dataWrap = |
-#		noRowsStdWrap.wrap = |
-#		oneImageStdWrap.dataWrap = <li class="csc-textpic-image###CLASSES###" style="width:{register:imagespace}px;"> | </li>
-#		imgTagStdWrap.wrap =
-#		editIconsStdWrap.wrap = |
-#		caption >
-#	}
-#	renderMethod = ul
-#	stdWrap.preUserFunc = tx_imagecarousel->getSlideshow
+#  imgMax = 1000
+#  rendering.ul {
+#    imageStdWrap.dataWrap = <div class="csc-textpic-imagewrap"><ul id="imagecarousel_{field:uid}" class="jcarousel-skin-{$plugin.tx_imagecarousel_pi1.skin}"> | </ul></div>
+#    imageStdWrapNoWidth < .imageStdWrap
+#    imageRowStdWrap.dataWrap = |
+#    imageLastRowStdWrap.dataWrap = |
+#    noRowsStdWrap.wrap = |
+#    oneImageStdWrap.dataWrap = <li> | </li>
+#    imgTagStdWrap.wrap =
+#    editIconsStdWrap.wrap = |
+#    caption >
+#  }
+#  renderMethod = ul
+#  stdWrap.preUserFunc = tx_imagecarousel->getSlideshow
 #}
 #tt_content.image.20 >
 #tt_content.image.20 = CASE
 #tt_content.image.20 {
-#	 key.field = tx_imagecarousel_activate
-#	 default < lib.tt_content_image_20
-#	 1 < lib.imagecarousel
+#  key.field = tx_imagecarousel_activate
+#  default < lib.tt_content_image_20
+#  1 < lib.imagecarousel
 #}
 #tt_content.textpic.20 >
 #tt_content.textpic.20 = CASE
 #tt_content.textpic.20 {
-#	key.field = tx_imagecarousel_activate
-#	default < tt_content.image.20.default
-#	default {
-#		text {
-#			10 < tt_content.textpic.20.1.text.10
-#			20 < tt_content.text.20
-#			wrap = <div class="csc-textpic-text"> | </div>
-#		}
-#	}
-#	1 < tt_content.image.20.1
-#	1 {
-#		text.10 = COA
-#		text.10 {
-#			if.value = 24
-#			if.isGreaterThan.field = imageorient
-#			10 =< lib.stdheader
-#			10.stdWrap.dataWrap = <div class="csc-textpicHeader csc-textpicHeader-{field:imageorient}">|</div>
-#		}
-#		text.20 < tt_content.text.20
-#		text.wrap = <div class="csc-textpic-text"> | </div>
-#	}
+#  key.field = tx_imagecarousel_activate
+#  default < tt_content.image.20.default
+#  default {
+#    text {
+#      10 < tt_content.textpic.20.1.text.10
+#      20 < tt_content.text.20
+#      wrap = <div class="csc-textpic-text"> | </div>
+#    }
+#  }
+#  1 < tt_content.image.20.1
+#  1 {
+#    text.10 = COA
+#    text.10 {
+#      if.value = 24
+#      if.isGreaterThan.field = imageorient
+#      10 =< lib.stdheader
+#      10.stdWrap.dataWrap = <div class="csc-textpicHeader csc-textpicHeader-{field:imageorient}"> | </div>
+#    }
+#    text.20 < tt_content.text.20
+#    text.wrap = <div class="csc-textpic-text"> | </div>
+#  }
 #}
