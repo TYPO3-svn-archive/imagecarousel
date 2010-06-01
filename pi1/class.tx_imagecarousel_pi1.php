@@ -92,22 +92,20 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 			$this->contentKey .= "_c" . $this->cObj->data['uid'];
 
 			// define the images
-			if ($this->lConf['images']) {
-				switch ($this->lConf['mode']) {
-					case "" : {}
-					case "folder" : {}
-					case "upload" : {
-						$this->setDataUpload();
-						break;
-					}
-					case "dam" : {
-						$this->setDataDam(false);
-						break;
-					}
-					case "dam_catedit" : {
-						$this->setDataDam(true);
-						break;
-					}
+			switch ($this->lConf['mode']) {
+				case "" : {}
+				case "folder" : {}
+				case "upload" : {
+					$this->setDataUpload();
+					break;
+				}
+				case "dam" : {
+					$this->setDataDam(false);
+					break;
+				}
+				case "dam_catedit" : {
+					$this->setDataDam(true);
+					break;
 				}
 			}
 
@@ -170,19 +168,22 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 	 */
 	function setDataUpload()
 	{
-		// define the images
 		if ($this->lConf['images']) {
-			$this->images = t3lib_div::trimExplode(',', $this->lConf['images']);
+			// define the images
+			if ($this->lConf['images']) {
+				$this->images = t3lib_div::trimExplode(',', $this->lConf['images']);
+			}
+			// define the hrefs
+			if ($this->lConf['hrefs']) {
+				$this->hrefs = t3lib_div::trimExplode(chr(10), $this->lConf['hrefs']);
+			}
+			// define the captions
+			if ($this->lConf['captions']) {
+				$this->captions = t3lib_div::trimExplode(chr(10), $this->lConf['captions']);
+			}
+			return true;
 		}
-		// define the hrefs
-		if ($this->lConf['hrefs']) {
-			$this->hrefs = t3lib_div::trimExplode(chr(10), $this->lConf['hrefs']);
-		}
-		// define the captions
-		if ($this->lConf['captions']) {
-			$this->captions = t3lib_div::trimExplode(chr(10), $this->lConf['captions']);
-		}
-		return true;
+		return false;
 	}
 
 	/**
