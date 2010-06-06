@@ -236,7 +236,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 			foreach ($images['rows'] as $key => $row) {
 				$row = tx_dam_db::getRecordOverlay('tx_dam', $row, $conf);
 				// set the data
-				$this->images[] = $row['file_path'].$row['file_dl_name'];$
+				$this->images[] = $row['file_path'].$row['file_name'];$
 				// set the href
 				$href = '';
 				unset($href);
