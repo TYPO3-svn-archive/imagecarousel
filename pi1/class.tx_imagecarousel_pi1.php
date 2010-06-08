@@ -398,16 +398,19 @@ jQuery(document).ready(function() { {$random_script}
 }");
 		}
 
-		preg_match("/^([0-9]*)/i", $this->conf['imagewidth'], $reg_width);
+		preg_match("/^([0-9]*)/i", $this->conf['imagewidth'],  $reg_width);
 		preg_match("/^([0-9]*)/i", $this->conf['imageheight'], $reg_height);
+
+		$css_width  = (is_numeric($reg_width[1])  ? $reg_width[1]."px"  : $this->conf['imagewidth']);
+		$css_height = (is_numeric($reg_height[1]) ? $reg_height[1]."px" : $this->conf['imageheight']);
 
 		$this->addCSS("
 #{$this->contentKey}-outer {
 	display: none;
 }
 #c{$this->cObj->data['uid']} .jcarousel-item {
-	width: {$reg_width[1]}px;
-	height: {$reg_height[1]}px;
+	width: {$css_width};
+	height: {$css_height};
 }");
 
 		// Add the ressources
