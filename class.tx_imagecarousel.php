@@ -35,7 +35,7 @@ class tx_imagecarousel {
 			require_once(t3lib_extMgm::extPath('imagecarousel') . 'pi1/class.tx_imagecarousel_pi1.php');
 			$obj = t3lib_div::makeInstance('tx_imagecarousel_pi1');
 			$obj->images  = t3lib_div::trimExplode(',', $this->cObj->data['image']);
-			$obj->contentKey = $obj->extKey . '_' . $this->cObj->data['uid'];
+			$obj->setContentKey($obj->extKey . '_' . $this->cObj->data['uid']);
 			$obj->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_imagecarousel_pi1.'];
 			// overwrite the width and height of the config
 			$obj->conf['imagewidth'] = $GLOBALS['TSFE']->register['imagewidth'];

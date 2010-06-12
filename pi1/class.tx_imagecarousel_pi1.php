@@ -21,11 +21,6 @@
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
-/**
- * [CLASS/FUNCTION INDEX of SCRIPT]
- *
- * Hint: use extdeveval to insert/update function index above.
- */
 
 require_once(PATH_tslib.'class.tslib_pibase.php');
 
@@ -40,7 +35,8 @@ if (t3lib_extMgm::isLoaded('t3jquery')) {
  * @package	TYPO3
  * @subpackage	tx_imagecarousel
  */
-class tx_imagecarousel_pi1 extends tslib_pibase {
+class tx_imagecarousel_pi1 extends tslib_pibase
+{
 	var $prefixId      = 'tx_imagecarousel_pi1';		// Same as class name
 	var $scriptRelPath = 'pi1/class.tx_imagecarousel_pi1.php';	// Path to this script relative to the extension dir.
 	var $extKey        = 'imagecarousel';	// The extension key.
@@ -65,13 +61,14 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 	 * @param	array		$conf: The PlugIn configuration
 	 * @return	The content that is displayed on the website
 	 */
-	function main($content, $conf) {
+	function main($content, $conf)
+	{
 		$this->conf = $conf;
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
 
 		// define the key of the element
-		$this->contentKey = "imagecarousel";
+		$this->setContentKey();
 
 		$pageID = false;
 		if ($this->cObj->data['list_type'] == $this->extKey.'_pi1') {
@@ -89,7 +86,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 			}
 
 			// define the key of the element
-			$this->contentKey .= "_c" . $this->cObj->data['uid'];
+			$this->setContentKey($this->extKey . "_c" . $this->cObj->data['uid']);
 
 			// define the images
 			switch ($this->lConf['mode']) {
@@ -154,12 +151,33 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 				$this->conf['scroll'] = $this->lConf['scroll'];
 			}
 			// 
-			$this->conf['random'] = $this->lConf['random'];
-			$this->conf['vertical'] = $this->lConf['vertical'];
-			$this->conf['stoponmouseover'] = $this->lConf['stoponmouseover'];
+			$this->conf['random']             = $this->lConf['random'];
+			$this->conf['vertical']           = $this->lConf['vertical'];
+			$this->conf['stoponmouseover']    = $this->lConf['stoponmouseover'];
+			$this->conf['externalcontrol']    = $this->lConf['externalcontrol'];
+			$this->conf['hidenextbutton']     = $this->lConf['hidenextbutton'];
+			$this->conf['hidepreviousbutton'] = $this->lConf['hidepreviousbutton'];
 
 			return $this->pi_wrapInBaseClass($this->parseTemplate());
 		}
+	}
+
+	/**
+	 * Set the contentKey
+	 * @param string $contentKey
+	 */
+	public function setContentKey($contentKey=null)
+	{
+		$this->contentKey = ($contentKey == null ? $this->extKey : $contentKey);
+	}
+
+	/**
+	 * Get the contentKey
+	 * @return string
+	 */
+	public function getContentKey()
+	{
+		return $this->contentKey;
 	}
 
 	/**
@@ -307,8 +325,8 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 		}
 
 		// define the contentKey if not exist
-		if ($this->contentKey == '') {
-			$this->contentKey = "imagecarousel_key";
+		if ($this->getContentKey() == '') {
+			$this->setContentKey($this->extKey . '_key');
 		}
 
 		// add CSS file for skin
@@ -326,12 +344,14 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 
 		// define the js files
 		$this->addJsFile($this->conf['jQueryCarousel']);
-		$this->addJsFile("EXT:imagecarousel/res/jquery/js/imagecarousel-0.4.0.js");
+		$this->addJsFile("EXT:imagecarousel/res/jquery/js/imagecarousel-1.2.0.js");
 
 		// get the options from config
 		$options = array();
 		$options[] = "size: ".count($this->images);
 		if ($this->conf['vertical']) {
+			// turn off the externalcontrol
+			$this->conf['externalcontrol'] = 0;
 			$options[] = "vertical: true";
 		}
 		if ($this->conf['auto'] > 0) {
@@ -346,7 +366,9 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 			$options[] = "animation: {$this->conf['transitionduration']}";
 		}
 		if (in_array($this->conf['movewrap'], array("first", "last", "both", "circular"))) {
-			$options[] = "wrap: '{$this->conf['movewrap']}'";
+			if (! ($this->conf['externalcontrol'] && $this->conf['movewrap'] == "circular")) {
+				$options[] = "wrap: '{$this->conf['movewrap']}'";
+			}
 		}
 		if ($this->conf['scroll'] > 0) {
 			if ($this->conf['scroll'] > count($this->images)) {
@@ -354,14 +376,24 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 			}
 			$options[] = "scroll: {$this->conf['scroll']}";
 		}
-		if ($this->conf['movewrap'] == "circular") {
-			$options[] = "itemVisibleInCallback:  {onBeforeAnimation: imagecarousel.itemVisibleInCallback}";
-			$options[] = "itemVisibleOutCallback: {onAfterAnimation:  imagecarousel.itemVisibleOutCallback}";
+		if (! $this->conf['externalcontrol']) {
+			if ($this->conf['movewrap'] == "circular") {
+				$options[] = "itemVisibleInCallback:  {onBeforeAnimation: imagecarousel.itemVisibleInCallback}";
+				$options[] = "itemVisibleOutCallback: {onAfterAnimation:  imagecarousel.itemVisibleOutCallback}";
+			}
 		}
+		// init Callback
+		$initCallback[] = "imagecarousel.initCallback('#{$this->getContentKey()}',carousel,state)";
 		if ($this->conf['stoponmouseover'] == 1) {
-			$options[] = "initCallback: imagecarousel.initCallbackMouseover";
-		} else {
-			$options[] = "initCallback: imagecarousel.initCallback";
+			$initCallback[] = "imagecarousel.initCallbackMouseover(carousel,state)";
+		}
+		$options[] = "initCallback: function(carousel,state){".implode(";", $initCallback).";}";
+		// hide buttons
+		if ($this->conf['hidenextbutton']) {
+			$options[] = "buttonNextHTML: null";
+		}
+		if ($this->conf['hidepreviousbutton']) {
+			$options[] = "buttonPrevHTML: null";
 		}
 		// fallback for childElem
 		if (! $this->conf['carousel.'][$this->type.'.']['childElem']) {
@@ -369,14 +401,14 @@ class tx_imagecarousel_pi1 extends tslib_pibase {
 		}
 		$random_script = null;
 		if ($this->conf['random']) {
-			$random_script = "\n	imagecarousel.randomize('#{$this->contentKey}','{$this->conf['carousel.'][$this->type.'.']['childElem']}');";
+			$random_script = "\n	imagecarousel.randomize('#{$this->getContentKey()}','{$this->conf['carousel.'][$this->type.'.']['childElem']}');";
 		}
 
 		$this->addJS(
 $jQueryNoConflict . "
 jQuery(document).ready(function() { {$random_script}
-	jQuery('#{$this->contentKey}-outer').css('display', 'block');
-	jQuery('#{$this->contentKey}').jcarousel(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "").");
+	jQuery('#{$this->getContentKey()}-outer').css('display', 'block');
+	jQuery('#{$this->getContentKey()}').jcarousel(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "").");
 });");
 
 		if (is_numeric($this->conf['carouselwidth'])) {
@@ -405,7 +437,7 @@ jQuery(document).ready(function() { {$random_script}
 		$css_height = (is_numeric($reg_height[1]) ? $reg_height[1]."px" : $this->conf['imageheight']);
 
 		$this->addCSS("
-#{$this->contentKey}-outer {
+#{$this->getContentKey()}-outer {
 	display: none;
 }
 #c{$this->cObj->data['uid']} .jcarousel-item {
@@ -422,7 +454,9 @@ jQuery(document).ready(function() { {$random_script}
 
 		$return_string = null;
 		$images = null;
-		$GLOBALS['TSFE']->register['key'] = $this->contentKey;
+		$navigation = null;
+		$markerArray = array();
+		$GLOBALS['TSFE']->register['key'] = $this->getContentKey();
 		$GLOBALS['TSFE']->register['class'] = $skin_class;
 		$GLOBALS['TSFE']->register['imagewidth']  = $this->conf['imagewidth'];
 		$GLOBALS['TSFE']->register['imageheight'] = $this->conf['imageheight'];
@@ -435,6 +469,7 @@ jQuery(document).ready(function() { {$random_script}
 				$GLOBALS['TSFE']->register['file']    = $totalImagePath;
 				$GLOBALS['TSFE']->register['href']    = $this->hrefs[$key];
 				$GLOBALS['TSFE']->register['caption'] = $this->captions[$key];
+				$GLOBALS['TSFE']->register['CURRENT_ID'] = $GLOBALS['TSFE']->register['IMAGE_NUM_CURRENT'] + 1;
 				if ($this->hrefs[$key]) {
 					$imgConf['imageLinkWrap.'] = $imgConf['imageHrefWrap.'];
 					$image = $this->cObj->IMAGE($imgConf);
@@ -448,9 +483,16 @@ jQuery(document).ready(function() { {$random_script}
 					$image = $this->cObj->IMAGE($imgConf);
 				}
 				$images .= $this->cObj->typolink($image, $imgConf['imageLinkWrap.']);
+				// create the navigation
+				if ($this->conf['externalcontrol']) {
+					$navigation .= trim($this->cObj->cObjGetSingle($this->conf['carousel.'][$this->type.'.']['navigation'], $this->conf['carousel.'][$this->type.'.']['navigation.']));
+				}
 				$GLOBALS['TSFE']->register['IMAGE_NUM_CURRENT'] ++;
 			}
-			$return_string = $this->cObj->stdWrap($images, $this->conf['carousel.'][$this->type.'.']['stdWrap.']);
+			$markerArray['NAVIGATION'] = $this->cObj->stdWrap($navigation, $this->conf['carousel.'][$this->type.'.']['navigationWrap.']);
+			// the stdWrap
+			$images = $this->cObj->stdWrap($images, $this->conf['carousel.'][$this->type.'.']['stdWrap.']);
+			$return_string = $this->cObj->substituteMarkerArray($images, $markerArray, '###|###', 0);
 		}
 		return $this->pi_wrapInBaseClass($return_string);
 	}

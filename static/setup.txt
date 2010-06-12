@@ -14,6 +14,9 @@ plugin.tx_imagecarousel_pi1 {
 
 	vertical = {$plugin.tx_imagecarousel_pi1.vertical}
 	random = {$plugin.tx_imagecarousel_pi1.random}
+	externalcontrol = {$plugin.tx_imagecarousel_pi1.externalcontrol}
+	hidenextbutton = {$plugin.tx_imagecarousel_pi1.hidenextbutton}
+	hidepreviousbutton = {$plugin.tx_imagecarousel_pi1.hidepreviousbutton}
 	imagewidth = {$plugin.tx_imagecarousel_pi1.imagewidth}
 	imageheight = {$plugin.tx_imagecarousel_pi1.imageheight}
 	carouselwidth = {$plugin.tx_imagecarousel_pi1.carouselwidth}
@@ -54,8 +57,17 @@ plugin.tx_imagecarousel_pi1 {
 				longdescURL < .altText
 				wrap = <li> | </li>
 			}
+			navigation = TEXT
+			navigation {
+				value = <a href="#">{register:CURRENT_ID}</a>
+				insertData = 1
+			}
+			navigationWrap {
+				wrap = <div class="jcarousel-control"> | </div>
+				required = 1
+			}
 			stdWrap {
-				dataWrap = <div id="{register:key}-outer"><ul id="{register:key}" class="{register:class}"> | </ul></div>
+				dataWrap = <div id="{register:key}-outer"><div id="{register:key}" class="{register:class}">###NAVIGATION###<ul> | </ul></div></div>
 				required = 1
 			}
 			childElem = li
@@ -69,7 +81,11 @@ plugin.tx_imagecarousel_pi1 {
 .jcarousel-list li,.jcarousel-item { float: left; list-style: none; margin: 0 10px 0 0; }
 .jcarousel-next { z-index: 3; display: none; }
 .jcarousel-prev { z-index: 3; display: none; }
-.csc-textpic-intext-left .jcarousel-clip ul { padding:0; overflow:hidden; position:relative; }
+.jcarousel-control { margin-bottom: 10px; text-align: center; }
+.jcarousel-control a { font-size: 75%; text-decoration: none; padding: 3px 5px; margin: 0 5px 5px 0; border: 1px solid #fff; color: #eee; background-color: #4088b8; font-weight: bold; }
+.jcarousel-control a:hover { color: #eee; }
+.jcarousel-control a:focus, .jcarousel-control a:active { color: #eee; outline: none; }
+.csc-textpic-intext-left .jcarousel-clip ul { padding: 0; overflow: hidden; position: relative; }
 	)
 }
 

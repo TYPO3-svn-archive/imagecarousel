@@ -159,6 +159,36 @@
 							</config>
 						</TCEforms>
 					</random>
+					<externalcontrol>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.externalcontrol</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</externalcontrol>
+					<hidenextbutton>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.hidenextbutton</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</hidenextbutton>
+					<hidepreviousbutton>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.hidepreviousbutton</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</hidepreviousbutton>
 					<imagewidth>
 						<TCEforms>
 							<exclude>1</exclude>
