@@ -9,6 +9,7 @@ plugin.tx_imagecarousel_pi1 {
 	jQueryLibrary = {$plugin.tx_imagecarousel_pi1.file.jQueryLibrary}
 	jQueryEasing = {$plugin.tx_imagecarousel_pi1.file.jQueryEasing}
 	jQueryCarousel = {$plugin.tx_imagecarousel_pi1.file.jQueryCarousel}
+	jsScript = {$plugin.tx_imagecarousel_pi1.file.jsScript}
 	skinFolder = {$plugin.tx_imagecarousel_pi1.skinFolder}
 	skin = {$plugin.tx_imagecarousel_pi1.skin}
 
@@ -59,7 +60,7 @@ plugin.tx_imagecarousel_pi1 {
 			}
 			navigation = TEXT
 			navigation {
-				value = <a href="#">{register:CURRENT_ID}</a>
+				value = <a href="#" rev="{register:CURRENT_ID}">{register:CURRENT_ID}</a>
 				insertData = 1
 			}
 			navigationWrap {

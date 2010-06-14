@@ -344,7 +344,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 
 		// define the js files
 		$this->addJsFile($this->conf['jQueryCarousel']);
-		$this->addJsFile("EXT:imagecarousel/res/jquery/js/imagecarousel-1.2.0.js");
+		$this->addJsFile($this->conf['jsScript']);
 
 		// get the options from config
 		$options = array();
