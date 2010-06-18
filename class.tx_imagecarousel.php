@@ -30,7 +30,8 @@
 class tx_imagecarousel {
 	var $cObj;
 
-	function getSlideshow($content, $conf) {
+	function getSlideshow($content, $conf)
+	{
 		if ($this->cObj->data['tx_imagecarousel_activate']) {
 			require_once(t3lib_extMgm::extPath('imagecarousel') . 'pi1/class.tx_imagecarousel_pi1.php');
 			$obj = t3lib_div::makeInstance('tx_imagecarousel_pi1');

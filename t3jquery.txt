@@ -1,2 +1,2 @@
-script=res/jquery/js/jquery.carrousel.js
+script=res/jquery/js/jquery.carrousel-0.2.4.min.js
 components=jQuery,Core,Easing
