@@ -72,6 +72,9 @@ class tx_imagecarousel_cms_layout
 				$result = $GLOBALS['LANG']->sL('LLL:EXT:imagecarousel/locallang.xml:cms_layout.not_configured').'<br/>';
 			}
 		}
+		if (t3lib_extMgm::isLoaded("templavoila")) {
+			$result = strip_tags($result);
+		}
 		return $result;
 	}
 }

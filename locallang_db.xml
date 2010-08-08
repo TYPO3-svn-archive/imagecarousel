@@ -8,7 +8,8 @@
 		<languageKey index="default" type="array">
 			<label index="tx_dam.tx_jfdam_link">Link</label>
 			<label index="tt_content.list_type_pi1">Image carousel</label>
-			<label index="tt_content.tx_imagecarousel_activate">Activate image carousel</label>
+			<label index="tt_content.tx_imagecarousel_title">Image Carousel</label>
+			<label index="tt_content.tx_imagecarousel_activate">Activate</label>
 			<label index="tt_content.pi_flexform.sheet_general">General</label>
 			<label index="tt_content.pi_flexform.mode">Mode (DAM)</label>
 			<label index="tt_content.pi_flexform.mode.I.upload">Upload Images</label>

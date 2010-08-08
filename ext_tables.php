@@ -16,8 +16,11 @@ $tempColumns = Array (
 
 t3lib_div::loadTCA('tt_content');
 t3lib_extMgm::addTCAcolumns('tt_content', $tempColumns,1);
-$GLOBALS['TCA']['tt_content']['palettes']['7']['showitem'] .= ',tx_imagecarousel_activate';
-
+$TCA['tt_content']['palettes']['tx_imagecarousel'] = array(
+	'showitem' => 'tx_imagecarousel_activate',
+	'canNotCollapse' => 1,
+);
+t3lib_extMgm::addToAllTCAtypes('tt_content', '--palette--;LLL:EXT:imagecarousel/locallang_db.xml:tt_content.tx_imagecarousel_title;tx_imagecarousel', 'textpic', 'before:imagecaption');
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1'] = 'layout,select_key,pages';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1'] = 'pi_flexform,image_zoom';
 
