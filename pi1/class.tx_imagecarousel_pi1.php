@@ -158,7 +158,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			$this->conf['hidenextbutton']     = $this->lConf['hidenextbutton'];
 			$this->conf['hidepreviousbutton'] = $this->lConf['hidepreviousbutton'];
 
-			return $this->pi_wrapInBaseClass($this->parseTemplate());
+			return $this->parseTemplate();
 		}
 	}
 
@@ -472,16 +472,8 @@ jQuery(document).ready(function() { {$random_script}
 				$GLOBALS['TSFE']->register['CURRENT_ID'] = $GLOBALS['TSFE']->register['IMAGE_NUM_CURRENT'] + 1;
 				if ($this->hrefs[$key]) {
 					$imgConf['imageLinkWrap.'] = $imgConf['imageHrefWrap.'];
-					$image = $this->cObj->IMAGE($imgConf);
-				} else {
-					$link = $this->cObj->imageLinkWrap('', $totalImagePath, $imgConf['imageLinkWrap.']);
-					if ($link) {
-						unset($imgConf['titleText']);
-						unset($imgConf['titleText.']);
-						$imgConf['emptyTitleHandling'] = 'removeAttr';
-					}
-					$image = $this->cObj->IMAGE($imgConf);
 				}
+				$image = $this->cObj->IMAGE($imgConf);
 				$images .= $this->cObj->typolink($image, $imgConf['imageLinkWrap.']);
 				// create the navigation
 				if ($this->conf['externalcontrol']) {
