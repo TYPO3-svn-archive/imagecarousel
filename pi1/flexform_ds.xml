@@ -7,6 +7,7 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.sheet_general</sheetTitle>
+					<cshFile>LLL:EXT:imagecarousel/locallang_csh_flexform.xml</cshFile>
 				</TCEforms>
 				<type>array</type>
 				<el>
@@ -117,6 +118,7 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.sheet_control</sheetTitle>
+					<cshFile>LLL:EXT:imagecarousel/locallang_csh_flexform.xml</cshFile>
 				</TCEforms>
 				<type>array</type>
 				<el>
@@ -248,6 +250,7 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.sheet_movement</sheetTitle>
+					<cshFile>LLL:EXT:imagecarousel/locallang_csh_flexform.xml</cshFile>
 				</TCEforms>
 				<type>array</type>
 				<el>

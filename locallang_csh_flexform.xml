@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<T3locallang>
+	<meta type="array">
+		<description>CSH labels for FlexForm fields</description>
+		<type>CSH</type>
+		<csh_table></csh_table>
+		<fileId>LLL:EXT:imagecarousel/locallang_csh_flexform.xml</fileId>
+		<labelContext type="array"></labelContext>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+
+			<label index="imagewidth.description">Width of the images</label>
+			<label index="imageheight.description">Height of the images</label>
+			<label index="carouselwidth.description">Width of the carousel</label>
+			<label index="carouselheight.description">Height of the carousel</label>
+
+			<label index="minScale.description">The minimum scale appled to the furthest item. The item at the front has a scale of 1. To make items in the distance one quarter of the size, minScale would be 0.25.</label>
+			<label index="minScale.details">0.5</label>
+
+			<label index="xRadius.description">Half-width of the circle that items travel around.</label>
+			<label index="xRadius.details">Width of container / 2.3</label>
+
+			<label index="yRadius.description">Half-height of the circle that items travel around. By playing around with this value, you can alter the amount of 'tilt'.</label>
+			<label index="yRadius.details">Height of container / 6</label>
+
+			<label index="xPos.description">Horizontal position of the circle centre relative to the container. You would normally set this to half the width of the container.</label>
+			<label index="xPos.details">The plugin trys to set a proper value if empty</label>
+
+			<label index="yPos.description">Vertical position of the circle centre relative to the container. You would normally set this to around half the height of container.</label>
+			<label index="yPos.details">The plugin trys to set a proper value if empty</label>
+
+
+			<label index="reflHeight.description">Height of the auto-reflection in pixels, assuming applied to the item at the front. The reflection will scale automatically. A value of 0 means that no auto-reflection will appear.</label>
+			<label index="reflHeight.details">0</label>
+
+			<label index="reflGap.description">Amount of vertical space in pixels between image and reflection, assuming applied to the item at the front. Gap will scale automatically.</label>
+			<label index="reflGap.details">0</label>
+
+			<label index="reflOpacity.description">Specifies how transparent the reflection is. 0 is invisible, 1 is totally opaque.</label>
+			<label index="reflOpacity.details">0.5</label>
+
+
+			<label index="speed.description">This value represents the speed at which the carousel rotates between items. Good values are around 0.1 ~ 0.3. A value of one will instantly move from one item to the next without any rotation animation. Values should be greater than zero and less than one.</label>
+			<label index="speed.details">0.2</label>
+
+			<label index="FPS.description">This is the approximate frame rate of the carousel in frames per second. The higher the number, the faster and smoother the carousel movement will appear. However, frame rates that are too high can make the user's browser feel sluggish, especially if they have an under powered machine. The default setting of 30 is a good tradeoff between speed and performance. </label>
+			<label index="FPS.details">30</label>
+
+			<label index="autoRotate.description">Turn on auto-rotation of the carousel using either 'left' or 'right'  as the value. The carousel will rotate between items automatically. The auto-rotation stops when the user hovers over the carousel area, and starts again when the mouse is moved off.</label>
+			<label index="autoRotate.details">no</label>
+
+			<label index="autoRotateDelay.description">Delay in milliseconds between each rotation in auto-rotate mode. A minimum value of 1000 (i.e. one second) is recommended.</label>
+			<label index="autoRotateDelay.details">1500</label>
+
+			<label index="mouseWheel.description">If set to true, this will enable mouse wheel support for the carousel.</label>
+			<label index="mouseWheel.details">false</label>
+
+			<label index="bringToFront.description">If true, moves the item clicked on to the front.</label>
+			<label index="bringToFront.details">false</label>
+
+
+			<label index="buttonLeft.description">Show the 'rotate left' button.</label>
+			<label index="buttonLeft.details">false</label>
+
+			<label index="buttonRight.description">Show the 'rotate right' button.</label>
+			<label index="buttonRight.details">false</label>
+
+			<label index="titleBox.description">Show the image's title attribute when hovered over.</label>
+			<label index="titleBox.details">false</label>
+
+			<label index="altBox.description">Show the image's alt attribute when hovered over.</label>
+			<label index="altBox.details">false</label>
+		</languageKey>
+	</data>
+</T3locallang>

@@ -85,10 +85,99 @@ plugin.tx_imagecarousel_pi1 {
 	movewrap = 
 
 
-	# cat=plugin.tx_imagecarousel/basic/010; type=string; label=DAM caption fields: Comma seperated string with tx_dam fields
-	damCaptionFields = caption,description,title
+	# cat=plugin.tx_imagecarousel.dam/basic/010; type=string; label=DAM caption fields: Comma seperated string with tx_dam fields
+	damCaptionFields = caption,title
 
-	# cat=plugin.tx_imagecarousel/basic/020; type=string; label=DAM href field: Witch field will be used for href in tx_dam
+	# cat=plugin.tx_imagecarousel.dam/basic/020; type=string; label=DAM Description fields: Comma seperated string with tx_dam fields
+	damDescFields = description
+
+	# cat=plugin.tx_imagecarousel.dam/basic/030; type=string; label=DAM href field: Witch field will be used for href in tx_dam
 	damHrefFields = tx_jfdam_link
 }
+
+
+
+plugin.tx_imagecarousel_pi2 {
+
+	# cat=plugin.tx_imagecarousel.cloud/file/010; type=file[js]; label=Cloud-Carousel: Location of the Cloud-Carousel
+	file.jQueryCloudCarousel = EXT:imagecarousel/res/jquery/js/jquery.cloudcarousel-1.0.4.min.js
+
+	# cat=plugin.tx_imagecarousel.cloud/file/020; type=file[js]; label=Mousewheel: Location of the Mousewheel
+	file.jQueryMouseWheel = EXT:imagecarousel/res/jquery/js/jquery.mousewheel-3.0.2.min.js
+
+
+
+	# cat=plugin.tx_imagecarousel.cloud/dims/010; type=string; label=Image width: Width of the images
+	imagewidth = 200c
+
+	# cat=plugin.tx_imagecarousel.cloud/dims/020; type=string; label=Image height: Height of the images
+	imageheight = 200c
+
+	# cat=plugin.tx_imagecarousel.cloud/dims/030; type=string; label=Carousel width: Width of the carousel if not vertically
+	carouselwidth = 600
+
+	# cat=plugin.tx_imagecarousel.cloud/dims/040; type=string; label=Carousel height: Height of the carousel if vertically
+	carouselheight = 400
+
+	# cat=plugin.tx_imagecarousel.cloud/dims/050; type=string; label=Min. Scale: The minimum scale appled to the furthest item. The item at the front has a scale of 1. To make items in the distance one quarter of the size, minScale would be 0.25.
+	minScale = 0.5
+
+	# cat=plugin.tx_imagecarousel.cloud/dims/060; type=int; label=Radius X: Half-width of the circle that items travel around.
+	xPos = 
+
+	# cat=plugin.tx_imagecarousel.cloud/dims/070; type=int; label=Radius Y: Half-height of the circle that items travel around. By playing around with this value, you can alter the amount of 'tilt'.
+	yPos = 
+
+	# cat=plugin.tx_imagecarousel.cloud/dims/080; type=int; label=Center X: Horizontal position of the circle centre relative to the container. You would normally set this to half the width of the container.
+	xRadius = 
+
+	# cat=plugin.tx_imagecarousel.cloud/dims/090; type=int; label=Center Y: Vertical position of the circle centre relative to the container. You would normally set this to around half the height of container.
+	yRadius = 
+
+
+
+	# cat=plugin.tx_imagecarousel.cloud/enable/010; type=boolean; label=Show button left: Show the 'rotate left' button.
+	buttonLeft = 0
+
+	# cat=plugin.tx_imagecarousel.cloud/enable/020; type=boolean; label=Show button right: Show the 'rotate right' button.
+	buttonRight = 0
+
+	# cat=plugin.tx_imagecarousel.cloud/enable/030; type=boolean; label=Show title box: Show the image's title attribute when hovered over.
+	titleBox = 0
+
+	# cat=plugin.tx_imagecarousel.cloud/enable/040; type=boolean; label=Show alt box: Show the image's alt attribute when hovered over.
+	altBox = 0
+
+
+
+	# cat=plugin.tx_imagecarousel.cloud/basic/010; type=int; label=Reflection height: Height of the auto-reflection in pixels, assuming applied to the item at the front. The reflection will scale automatically. A value of 0 means that no auto-reflection will appear.
+	reflHeight = 
+
+	# cat=plugin.tx_imagecarousel.cloud/basic/020; type=int; label=Reflection gap: Amount of vertical space in pixels between image and reflection, assuming applied to the item at the front. Gap will scale automatically.
+	reflGap = 
+
+	# cat=plugin.tx_imagecarousel.cloud/basic/030; type=string; label=Reflection opacity: Specifies how transparent the reflection is. 0 is invisible, 1 is totally opaque.
+	reflOpacity = 
+
+
+
+	# cat=plugin.tx_imagecarousel.cloud/typo/010; type=string; label=Speed of movement: This value represents the speed at which the carousel rotates between items. Good values are around 0.1 ~ 0.3. A value of one will instantly move from one item to the next without any rotation animation. Values should be greater than zero and less than one.
+	speed = 0.2
+
+	# cat=plugin.tx_imagecarousel.cloud/typo/020; type=int; label=Frames per secound: This is the approximate frame rate of the carousel in frames per second. The higher the number, the faster and smoother the carousel movement will appear. However, frame rates that are too high can make the user's browser feel sluggish, especially if they have an under powered machine. The default setting of 30 is a good tradeoff between speed and performance.
+	FPS = 30
+
+	# cat=plugin.tx_imagecarousel.cloud/typo/030; type=options[no,left,right]; label=Direction of autorotate: Turn on auto-rotation of the carousel using either 'left' or 'right' as the value. The carousel will rotate between items automatically. The auto-rotation stops when the user hovers over the carousel area, and starts again when the mouse is moved off.
+	autoRotate = no
+
+	# cat=plugin.tx_imagecarousel.cloud/typo/040; type=int; label=Delay of autorotate: Delay in milliseconds between each rotation in auto-rotate mode. A minimum value of 1000 (i.e. one second) is recommended.
+	autoRotateDelay = 1500
+
+	# cat=plugin.tx_imagecarousel.cloud/typo/050; type=boolean; label=Activate the mouseweel: If set to true, this will enable mouse wheel support for the carousel.
+	mouseWheel = 0
+
+	# cat=plugin.tx_imagecarousel.cloud/typo/060; type=boolean; label=Bring image to front: If true, moves the item clicked on to the front.
+	bringToFront = 0
+}
+
 

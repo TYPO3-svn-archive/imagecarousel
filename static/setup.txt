@@ -90,6 +90,7 @@ plugin.tx_imagecarousel_pi1 {
 	)
 }
 
+
 #
 # For content elements
 #
@@ -144,3 +145,132 @@ plugin.tx_imagecarousel_pi1 {
 #    text.wrap = <div class="csc-textpic-text"> | </div>
 #  }
 #}
+
+
+
+plugin.tx_imagecarousel_pi2 {
+
+	linkTarget = {$plugin.tx_imagecarousel_pi1.linkTarget}
+	extlinkTarget = {$plugin.tx_imagecarousel_pi1.extlinkTarget}
+	jQueryNoConflict = {$plugin.tx_imagecarousel_pi1.jQueryNoConflict}
+	jsInFooter = {$plugin.tx_imagecarousel_pi1.jsInFooter}
+	jsMinify = {$plugin.tx_imagecarousel_pi1.jsMinify}
+
+	jQueryLibrary = {$plugin.tx_imagecarousel_pi1.file.jQueryLibrary}
+	jQueryEasing = {$plugin.tx_imagecarousel_pi1.file.jQueryEasing}
+	jQueryMouseWheel = {$plugin.tx_imagecarousel_pi2.file.jQueryMouseWheel}
+	jQueryCloudCarousel = {$plugin.tx_imagecarousel_pi2.file.jQueryCloudCarousel}
+
+	imagewidth = {$plugin.tx_imagecarousel_pi2.imagewidth}
+	imageheight = {$plugin.tx_imagecarousel_pi2.imageheight}
+	carouselwidth = {$plugin.tx_imagecarousel_pi2.carouselwidth}
+	carouselheight = {$plugin.tx_imagecarousel_pi2.carouselheight}
+	minScale = {$plugin.tx_imagecarousel_pi2.minScale}
+	xPos = {$plugin.tx_imagecarousel_pi2.xPos}
+	yPos = {$plugin.tx_imagecarousel_pi2.yPos}
+	xRadius = {$plugin.tx_imagecarousel_pi2.xRadius}
+	yRadius = {$plugin.tx_imagecarousel_pi2.yRadius}
+
+	buttonLeft = {$plugin.tx_imagecarousel_pi2.buttonLeft}
+	buttonRight = {$plugin.tx_imagecarousel_pi2.buttonRight}
+	titleBox = {$plugin.tx_imagecarousel_pi2.titleBox}
+	altBox = {$plugin.tx_imagecarousel_pi2.altBox}
+
+	reflHeight = {$plugin.tx_imagecarousel_pi2.reflHeight}
+	reflGap = {$plugin.tx_imagecarousel_pi2.reflGap}
+	reflOpacity = {$plugin.tx_imagecarousel_pi2.reflOpacity}
+
+	speed = {$plugin.tx_imagecarousel_pi2.speed}
+	FPS = {$plugin.tx_imagecarousel_pi2.FPS}
+	autoRotate = {$plugin.tx_imagecarousel_pi2.autoRotate}
+	autoRotateDelay = {$plugin.tx_imagecarousel_pi2.autoRotateDelay}
+	mouseWheel = {$plugin.tx_imagecarousel_pi2.mouseWheel}
+	bringToFront = {$plugin.tx_imagecarousel_pi2.bringToFront}
+
+	damCaptionFields = {$plugin.tx_imagecarousel_pi1.damCaptionFields}
+	damDescFields = {$plugin.tx_imagecarousel_pi1.damDescFields}
+	damHrefFields = {$plugin.tx_imagecarousel_pi1.damHrefFields}
+
+	carousel {
+		normal {
+			image {
+				file.import.data = register:file
+				file.width.data = register:imagewidth
+				file.height.data = register:imageheight
+				imageLinkWrap < tt_content.image.20.1.imageLinkWrap
+				imageHrefWrap {
+					enable.data = register:href
+					typolink {
+						parameter.data = register:href
+						title.data = register:caption
+						target = {$plugin.tx_imagecarousel_pi1.linkTarget}
+						extTarget = {$plugin.tx_imagecarousel_pi1.extlinkTarget}
+					}
+				}
+				params = class="cloudcarousel"
+				altText {
+					data = register:caption
+					stripHtml = 1
+				}
+				titleText {
+					data = register:description
+					stripHtml = 1
+				}
+				wrap = |
+			}
+
+			buttonLeft = TEXT
+			buttonLeft {
+				value = <div id="{register:key}-left" class="cloudcarousel-left"></div>
+				insertData = 1
+			}
+			buttonLeftWrap {
+				wrap = |
+				required = 1
+			}
+
+			buttonRight = TEXT
+			buttonRight {
+				value = <div id="{register:key}-right" class="cloudcarousel-right"></div>
+				insertData = 1
+			}
+			buttonRightWrap {
+				wrap = |
+				required = 1
+			}
+
+			titleBox = TEXT
+			titleBox {
+				value = <h3 id="{register:key}-title" class="cloudcarousel-title"></h3>
+				insertData = 1
+			}
+			titleBoxWrap {
+				wrap = |
+				required = 1
+			}
+
+			altBox = TEXT
+			altBox {
+				value = <p id="{register:key}-alt" class="cloudcarousel-alt"></p>
+				insertData = 1
+			}
+			altBoxWrap {
+				wrap = |
+				required = 1
+			}
+
+			stdWrap {
+				dataWrap = <div id="{register:key}"> | ###BUTTON_LEFT### ###BUTTON_RIGHT### ###TITLE_BOX### ###ALT_BOX###</div>
+				required = 1
+			}
+		}
+		content < .normal
+	}
+	_CSS_DEFAULT_STYLE (
+.cloudcarousel-left, .cloudcarousel-right { display: none; background: url(/typo3conf/ext/imagecarousel/pi2/images/rotate-left.png); width: 40px; height: 40px; background-position: 0px 0px; position: absolute; top: 20px; right: 64px; }
+.cloudcarousel-right { background: url(/typo3conf/ext/imagecarousel/pi2/images/rotate-right.png); right: 20px; }
+.cloudcarousel-left:hover, .cloudcarousel-right:hover { background-position: 0px 40px; cursor: auto; }
+.cloudcarousel-title { display: block; margin: 20px; text-transform: uppercase; margin-bottom: 10px; width: 80%; }
+.cloudcarousel-alt { display: block; color: #000; margin: 20px; margin-top: 0px; }
+	)
+}

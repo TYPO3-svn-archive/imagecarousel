@@ -46,7 +46,7 @@ class tx_imagecarousel_cms_layout
 			if (is_array($data)) {
 				$skin      = ($data['data']['control']['lDEF']['skin']['vDEF'] ? $data['data']['control']['lDEF']['skin']['vDEF'] : $GLOBALS['LANG']->sL('LLL:EXT:imagecarousel/locallang.xml:cms_layout.from_ts'));
 				$direction = ($data['data']['control']['lDEF']['vertical']['vDEF'] ? $GLOBALS['LANG']->sL('LLL:EXT:imagecarousel/locallang.xml:cms_layout.vertical') : $GLOBALS['LANG']->sL('LLL:EXT:imagecarousel/locallang.xml:cms_layout.horizontal'));
-				$result .= sprintf($GLOBALS['LANG']->sL('LLL:EXT:imagecarousel/locallang.xml:cms_layout.style'), '<strong>'.($skin ? $skin : $GLOBALS['LANG']->sL('LLL:EXT:imagecarousel/locallang.xml:cms_layout.from_ts')).'</strong>', '<strong>'.$direction.'</strong>').'<br/>';
+				$result    = sprintf($GLOBALS['LANG']->sL('LLL:EXT:imagecarousel/locallang.xml:cms_layout.style'), '<strong>'.($skin ? $skin : $GLOBALS['LANG']->sL('LLL:EXT:imagecarousel/locallang.xml:cms_layout.from_ts')).'</strong>', '<strong>'.$direction.'</strong>').'<br/>';
 				/*
 				$mode = $data['data']['general']['lDEF']['mode']['vDEF'];
 				switch ($mode) {
@@ -71,6 +71,8 @@ class tx_imagecarousel_cms_layout
 			} else {
 				$result = $GLOBALS['LANG']->sL('LLL:EXT:imagecarousel/locallang.xml:cms_layout.not_configured').'<br/>';
 			}
+		} elseif ($params['row']['list_type'] == 'imagecarousel_pi2') {
+			$result = sprintf($GLOBALS['LANG']->sL('LLL:EXT:imagecarousel/locallang.xml:cms_layout.cloud'), '<strong>Cloud-Carousel</strong>').'<br/>';
 		}
 		if (t3lib_extMgm::isLoaded("templavoila")) {
 			$result = strip_tags($result);

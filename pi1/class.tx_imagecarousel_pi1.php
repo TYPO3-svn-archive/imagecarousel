@@ -37,22 +37,23 @@ if (t3lib_extMgm::isLoaded('t3jquery')) {
  */
 class tx_imagecarousel_pi1 extends tslib_pibase
 {
-	var $prefixId      = 'tx_imagecarousel_pi1';		// Same as class name
-	var $scriptRelPath = 'pi1/class.tx_imagecarousel_pi1.php';	// Path to this script relative to the extension dir.
-	var $extKey        = 'imagecarousel';	// The extension key.
-	var $pi_checkCHash = true;
-	var $lConf = array();
-	var $templatePart = null;
-	var $contentKey = null;
-	var $jsFiles = array();
-	var $js = array();
-	var $cssFiles = array();
-	var $css = array();
-	var $images = array();
-	var $hrefs = array();
-	var $captions = array();
-	var $imageDir = 'uploads/tx_imagecarousel/';
-	var $type = 'normal';
+	public $prefixId      = 'tx_imagecarousel_pi1';
+	public $scriptRelPath = 'pi1/class.tx_imagecarousel_pi1.php';
+	public $extKey        = 'imagecarousel';
+	public $pi_checkCHash = true;
+	public $lConf = array();
+	public $templatePart = null;
+	public $contentKey = null;
+	public $jsFiles = array();
+	public $js = array();
+	public $cssFiles = array();
+	public $css = array();
+	public $images = array();
+	public $hrefs = array();
+	public $captions = array();
+	public $description = array();
+	public $imageDir = 'uploads/tx_imagecarousel/';
+	public $type = 'normal';
 
 	/**
 	 * The main method of the PlugIn
@@ -61,7 +62,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 	 * @param	array		$conf: The PlugIn configuration
 	 * @return	The content that is displayed on the website
 	 */
-	function main($content, $conf)
+	public function main($content, $conf)
 	{
 		$this->conf = $conf;
 		$this->pi_setPiVarDefaults();
@@ -84,7 +85,6 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 					}
 				}
 			}
-
 			// define the key of the element
 			$this->setContentKey($this->extKey . "_c" . $this->cObj->data['uid']);
 
@@ -184,7 +184,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 	 * Set the Information of the images if mode = upload
 	 * @return boolean
 	 */
-	function setDataUpload()
+	protected function setDataUpload()
 	{
 		if ($this->lConf['images']) {
 			// define the images
@@ -208,14 +208,16 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 	 * Set the Information of the images if mode = dam
 	 * @return boolean
 	 */
-	function setDataDam($fromCategory=false)
+	protected function setDataDam($fromCategory=false)
 	{
 		// clear the imageDir
 		$this->imageDir = '';
 		// get all fields for captions
 		$damCaptionFields = t3lib_div::trimExplode(',', $this->conf['damCaptionFields'], true);
+		$damDescFields    = t3lib_div::trimExplode(',', $this->conf['damDescFields'], true);
 		$damHrefFields    = t3lib_div::trimExplode(',', $this->conf['damHrefFields'], true);
 		$fields  = (count($damCaptionFields) > 0 ? ','.implode(',tx_dam.', $damCaptionFields) : '');
+		$fields .= (count($damDescFields) > 0    ? ','.implode(',tx_dam.', $damDescFields)    : '');
 		$fields .= (count($damHrefFields) > 0    ? ','.implode(',tx_dam.', $damHrefFields)    : '');
 		if ($fromCategory === true) {
 			// Get the images from dam category
@@ -279,6 +281,18 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 					}
 				}
 				$this->captions[] = $caption;
+				// set the description
+				$description = '';
+				unset($description);
+				if (count($damDescFields) > 0) {
+					foreach ($damDescFields as $damDescField) {
+						if (! isset($description) && trim($row[$damDescField])) {
+							$description = $row[$damDescField];
+							break;
+						}
+					}
+				}
+				$this->description[] = $description;
 			}
 		}
 		return true;
@@ -289,7 +303,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 	 *
 	 * @return	array
 	 */
-	function getDamcats($dam_cat='')
+	protected function getDamcats($dam_cat='')
 	{
 		$damCats = t3lib_div::trimExplode(",", $dam_cat, true);
 		if (count($damCats) < 1) {
@@ -317,7 +331,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 	 * @param $data
 	 * @return string
 	 */
-	function parseTemplate($dir='', $onlyJS=false)
+	public function parseTemplate($dir='', $onlyJS=false)
 	{
 		// define the directory of images
 		if ($dir == '') {
@@ -329,17 +343,24 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			$this->setContentKey($this->extKey . '_key');
 		}
 
-		// add CSS file for skin
-		if ($this->conf['skin']) {
-			$this->addCssFile("{$this->conf['skinFolder']}/{$this->conf['skin']}/skin.css");
-			$skin_class = "jcarousel-skin-{$this->conf['skin']}";
-		}
-
 		// define the jQuery mode and function
 		if ($this->conf['jQueryNoConflict']) {
 			$jQueryNoConflict = "jQuery.noConflict();";
 		} else {
 			$jQueryNoConflict = "";
+		}
+
+		preg_match("/^([0-9]*)/i", $this->conf['imagewidth'],  $reg_width);
+		preg_match("/^([0-9]*)/i", $this->conf['imageheight'], $reg_height);
+
+		$css_width  = (is_numeric($reg_width[1])  ? $reg_width[1]."px"  : $this->conf['imagewidth']);
+		$css_height = (is_numeric($reg_height[1]) ? $reg_height[1]."px" : $this->conf['imageheight']);
+
+		// add CSS file for skin
+		$skin_class = null;
+		if ($this->conf['skin']) {
+			$this->addCssFile("{$this->conf['skinFolder']}/{$this->conf['skin']}/skin.css");
+			$skin_class = "jcarousel-skin-{$this->conf['skin']}";
 		}
 
 		// define the js files
@@ -422,20 +443,13 @@ jQuery(document).ready(function() { {$random_script}
 		}
 		if (is_numeric($this->conf['carouselheight'])) {
 			$this->addCSS("
-#c{$this->cObj->data['uid']} .jcarousel-clip-vartical {
+#c{$this->cObj->data['uid']} .jcarousel-clip-vertical {
 	height: {$this->conf['carouselheight']}px;
 }
-#c{$this->cObj->data['uid']} .jcarousel-container-vartical {
+#c{$this->cObj->data['uid']} .jcarousel-container-vertical {
 	height: {$this->conf['carouselheight']}px;
 }");
 		}
-
-		preg_match("/^([0-9]*)/i", $this->conf['imagewidth'],  $reg_width);
-		preg_match("/^([0-9]*)/i", $this->conf['imageheight'], $reg_height);
-
-		$css_width  = (is_numeric($reg_width[1])  ? $reg_width[1]."px"  : $this->conf['imagewidth']);
-		$css_height = (is_numeric($reg_height[1]) ? $reg_height[1]."px" : $this->conf['imageheight']);
-
 		$this->addCSS("
 #{$this->getContentKey()}-outer {
 	display: none;
@@ -466,10 +480,11 @@ jQuery(document).ready(function() { {$random_script}
 				$image = null;
 				$imgConf = $this->conf['carousel.'][$this->type.'.']['image.'];
 				$totalImagePath = $this->imageDir . $image_name;
-				$GLOBALS['TSFE']->register['file']    = $totalImagePath;
-				$GLOBALS['TSFE']->register['href']    = $this->hrefs[$key];
-				$GLOBALS['TSFE']->register['caption'] = $this->captions[$key];
-				$GLOBALS['TSFE']->register['CURRENT_ID'] = $GLOBALS['TSFE']->register['IMAGE_NUM_CURRENT'] + 1;
+				$GLOBALS['TSFE']->register['file']        = $totalImagePath;
+				$GLOBALS['TSFE']->register['href']        = $this->hrefs[$key];
+				$GLOBALS['TSFE']->register['caption']     = $this->captions[$key];
+				$GLOBALS['TSFE']->register['description'] = $this->description[$key];
+				$GLOBALS['TSFE']->register['CURRENT_ID']  = $GLOBALS['TSFE']->register['IMAGE_NUM_CURRENT'] + 1;
 				if ($this->hrefs[$key]) {
 					$imgConf['imageLinkWrap.'] = $imgConf['imageHrefWrap.'];
 				}
@@ -494,7 +509,7 @@ jQuery(document).ready(function() { {$random_script}
 	 *
 	 * @return void
 	 */
-	function addResources()
+	public function addResources()
 	{
 		// checks if t3jquery is loaded
 		if (T3JQUERY === true) {
@@ -572,7 +587,7 @@ jQuery(document).ready(function() { {$random_script}
 	 * @param string $path
 	 * return string
 	 */
-	function getPath($path="")
+	protected function getPath($path="")
 	{
 		return $GLOBALS['TSFE']->tmpl->getFileName($path);
 	}
@@ -584,7 +599,7 @@ jQuery(document).ready(function() { {$random_script}
 	 * @param boolean $first
 	 * @return void
 	 */
-	function addJsFile($script="", $first=false)
+	protected function addJsFile($script="", $first=false)
 	{
 		$script = t3lib_div::fixWindowsFilePath($script);
 		if ($this->getPath($script) && ! in_array($script, $this->jsFiles)) {
@@ -602,7 +617,7 @@ jQuery(document).ready(function() { {$random_script}
 	 * @param string $script
 	 * @return void
 	 */
-	function addJS($script="")
+	protected function addJS($script="")
 	{
 		if (! in_array($script, $this->js)) {
 			$this->js[] = $script;
@@ -615,7 +630,7 @@ jQuery(document).ready(function() { {$random_script}
 	 * @param string $script
 	 * @return void
 	 */
-	function addCssFile($script="")
+	protected function addCssFile($script="")
 	{
 		$script = t3lib_div::fixWindowsFilePath($script);
 		if ($this->getPath($script) && ! in_array($script, $this->cssFiles)) {
@@ -629,7 +644,7 @@ jQuery(document).ready(function() { {$random_script}
 	 * @param string $script
 	 * @return void
 	 */
-	function addCSS($script="")
+	protected function addCSS($script="")
 	{
 		if (! in_array($script, $this->css)) {
 			$this->css[] = $script;
@@ -641,7 +656,7 @@ jQuery(document).ready(function() { {$random_script}
 	 * @param string $key
 	 * @return string
 	 */
-	function getExtensionVersion($key)
+	protected function getExtensionVersion($key)
 	{
 		if (! t3lib_extMgm::isLoaded($key)) {
 			return '';

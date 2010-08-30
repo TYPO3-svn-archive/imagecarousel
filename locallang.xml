@@ -8,7 +8,10 @@
 		<languageKey index="default" type="array">
 			<label index="pi1_title">Image carousel</label>
 			<label index="pi1_plus_wiz_description">Add an image carousel to your content</label>
+			<label index="pi2_title">Cloud-Carousel</label>
+			<label index="pi2_plus_wiz_description">Add an Cloud-Carousel to your content</label>
 			<label index="cms_layout.style">Display: %s %s</label>
+			<label index="cms_layout.cloud">Display: %s</label>
 			<label index="cms_layout.not_configured">Plugin is not configured!</label>
 			<label index="cms_layout.from_ts">From Typoscript</label>
 			<label index="cms_layout.vertical">vertical</label>

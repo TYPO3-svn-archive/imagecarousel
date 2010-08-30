@@ -46,6 +46,28 @@
 			<label index="tt_content.pi_flexform.wrap.I.2">Last</label>
 			<label index="tt_content.pi_flexform.wrap.I.3">First + Last</label>
 			<label index="tt_content.pi_flexform.wrap.I.4">Circular</label>
+			
+			<label index="tt_content.list_type_pi2">Image carousel (Cloud)</label>
+			<label index="tt_content.pi_flexform.minScale">Min. Scale</label>
+			<label index="tt_content.pi_flexform.xRadius">Radius X</label>
+			<label index="tt_content.pi_flexform.yRadius">Radius Y</label>
+			<label index="tt_content.pi_flexform.xPos">Center X</label>
+			<label index="tt_content.pi_flexform.yPos">Center Y</label>
+			<label index="tt_content.pi_flexform.FPS">Frames per secound</label>
+			<label index="tt_content.pi_flexform.speed">Speed of movement</label>
+			<label index="tt_content.pi_flexform.autoRotate">Direction of autorotate</label>
+			<label index="tt_content.pi_flexform.autoRotateDelay">Delay of autorotate</label>
+			<label index="tt_content.pi_flexform.mouseWheel">Activate the mouseweel</label>
+			<label index="tt_content.pi_flexform.bringToFront">Bring th image to front</label>
+			<label index="tt_content.pi_flexform.sheet_reflection">Reflection</label>
+			<label index="tt_content.pi_flexform.reflHeight">Reflection height</label>
+			<label index="tt_content.pi_flexform.reflGap">Reflection gap</label>
+			<label index="tt_content.pi_flexform.reflOpacity">Reflection opacity</label>
+			<label index="tt_content.pi_flexform.sheet_buttons">Buttons</label>
+			<label index="tt_content.pi_flexform.buttonLeft">Show button left</label>
+			<label index="tt_content.pi_flexform.buttonRight">Show button right</label>
+			<label index="tt_content.pi_flexform.titleBox">Show title box</label>
+			<label index="tt_content.pi_flexform.altBox">Show alt box</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">

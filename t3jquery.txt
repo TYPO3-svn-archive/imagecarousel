@@ -1,2 +1,2 @@
-script=res/jquery/js/jquery.carrousel-0.2.4.min.js
+script=res/jquery/js/jquery.carrousel-0.2.4.min.js,res/jquery/js/jquery.cloudcarousel-1.0.4.min.js,res/jquery/js/jquery.mousewheel-3.0.2.min.js
 components=jQuery,Core,Easing
