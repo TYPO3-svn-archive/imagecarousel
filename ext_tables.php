@@ -72,6 +72,7 @@ if (TYPO3_MODE == 'BE') {
 }
 
 t3lib_extMgm::addStaticFile($_EXTKEY,'static/', 'Image Carousel');
+t3lib_extMgm::addStaticFile($_EXTKEY,'static/cloudcarousel/', 'Cloud-Carousel');
 
 
 
