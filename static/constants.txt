@@ -15,6 +15,13 @@ plugin.tx_imagecarousel_pi1 {
 	# cat=plugin.tx_imagecarousel/enable/050; type=boolean; label=Minify Javascript: If set, the Javascript will be minified
 	jsMinify = 0
 
+	# cat=plugin.tx_imagecarousel/enable/060; type=boolean; label=Javascript to Inline: If set, the Javascript will be inserted into the inlineJS, after this, its possible to put it into externel files (config.removeDefaultJS = external)
+	jsInline = 0
+
+	# cat=plugin.tx_imagecarousel/enable/070; type=boolean; label=Minify CSS: If set, the CSS will be minified
+	cssMinify = 0
+
+
 
 	# cat=plugin.tx_imagecarousel/file/010; type=file[js]; label=jQuery Library: Location of the jQuery Lib
 	file.jQueryLibrary = EXT:imagecarousel/res/jquery/js/jquery-1.4.2.min.js
@@ -33,6 +40,7 @@ plugin.tx_imagecarousel_pi1 {
 
 	# cat=plugin.tx_imagecarousel/file/060; type=options[ie7,tango]; label=Skin: Skin to use as default
 	skin = tango
+
 
 
 	# cat=plugin.tx_imagecarousel/dims/010; type=boolean; label=Vertical: Displays carousel varousel
@@ -63,6 +71,7 @@ plugin.tx_imagecarousel_pi1 {
 	carouselheight = 400
 
 
+
 	# cat=plugin.tx_imagecarousel/typo/010; type=boolean; label=Auto scroll (in ms):
 	auto = 0
 
@@ -83,6 +92,7 @@ plugin.tx_imagecarousel_pi1 {
 
 	# cat=plugin.tx_imagecarousel/typo/070; type=options[,first,last,both,circular]; label=Wrap back at position:
 	movewrap = 
+
 
 
 	# cat=plugin.tx_imagecarousel.dam/basic/010; type=string; label=DAM caption fields: Comma seperated string with tx_dam fields
