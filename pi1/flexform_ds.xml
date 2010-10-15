@@ -197,8 +197,8 @@
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.imagewidth</label>
 							<config>
 								<type>input</type>
-								<size>5</size>
-								<max>5</max>
+								<size>16</size>
+								<max>16</max>
 								<default></default>
 								<eval>nospace</eval>
 							</config>
@@ -210,8 +210,8 @@
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.imageheight</label>
 							<config>
 								<type>input</type>
-								<size>5</size>
-								<max>5</max>
+								<size>16</size>
+								<max>16</max>
 								<default></default>
 								<eval>nospace</eval>
 							</config>
@@ -223,8 +223,8 @@
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.carouselwidth</label>
 							<config>
 								<type>input</type>
-								<size>5</size>
-								<max>5</max>
+								<size>10</size>
+								<max>10</max>
 								<default></default>
 								<eval>nospace</eval>
 							</config>
@@ -236,8 +236,8 @@
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.carouselheight</label>
 							<config>
 								<type>input</type>
-								<size>5</size>
-								<max>5</max>
+								<size>10</size>
+								<max>10</max>
 								<default></default>
 								<eval>nospace</eval>
 							</config>

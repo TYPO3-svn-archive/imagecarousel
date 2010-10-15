@@ -30,7 +30,7 @@ plugin.tx_imagecarousel_pi1 {
 	file.jQueryEasing = EXT:imagecarousel/res/jquery/js/jquery.easing-1.3.js
 
 	# cat=plugin.tx_imagecarousel/file/030; type=file[js]; label=jQuery Carousel: Location of the jQuery Carousel
-	file.jQueryCarousel = EXT:imagecarousel/res/jquery/js/jquery.jcarousel-0.2.4.pack.js
+	file.jQueryCarousel = EXT:imagecarousel/res/jquery/js/jquery.jcarousel-0.2.7.min.js
 
 	# cat=plugin.tx_imagecarousel/file/040; type=file[js]; label=Script file: Location of the additional JS (needed for init)
 	file.jsScript = EXT:imagecarousel/res/jquery/js/imagecarousel-1.2.1.js
