@@ -23,13 +23,20 @@
 ***************************************************************/
 
 /**
- * @author	Juergen Furrer <juergen.furrer@gmail.com>
- * @package	TYPO3
- * @subpackage	tx_imagecarousel
+ * @author      Juergen Furrer <juergen.furrer@gmail.com>
+ * @package     TYPO3
+ * @subpackage  tx_imagecarousel
  */
-class tx_imagecarousel {
+class tx_imagecarousel
+{
 	var $cObj;
 
+	/**
+	 * Return the jCarousel for cType text w/image
+	 * 
+	 * @param $content
+	 * @param $conf
+	 */
 	function getSlideshow($content, $conf)
 	{
 		if ($this->cObj->data['tx_imagecarousel_activate']) {
@@ -45,6 +52,28 @@ class tx_imagecarousel {
 			$obj->type = 'content';
 			$return_string = $obj->parseTemplate('uploads/pics/', true);
 		}
+		return $content;
+	}
+
+	/**
+	 * Return the CloudCarousel for chgallery (Experimental)
+	 * 
+	 * @param $content
+	 * @param $conf
+	 */
+	function getCloudCarousel($content, $conf)
+	{
+		require_once(t3lib_extMgm::extPath('imagecarousel') . 'pi2/class.tx_imagecarousel_pi2.php');
+		$obj = t3lib_div::makeInstance('tx_imagecarousel_pi2');
+		if ($conf['contentKey']) {
+			$obj->setContentKey($conf['contentKey']);
+		} else {
+			$obj->setContentKey($obj->extKey . '_' . $this->cObj->data['uid']);
+		}
+		$obj->conf = t3lib_div::array_merge($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_imagecarousel_pi2.'], $conf);
+		$obj->cObj = $this->cObj;
+		$obj->type = 'chgallery';
+		$return_string = $obj->parseTemplate('', true);
 		return $content;
 	}
 }

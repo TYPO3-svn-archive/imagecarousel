@@ -117,6 +117,7 @@ plugin.tx_imagecarousel_pi2 {
 			}
 		}
 		content < .normal
+		chgallery < .normal
 	}
 	_CSS_DEFAULT_STYLE (
 .cloudcarousel-left, .cloudcarousel-right { display: none; background: url(/typo3conf/ext/imagecarousel/pi2/images/rotate-left.png); width: 40px; height: 40px; background-position: 0px 0px; position: absolute; top: 20px; right: 64px; }
@@ -126,3 +127,43 @@ plugin.tx_imagecarousel_pi2 {
 .cloudcarousel-alt { display: block; color: #000; margin: 20px; margin-top: 0px; }
 	)
 }
+
+#
+# Cloud-Carousel for chgallery
+# EXPERIMENTAL
+#
+#includeLibs.imagecarousel = EXT:imagecarousel/class.tx_imagecarousel.php
+#plugin.tx_chgallery_pi1 {
+#  templateFile = fileadmin/templates/yaml/chgallery.html
+#  description {
+#    preUserFunc = tx_imagecarousel->getCloudCarousel
+#    preUserFunc {
+#      contentKey = chgallery_imagecarousel
+#      reflHeight = 20
+#      reflGap = 3
+#      reflOpacity = 20
+#      mouseWheel = 1
+#      bringToFront = 1
+#      buttonLeft = 1
+#      buttonRight = 1
+#      titleBox = 1
+#      altBox = 1
+#    }
+#  }
+#  category.image {
+#    file {
+#      maxW = 200
+#      maxH = 200
+#    }
+#    altText {
+#      data = register:name
+#      stripHtml = 1
+#    }
+#    titleText {
+#      data = register:title
+#      stripHtml = 1
+#    }
+#    params = class="cloudcarousel"
+#  }
+#}
+

@@ -12,7 +12,6 @@ plugin.tx_imagecarousel_pi1 {
 	jQueryEasing = {$plugin.tx_imagecarousel_pi1.file.jQueryEasing}
 	jQueryCarousel = {$plugin.tx_imagecarousel_pi1.file.jQueryCarousel}
 	jsScript = {$plugin.tx_imagecarousel_pi1.file.jsScript}
-	skinFolder = {$plugin.tx_imagecarousel_pi1.skinFolder}
 	skin = {$plugin.tx_imagecarousel_pi1.skin}
 
 	vertical = {$plugin.tx_imagecarousel_pi1.vertical}

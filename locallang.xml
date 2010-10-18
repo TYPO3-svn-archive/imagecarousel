@@ -16,6 +16,8 @@
 			<label index="cms_layout.from_ts">From Typoscript</label>
 			<label index="cms_layout.vertical">vertical</label>
 			<label index="cms_layout.horizontal">horizontal</label>
+			<label index="extmng.updatermsgHeader">Warning!</label>
+			<label index="extmng.updatermsg">You have to use the "Update"-Button below to ensure proper working for all functions in this extension.</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">

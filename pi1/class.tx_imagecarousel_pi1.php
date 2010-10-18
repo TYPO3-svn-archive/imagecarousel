@@ -359,7 +359,8 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 		// add CSS file for skin
 		$skin_class = null;
 		if ($this->conf['skin']) {
-			$this->addCssFile("{$this->conf['skinFolder']}/{$this->conf['skin']}/skin.css");
+			$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['imagecarousel']);
+			$this->addCssFile("{$confArr['skinFolder']}/{$this->conf['skin']}/skin.css");
 			$skin_class = "jcarousel-skin-{$this->conf['skin']}";
 		}
 
@@ -542,9 +543,9 @@ jQuery(document).ready(function() { {$random_script}
 					if ($file) {
 						if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
 							if ($allJsInFooter) {
-								$pagerender->addJsFooterFile($file, $type, $this->conf['jsMinify']);
+								$pagerender->addJsFooterFile($file, 'text/javascript', $this->conf['jsMinify']);
 							} else {
-								$pagerender->addJsFile($file, $type, $this->conf['jsMinify']);
+								$pagerender->addJsFile($file, 'text/javascript', $this->conf['jsMinify']);
 							}
 						} else {
 							$temp_file = '<script type="text/javascript" src="'.$file.'"></script>';
