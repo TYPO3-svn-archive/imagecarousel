@@ -419,7 +419,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 		}
 		// fallback for childElem
 		if (! $this->conf['carousel.'][$this->type.'.']['childElem']) {
-			$this->conf['carousel.'][$this->type.'.']['childElem'] = 'li';
+			$this->conf['carousel.'][$this->type.'.']['childElem'] = 'ul,li';
 		}
 		$random_script = null;
 		if ($this->conf['random']) {
