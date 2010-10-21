@@ -10,6 +10,7 @@ plugin.tx_imagecarousel_pi1 {
 
 	jQueryLibrary = {$plugin.tx_imagecarousel_pi1.file.jQueryLibrary}
 	jQueryEasing = {$plugin.tx_imagecarousel_pi1.file.jQueryEasing}
+	jQueryCaptify = {$plugin.tx_imagecarousel_pi1.file.jQueryCaptify}
 	jQueryCarousel = {$plugin.tx_imagecarousel_pi1.file.jQueryCarousel}
 	jsScript = {$plugin.tx_imagecarousel_pi1.file.jsScript}
 	skin = {$plugin.tx_imagecarousel_pi1.skin}
@@ -32,15 +33,29 @@ plugin.tx_imagecarousel_pi1 {
 	scroll = {$plugin.tx_imagecarousel_pi1.scroll}
 	movewrap = {$plugin.tx_imagecarousel_pi1.movewrap}
 
+	showCaption = {$plugin.tx_imagecarousel_pi1.showCaption}
+	animation = {$plugin.tx_imagecarousel_pi1.animation}
+	position = {$plugin.tx_imagecarousel_pi1.position}
+	speedOver = {$plugin.tx_imagecarousel_pi1.speedOver}
+	speedOut = {$plugin.tx_imagecarousel_pi1.speedOut}
+	hideDelay = {$plugin.tx_imagecarousel_pi1.hideDelay}
+	prefix = {$plugin.tx_imagecarousel_pi1.prefix}
+	opacity = {$plugin.tx_imagecarousel_pi1.opacity}
+	className = {$plugin.tx_imagecarousel_pi1.className}
+	spanWidth = {$plugin.tx_imagecarousel_pi1.spanWidth}
+
+
 	damCaptionFields = {$plugin.tx_imagecarousel_pi1.damCaptionFields}
 	damHrefFields = {$plugin.tx_imagecarousel_pi1.damHrefFields}
 
 	carousel {
 		normal {
 			image {
-				file.import.data = register:file
-				file.width.data = register:imagewidth
-				file.height.data = register:imageheight
+				file {
+					import.data = register:file
+					width.data = register:imagewidth
+					height.data = register:imageheight
+				}
 				imageLinkWrap < tt_content.image.20.1.imageLinkWrap
 				imageHrefWrap {
 					enable.data = register:href
@@ -51,6 +66,7 @@ plugin.tx_imagecarousel_pi1 {
 						extTarget = {$plugin.tx_imagecarousel_pi1.extlinkTarget}
 					}
 				}
+				params = class="captify"
 				altText {
 					data = register:caption
 					stripHtml = 1
@@ -72,7 +88,7 @@ plugin.tx_imagecarousel_pi1 {
 				dataWrap = <div id="{register:key}-outer"><div id="{register:key}" class="{register:class}">###NAVIGATION###<ul> | </ul></div></div>
 				required = 1
 			}
-			childElem = ul,li
+			childElem = li
 		}
 		content < .normal
 	}

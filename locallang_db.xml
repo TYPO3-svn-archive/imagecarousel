@@ -33,6 +33,27 @@
 			<label index="tt_content.pi_flexform.imageheight">Image height</label>
 			<label index="tt_content.pi_flexform.carouselwidth">Carousel width</label>
 			<label index="tt_content.pi_flexform.carouselheight">Carousel height</label>
+
+			<label index="tt_content.pi_flexform.sheet_captions">Captions</label>
+			<label index="tt_content.pi_flexform.showCaption">Show caption</label>
+			<label index="tt_content.pi_flexform.animation">Animation</label>
+			<label index="tt_content.pi_flexform.animation.fade">Fade</label>
+			<label index="tt_content.pi_flexform.animation.slide">Slide</label>
+			<label index="tt_content.pi_flexform.animation.always-on">Always on</label>
+			<label index="tt_content.pi_flexform.position">Position</label>
+			<label index="tt_content.pi_flexform.position.top">Top</label>
+			<label index="tt_content.pi_flexform.position.bottom">Bottom</label>
+			<label index="tt_content.pi_flexform.speedOver">speed over</label>
+			<label index="tt_content.pi_flexform.speedOut">Speed out</label>
+			<label index="tt_content.pi_flexform.speed.fast">Fast</label>
+			<label index="tt_content.pi_flexform.speed.normal">Normal</label>
+			<label index="tt_content.pi_flexform.speed.slow">Slow</label>
+			<label index="tt_content.pi_flexform.hideDelay">Hide delay</label>
+			<label index="tt_content.pi_flexform.prefix">Prefix</label>
+			<label index="tt_content.pi_flexform.opacity">Opacity</label>
+			<label index="tt_content.pi_flexform.className">Class name</label>
+			<label index="tt_content.pi_flexform.spanWidth">Span width</label>
+
 			<label index="tt_content.pi_flexform.sheet_movement">Movement</label>
 			<label index="tt_content.pi_flexform.auto">Auto scroll (in ms)</label>
 			<label index="tt_content.pi_flexform.stoponmouseover">Stop on mouse over</label>
@@ -68,6 +89,8 @@
 			<label index="tt_content.pi_flexform.buttonRight">Show button right</label>
 			<label index="tt_content.pi_flexform.titleBox">Show title box</label>
 			<label index="tt_content.pi_flexform.altBox">Show alt box</label>
+
+			<label index="tt_content.pi_flexform.from_ts">From Typoscript</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">

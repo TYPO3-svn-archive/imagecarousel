@@ -143,8 +143,7 @@
 					<vertical>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.vertical
-							</label>
+							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.vertical</label>
 							<config>
 								<type>check</type>
 								<default>0</default>
@@ -246,6 +245,165 @@
 				</el>
 			</ROOT>
 		</control>
+		<captions>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.sheet_captions</sheetTitle>
+					<cshFile>LLL:EXT:imagecarousel/locallang_csh_flexform.xml</cshFile>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<showCaption>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.showCaption</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</showCaption>
+					<animation>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.animation</label>
+							<config>
+								<type>select</type>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.animation.fade</numIndex>
+										<numIndex index="1">fade</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.animation.slide</numIndex>
+										<numIndex index="1">slide</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.animation.always-on</numIndex>
+										<numIndex index="1">always-on</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</animation>
+					<position>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.position</label>
+							<config>
+								<type>select</type>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.position.top</numIndex>
+										<numIndex index="1">top</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.position.bottom</numIndex>
+										<numIndex index="1">bottom</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</position>
+					<speedOver>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.speedOver</label>
+							<config>
+								<type>select</type>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.speed.fast</numIndex>
+										<numIndex index="1">fast</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.speed.normal</numIndex>
+										<numIndex index="1">normal</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.speed.slow</numIndex>
+										<numIndex index="1">slow</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</speedOver>
+					<speedOut>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.speedOut</label>
+							<config>
+								<type>select</type>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.speed.fast</numIndex>
+										<numIndex index="1">fast</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.speed.normal</numIndex>
+										<numIndex index="1">normal</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.speed.slow</numIndex>
+										<numIndex index="1">slow</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</speedOut>
+					<hideDelay>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.hideDelay</label>
+							<config>
+								<type>input</type>
+								<size>5</size>
+								<max>5</max>
+								<default>500</default>
+								<eval>integer</eval>
+							</config>
+						</TCEforms>
+					</hideDelay>
+					<spanWidth>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.spanWidth</label>
+							<config>
+								<type>input</type>
+								<size>10</size>
+								<max>10</max>
+								<default>100%</default>
+								<eval>nospace</eval>
+							</config>
+						</TCEforms>
+					</spanWidth>
+				</el>
+			</ROOT>
+		</captions>
 		<movement>
 			<ROOT>
 				<TCEforms>

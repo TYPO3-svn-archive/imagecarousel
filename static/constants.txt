@@ -29,13 +29,16 @@ plugin.tx_imagecarousel_pi1 {
 	# cat=plugin.tx_imagecarousel/file/020; type=file[js]; label=jQuery Easing: Location of the jQuery Easing
 	file.jQueryEasing = EXT:imagecarousel/res/jquery/js/jquery.easing-1.3.js
 
-	# cat=plugin.tx_imagecarousel/file/030; type=file[js]; label=jQuery Carousel: Location of the jQuery Carousel
+	# cat=plugin.tx_imagecarousel/file/030; type=file[js]; label=jQuery Captify: Location of the jQuery Captify
+	file.jQueryCaptify = EXT:imagecarousel/res/jquery/js/jquery.captify-1.1.3.min.js
+
+	# cat=plugin.tx_imagecarousel/file/040; type=file[js]; label=jQuery Carousel: Location of the jQuery Carousel
 	file.jQueryCarousel = EXT:imagecarousel/res/jquery/js/jquery.jcarousel-0.2.7.min.js
 
-	# cat=plugin.tx_imagecarousel/file/040; type=file[js]; label=Script file: Location of the additional JS (needed for init)
+	# cat=plugin.tx_imagecarousel/file/050; type=file[js]; label=Script file: Location of the additional JS (needed for init)
 	file.jsScript = EXT:imagecarousel/res/jquery/js/imagecarousel-1.4.1.js
 
-	# cat=plugin.tx_imagecarousel/file/050; type=options[ie7,tango]; label=Skin: Skin to use as default
+	# cat=plugin.tx_imagecarousel/file/060; type=options[ie7,tango]; label=Skin: Skin to use as default
 	skin = tango
 
 
@@ -89,6 +92,38 @@ plugin.tx_imagecarousel_pi1 {
 
 	# cat=plugin.tx_imagecarousel/typo/070; type=options[,first,last,both,circular]; label=Wrap back at position:
 	movewrap = 
+
+
+
+	# cat=plugin.tx_imagecarousel.caption/enable/010; type=boolean; label=Show caption: If set, the captions will be displayed
+	showCaption = 0
+
+	# cat=plugin.tx_imagecarousel.caption/typo/040; type=options[fade,slide,always-on]; label=Animation: Used animation for caption
+	animation = slide
+
+	# cat=plugin.tx_imagecarousel.caption/typo/080; type=options[top,bottom]; label=Position: Position of the caption
+	position = bottom
+
+	# cat=plugin.tx_imagecarousel.caption/typo/010; type=options[fast,normal,slow]; label=Speed over: Speed of the mouseover effect
+	speedOver = fast
+
+	# cat=plugin.tx_imagecarousel.caption/typo/020; type=options[fast,normal,slow]; label=Speed out: Speed of the mouseout effect
+	speedOut = normal
+
+	# cat=plugin.tx_imagecarousel.caption/typo/030; type=int; label=Hide delay: How long to delay the hiding of the caption after mouseout (in ms)
+	hideDelay = 500
+
+	# cat=plugin.tx_imagecarousel.caption/typo/050; type=string; label=Prefix: text/html to be placed at the beginning of every caption
+	prefix = 
+
+	# cat=plugin.tx_imagecarousel.caption/typo/060; type=string; label=Opacity: Opacity of the caption on mouse over
+	opacity = 0.7
+
+	# cat=plugin.tx_imagecarousel.caption/typo/070; type=string; label=Class name: The name of the CSS class to apply to the caption box
+	className = caption-bottom
+
+	# cat=plugin.tx_imagecarousel.caption/typo/090; type=string; label=Span width: Caption span percentage of the image
+	spanWidth = 100%
 
 
 

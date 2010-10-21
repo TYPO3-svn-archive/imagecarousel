@@ -157,6 +157,22 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			$this->conf['externalcontrol']    = $this->lConf['externalcontrol'];
 			$this->conf['hidenextbutton']     = $this->lConf['hidenextbutton'];
 			$this->conf['hidepreviousbutton'] = $this->lConf['hidepreviousbutton'];
+			// Caption
+			$this->conf['showCaption'] = $this->lConf['showCaption'];
+			if ($this->lConf['animation']) {
+				$this->conf['animation'] = $this->lConf['animation'];
+			}
+			if ($this->lConf['position']) {
+				$this->conf['position'] = $this->lConf['position'];
+			}
+			if ($this->lConf['speedOver']) {
+				$this->conf['speedOver'] = $this->lConf['speedOver'];
+			}
+			if ($this->lConf['speedOut']) {
+				$this->conf['speedOut'] = $this->lConf['speedOut'];
+			}
+			$this->conf['hideDelay'] = $this->lConf['hideDelay'];
+			$this->conf['spanWidth'] = $this->lConf['spanWidth'];
 
 			return $this->parseTemplate();
 		}
@@ -419,19 +435,54 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 		}
 		// fallback for childElem
 		if (! $this->conf['carousel.'][$this->type.'.']['childElem']) {
-			$this->conf['carousel.'][$this->type.'.']['childElem'] = 'ul,li';
+			$this->conf['carousel.'][$this->type.'.']['childElem'] = 'li';
 		}
 		$random_script = null;
 		if ($this->conf['random']) {
 			$random_script = "\n	imagecarousel.randomize('#{$this->getContentKey()}','{$this->conf['carousel.'][$this->type.'.']['childElem']}');";
+		}
+		// caption
+		$jQueryCaptify = null;
+		if ($this->conf['showCaption']) {
+			$captions = array();
+			if ($this->conf['animation']) {
+				$captions[] = "animation: " . t3lib_div::quoteJSvalue($this->conf['animation']);
+			}
+			if ($this->conf['position']) {
+				$captions[] = "position: " . t3lib_div::quoteJSvalue($this->conf['position']);
+			}
+			if ($this->conf['speedOver']) {
+				$captions[] = "speedOver: " . t3lib_div::quoteJSvalue($this->conf['speedOver']);
+			}
+			if ($this->conf['speedOut']) {
+				$captions[] = "speedOut: " . t3lib_div::quoteJSvalue($this->conf['speedOut']);
+			}
+			if ($this->conf['hideDelay']) {
+				$captions[] = "hideDelay: " . t3lib_div::quoteJSvalue($this->conf['hideDelay']);
+			}
+			if ($this->conf['prefix']) {
+				$captions[] = "prefix: " . t3lib_div::quoteJSvalue($this->conf['prefix']);
+			}
+			if ($this->conf['opacity']) {
+				$captions[] = "opacity: " . t3lib_div::quoteJSvalue($this->conf['opacity']);
+			}
+			if ($this->conf['className']) {
+				$captions[] = "className: " . t3lib_div::quoteJSvalue($this->conf['className']);
+			}
+			if ($this->conf['spanWidth']) {
+				$captions[] = "spanWidth: " . t3lib_div::quoteJSvalue($this->conf['spanWidth']);
+			}
+			$this->addJsFile($this->conf['jQueryCaptify']);
+			$jQueryCaptify = "\n	jQuery('#{$this->getContentKey()} img.captify').captify(".(count($captions) ? "{\n		".implode(",\n		", $captions)."\n	}" : "").");";
 		}
 
 		$this->addJS(
 $jQueryNoConflict . "
 jQuery(document).ready(function() { {$random_script}
 	jQuery('#{$this->getContentKey()}-outer').css('display', 'block');
-	jQuery('#{$this->getContentKey()}').jcarousel(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "").");
-});");
+	jQuery('#{$this->getContentKey()}').jcarousel(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "").");{$jQueryCaptify}
+});
+");
 
 		if (is_numeric($this->conf['carouselwidth'])) {
 			$this->addCSS("
