@@ -16,6 +16,7 @@ plugin.tx_imagecarousel_pi1 {
 	skin = {$plugin.tx_imagecarousel_pi1.skin}
 
 	vertical = {$plugin.tx_imagecarousel_pi1.vertical}
+	rtl = {$plugin.tx_imagecarousel_pi1.rtl}
 	random = {$plugin.tx_imagecarousel_pi1.random}
 	externalcontrol = {$plugin.tx_imagecarousel_pi1.externalcontrol}
 	hidenextbutton = {$plugin.tx_imagecarousel_pi1.hidenextbutton}

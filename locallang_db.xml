@@ -11,7 +11,7 @@
 			<label index="tt_content.tx_imagecarousel_title">Image Carousel</label>
 			<label index="tt_content.tx_imagecarousel_activate">Activate</label>
 			<label index="tt_content.pi_flexform.sheet_general">General</label>
-			<label index="tt_content.pi_flexform.mode">Mode (DAM)</label>
+			<label index="tt_content.pi_flexform.mode">Image carousel mode</label>
 			<label index="tt_content.pi_flexform.mode.I.upload">Upload Images</label>
 			<label index="tt_content.pi_flexform.mode.I.folder">Folder</label>
 			<label index="tt_content.pi_flexform.mode.I.dam">DAM (dam)</label>
@@ -25,6 +25,7 @@
 			<label index="tt_content.pi_flexform.sheet_control">Control / Style</label>
 			<label index="tt_content.pi_flexform.skin">Skin</label>
 			<label index="tt_content.pi_flexform.vertical">Vertical</label>
+			<label index="tt_content.pi_flexform.rtl">Reverse (horizontal only)</label>
 			<label index="tt_content.pi_flexform.random">Random order</label>
 			<label index="tt_content.pi_flexform.externalcontrol">External control</label>
 			<label index="tt_content.pi_flexform.hidenextbutton">Hide next button</label>

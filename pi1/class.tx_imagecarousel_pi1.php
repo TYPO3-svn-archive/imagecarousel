@@ -153,6 +153,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			// 
 			$this->conf['random']             = $this->lConf['random'];
 			$this->conf['vertical']           = $this->lConf['vertical'];
+			$this->conf['rtl']                = $this->lConf['rtl'];
 			$this->conf['stoponmouseover']    = $this->lConf['stoponmouseover'];
 			$this->conf['externalcontrol']    = $this->lConf['externalcontrol'];
 			$this->conf['hidenextbutton']     = $this->lConf['hidenextbutton'];
@@ -408,6 +409,9 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 				$options[] = "wrap: '{$this->conf['movewrap']}'";
 			}
 		}
+		if ($this->conf['rtl']) {
+			$options[] = "rtl: true";
+		}
 		if ($this->conf['scroll'] > 0) {
 			if ($this->conf['scroll'] > count($this->images)) {
 				$this->conf['scroll'] = count($this->images);
@@ -486,21 +490,19 @@ jQuery(document).ready(function() { {$random_script}
 
 		if (is_numeric($this->conf['carouselwidth'])) {
 			$this->addCSS("
-#c{$this->cObj->data['uid']} .jcarousel-clip-horizontal {
-	width: {$this->conf['carouselwidth']}px;
-}
+#c{$this->cObj->data['uid']} .jcarousel-clip-horizontal,
 #c{$this->cObj->data['uid']} .jcarousel-container-horizontal {
-	width: {$this->conf['carouselwidth']}px;
-}");
+	width: {$this->conf['carouselwidth']}px;".($this->conf['carouselheight'] ? "\n	height: {$this->conf['carouselheight']}px;" : "")."
+}
+");
 		}
 		if (is_numeric($this->conf['carouselheight'])) {
 			$this->addCSS("
-#c{$this->cObj->data['uid']} .jcarousel-clip-vertical {
-	height: {$this->conf['carouselheight']}px;
-}
+#c{$this->cObj->data['uid']} .jcarousel-clip-vertical,
 #c{$this->cObj->data['uid']} .jcarousel-container-vertical {
-	height: {$this->conf['carouselheight']}px;
-}");
+	height: {$this->conf['carouselheight']}px;".($this->conf['carouselwidth'] ? "\n	width: {$this->conf['carouselwidth']}px;" : "")."
+}
+");
 		}
 		$this->addCSS("
 #{$this->getContentKey()}-outer {
@@ -656,7 +658,7 @@ jQuery(document).ready(function() { {$random_script}
 					if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
 						$pagerender->addCssFile($file, 'stylesheet', 'all', '', $this->conf['cssMinify']);
 					} else {
-						$GLOBALS['TSFE']->additionalHeaderData['cssFile_'.$this->extKey.'_'.$file] = '<link rel="stylesheet" type="text/css" href="'.$file.'" medai="all" />'.chr(10);
+						$GLOBALS['TSFE']->additionalHeaderData['cssFile_'.$this->extKey.'_'.$file] = '<link rel="stylesheet" type="text/css" href="'.$file.'" media="all" />'.chr(10);
 					}
 				} else {
 					t3lib_div::devLog("'{$cssToLoad}' does not exists!", $this->extKey, 2);
