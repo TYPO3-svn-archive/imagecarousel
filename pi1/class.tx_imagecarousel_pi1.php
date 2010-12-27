@@ -110,56 +110,62 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			if ($this->lConf['skin']) {
 				$this->conf['skin'] = $this->lConf['skin'];
 			}
-			// 
 			if ($this->lConf['imagewidth']) {
 				$this->conf['imagewidth'] = $this->lConf['imagewidth'];
 			}
-			// 
 			if ($this->lConf['imageheight']) {
 				$this->conf['imageheight'] = $this->lConf['imageheight'];
 			}
-			// 
-			if (is_numeric($this->lConf['carouselwidth'])) {
+			if ($this->lConf['carouselwidth'] > 0) {
 				$this->conf['carouselwidth'] = $this->lConf['carouselwidth'];
 			}
-			// 
-			if (is_numeric($this->lConf['carouselheight'])) {
+			if ($this->lConf['carouselheight'] > 0) {
 				$this->conf['carouselheight'] = $this->lConf['carouselheight'];
 			}
-			// 
 			if ($this->lConf['auto'] > 0) {
 				$this->conf['auto'] = $this->lConf['auto'];
 			}
-			// 
 			if ($this->lConf['transition']) {
 				$this->conf['transition'] = $this->lConf['transition'];
 			}
-			// 
 			if ($this->lConf['transitiondir']) {
 				$this->conf['transitiondir'] = $this->lConf['transitiondir'];
 			}
-			// 
 			if ($this->lConf['transitionduration'] > 0) {
 				$this->conf['transitionduration'] = $this->lConf['transitionduration'];
 			}
-			// 
 			if ($this->lConf['wrap']) {
 				$this->conf['movewrap'] = $this->lConf['wrap'];
 			}
-			// 
 			if ($this->lConf['scroll'] > 0) {
 				$this->conf['scroll'] = $this->lConf['scroll'];
 			}
-			// 
-			$this->conf['random']             = $this->lConf['random'];
-			$this->conf['vertical']           = $this->lConf['vertical'];
-			$this->conf['rtl']                = $this->lConf['rtl'];
-			$this->conf['stoponmouseover']    = $this->lConf['stoponmouseover'];
-			$this->conf['externalcontrol']    = $this->lConf['externalcontrol'];
-			$this->conf['hidenextbutton']     = $this->lConf['hidenextbutton'];
-			$this->conf['hidepreviousbutton'] = $this->lConf['hidepreviousbutton'];
+			// Will be overridden, if not "from TS"
+			if ($this->lConf['random'] < 2) {
+				$this->conf['random'] = $this->lConf['random'];
+			}
+			if ($this->lConf['vertical'] < 2) {
+				$this->conf['vertical'] = $this->lConf['vertical'];
+			}
+			if ($this->lConf['rtl'] < 2) {
+				$this->conf['rtl'] = $this->lConf['rtl'];
+			}
+			if ($this->lConf['stoponmouseover'] < 2) {
+				$this->conf['stoponmouseover'] = $this->lConf['stoponmouseover'];
+			}
+			if ($this->lConf['externalcontrol'] < 2) {
+				$this->conf['externalcontrol'] = $this->lConf['externalcontrol'];
+			}
+			if ($this->lConf['hidenextbutton'] < 2) {
+				$this->conf['hidenextbutton'] = $this->lConf['hidenextbutton'];
+			}
+			if ($this->lConf['hidepreviousbutton'] < 2) {
+				$this->conf['hidepreviousbutton'] = $this->lConf['hidepreviousbutton'];
+			}
 			// Caption
-			$this->conf['showCaption'] = $this->lConf['showCaption'];
+			if ($this->lConf['showCaption'] < 2) {
+				$this->conf['showCaption'] = $this->lConf['showCaption'];
+			}
 			if ($this->lConf['animation']) {
 				$this->conf['animation'] = $this->lConf['animation'];
 			}
@@ -172,8 +178,12 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			if ($this->lConf['speedOut']) {
 				$this->conf['speedOut'] = $this->lConf['speedOut'];
 			}
-			$this->conf['hideDelay'] = $this->lConf['hideDelay'];
-			$this->conf['spanWidth'] = $this->lConf['spanWidth'];
+			if ($this->lConf['hideDelay']) {
+				$this->conf['hideDelay'] = $this->lConf['hideDelay'];
+			}
+			if ($this->lConf['spanWidth']) {
+				$this->conf['spanWidth'] = $this->lConf['spanWidth'];
+			}
 
 			return $this->parseTemplate();
 		}

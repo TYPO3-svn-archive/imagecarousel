@@ -51,16 +51,19 @@ class tx_imagecarousel_tsparserext
 
 		$checkConfig = null;
 		if ($this->checkConfig() === false) {
-			$out .= '
-<div style="position:absolute;top:10px;right:10px; width:300px;">
+			$checkConfig .= '
 	<div class="typo3-message message-warning">
 		<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:imagecarousel/locallang.xml:extmng.updatermsgHeader') . '</div>
 		<div class="message-body">
 			' . $GLOBALS['LANG']->sL('LLL:EXT:imagecarousel/locallang.xml:extmng.updatermsg') . '
 		</div>
-	</div>
-</div>';
+	</div>';
 		}
+
+		$out .= '
+<div style="position:absolute;top:10px;right:10px; width:300px;">
+	' . $checkConfig . '
+</div>';
 
 		return $out;
 	}
@@ -74,10 +77,11 @@ class tx_imagecarousel_tsparserext
 	{
 		$confDefault = array(
 			'skinFolder',
+			'useSelectInsteadCheckbox',
 		);
 		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['imagecarousel']);
 		foreach ($confDefault as $val) {
-			if (! isset($confArr[$val]) && ! $_POST['data'][$val]) {
+			if (! isset($confArr[$val]) && ! isset($_POST['data'][$val])) {
 				return false;
 			}
 		}

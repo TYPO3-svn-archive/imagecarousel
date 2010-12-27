@@ -184,11 +184,15 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.minScale</label>
 							<config>
-								<type>input</type>
-								<size>5</size>
-								<max>5</max>
-								<default></default>
-								<eval>nospace</eval>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jftcaforms/lib/class.tx_jftcaforms_tceFunc.php:&tx_jftcaforms_tceFunc->getExtSlider]]></userFunc>
+								<width>300</width>
+								<range>
+									<lower>0</lower>
+									<upper>1</upper>
+								</range>
+								<decimalPrecision>2</decimalPrecision>
+								<emptyValue>1</emptyValue>
 							</config>
 						</TCEforms>
 					</minScale>
@@ -201,7 +205,8 @@
 								<size>5</size>
 								<max>5</max>
 								<default></default>
-								<eval>nospace</eval>
+								<checkbox>0</checkbox>
+								<eval>int</eval>
 							</config>
 						</TCEforms>
 					</xRadius>
@@ -214,7 +219,8 @@
 								<size>5</size>
 								<max>5</max>
 								<default></default>
-								<eval>nospace</eval>
+								<checkbox>0</checkbox>
+								<eval>int</eval>
 							</config>
 						</TCEforms>
 					</yRadius>
@@ -227,7 +233,8 @@
 								<size>5</size>
 								<max>5</max>
 								<default></default>
-								<eval>nospace</eval>
+								<checkbox>0</checkbox>
+								<eval>int</eval>
 							</config>
 						</TCEforms>
 					</xPos>
@@ -240,7 +247,8 @@
 								<size>5</size>
 								<max>5</max>
 								<default></default>
-								<eval>nospace</eval>
+								<checkbox>0</checkbox>
+								<eval>int</eval>
 							</config>
 						</TCEforms>
 					</yPos>
@@ -260,8 +268,9 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.buttonLeft</label>
 							<config>
-								<type>check</type>
-								<default>0</default>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:imagecarousel/lib/class.tx_imagecarousel_tceFunc.php:&tx_imagecarousel_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
 							</config>
 						</TCEforms>
 					</buttonLeft>
@@ -270,8 +279,9 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.buttonRight</label>
 							<config>
-								<type>check</type>
-								<default>0</default>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:imagecarousel/lib/class.tx_imagecarousel_tceFunc.php:&tx_imagecarousel_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
 							</config>
 						</TCEforms>
 					</buttonRight>
@@ -280,8 +290,9 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.titleBox</label>
 							<config>
-								<type>check</type>
-								<default>0</default>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:imagecarousel/lib/class.tx_imagecarousel_tceFunc.php:&tx_imagecarousel_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
 							</config>
 						</TCEforms>
 					</titleBox>
@@ -290,8 +301,9 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.altBox</label>
 							<config>
-								<type>check</type>
-								<default>0</default>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:imagecarousel/lib/class.tx_imagecarousel_tceFunc.php:&tx_imagecarousel_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
 							</config>
 						</TCEforms>
 					</altBox>
@@ -315,7 +327,8 @@
 								<size>5</size>
 								<max>5</max>
 								<default></default>
-								<eval>nospace</eval>
+								<checkbox>0</checkbox>
+								<eval>int</eval>
 							</config>
 						</TCEforms>
 					</reflHeight>
@@ -328,7 +341,8 @@
 								<size>5</size>
 								<max>5</max>
 								<default></default>
-								<eval>nospace</eval>
+								<checkbox>0</checkbox>
+								<eval>int</eval>
 							</config>
 						</TCEforms>
 					</reflGap>
@@ -337,11 +351,15 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.reflOpacity</label>
 							<config>
-								<type>input</type>
-								<size>5</size>
-								<max>5</max>
-								<default></default>
-								<eval>nospace</eval>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jftcaforms/lib/class.tx_jftcaforms_tceFunc.php:&tx_jftcaforms_tceFunc->getExtSlider]]></userFunc>
+								<width>300</width>
+								<range>
+									<lower>0</lower>
+									<upper>1</upper>
+								</range>
+								<decimalPrecision>2</decimalPrecision>
+								<emptyValue>1</emptyValue>
 							</config>
 						</TCEforms>
 					</reflOpacity>
@@ -361,11 +379,15 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.speed</label>
 							<config>
-								<type>input</type>
-								<size>5</size>
-								<max>5</max>
-								<default></default>
-								<eval>nospace</eval>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jftcaforms/lib/class.tx_jftcaforms_tceFunc.php:&tx_jftcaforms_tceFunc->getExtSlider]]></userFunc>
+								<width>300</width>
+								<range>
+									<lower>0</lower>
+									<upper>1</upper>
+								</range>
+								<decimalPrecision>2</decimalPrecision>
+								<emptyValue>1</emptyValue>
 							</config>
 						</TCEforms>
 					</speed>
@@ -374,11 +396,14 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.FPS</label>
 							<config>
-								<type>input</type>
-								<size>5</size>
-								<max>5</max>
-								<default></default>
-								<eval>nospace</eval>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jftcaforms/lib/class.tx_jftcaforms_tceFunc.php:&tx_jftcaforms_tceFunc->getExtSlider]]></userFunc>
+								<width>300</width>
+								<range>
+									<lower>2</lower>
+									<upper>100</upper>
+								</range>
+								<emptyValue>1</emptyValue>
 							</config>
 						</TCEforms>
 					</FPS>
@@ -391,14 +416,18 @@
 								<maxitems>1</maxitems>
 								<items type="array">
 									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
 										<numIndex index="0">No</numIndex>
 										<numIndex index="1">no</numIndex>
 									</numIndex>
-									<numIndex index="1" type="array">
+									<numIndex index="2" type="array">
 										<numIndex index="0">Left</numIndex>
 										<numIndex index="1">left</numIndex>
 									</numIndex>
-									<numIndex index="2" type="array">
+									<numIndex index="3" type="array">
 										<numIndex index="0">Right</numIndex>
 										<numIndex index="1">Right</numIndex>
 									</numIndex>
@@ -415,7 +444,8 @@
 								<size>5</size>
 								<max>5</max>
 								<default></default>
-								<eval>nospace</eval>
+								<checkbox>0</checkbox>
+								<eval>int</eval>
 							</config>
 						</TCEforms>
 					</autoRotateDelay>
@@ -424,8 +454,9 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.mouseWheel</label>
 							<config>
-								<type>check</type>
-								<default>0</default>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:imagecarousel/lib/class.tx_imagecarousel_tceFunc.php:&tx_imagecarousel_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
 							</config>
 						</TCEforms>
 					</mouseWheel>
@@ -434,8 +465,9 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.bringToFront</label>
 							<config>
-								<type>check</type>
-								<default>0</default>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:imagecarousel/lib/class.tx_imagecarousel_tceFunc.php:&tx_imagecarousel_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
 							</config>
 						</TCEforms>
 					</bringToFront>

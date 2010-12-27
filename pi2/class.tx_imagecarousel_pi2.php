@@ -33,10 +33,10 @@ require_once(t3lib_extMgm::extPath('imagecarousel').'pi1/class.tx_imagecarousel_
  */
 class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 {
-	var $prefixId      = 'tx_imagecarousel_pi2';
-	var $scriptRelPath = 'pi2/class.tx_imagecarousel_pi2.php';
-	var $extKey        = 'imagecarousel';
-	var $pi_checkCHash = true;
+	public $prefixId      = 'tx_imagecarousel_pi2';
+	public $scriptRelPath = 'pi2/class.tx_imagecarousel_pi2.php';
+	public $extKey        = 'imagecarousel';
+	public $pi_checkCHash = true;
 
 	/**
 	 * The main method of the PlugIn
@@ -93,26 +93,23 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 			if ($this->lConf['imagewidth']) {
 				$this->conf['imagewidth'] = $this->lConf['imagewidth'];
 			}
-			// 
 			if ($this->lConf['imageheight']) {
 				$this->conf['imageheight'] = $this->lConf['imageheight'];
 			}
-			// 
-			if (is_numeric($this->lConf['carouselwidth'])) {
+			if ($this->lConf['carouselwidth'] > 0) {
 				$this->conf['carouselwidth'] = $this->lConf['carouselwidth'];
 			}
-			// 
-			if (is_numeric($this->lConf['carouselheight'])) {
+			if ($this->lConf['carouselheight'] > 0) {
 				$this->conf['carouselheight'] = $this->lConf['carouselheight'];
 			}
 			// for the Cloud-Carousel
-			if (is_numeric($this->lConf['minScale'])) {
+			if ($this->lConf['minScale'] > 0) {
 				$this->conf['minScale'] = $this->lConf['minScale'];
 			}
-			if (is_numeric($this->lConf['xPos'])) {
+			if ($this->lConf['xPos'] > 0) {
 				$this->conf['xPos'] = $this->lConf['xPos'];
 			}
-			if (is_numeric($this->lConf['yPos'])) {
+			if ($this->lConf['yPos'] > 0) {
 				$this->conf['yPos'] = $this->lConf['yPos'];
 			}
 			if (is_numeric($this->lConf['reflHeight'])) {
@@ -124,30 +121,43 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 			if (is_numeric($this->lConf['reflOpacity'])) {
 				$this->conf['reflOpacity'] = $this->lConf['reflOpacity'];
 			}
-			if (is_numeric($this->lConf['xRadius'])) {
+			if ($this->lConf['xRadius'] > 0) {
 				$this->conf['xRadius'] = $this->lConf['xRadius'];
 			}
-			if (is_numeric($this->lConf['yRadius'])) {
+			if ($this->lConf['yRadius'] > 0) {
 				$this->conf['yRadius'] = $this->lConf['yRadius'];
 			}
-			if (is_numeric($this->lConf['speed'])) {
+			if ($this->lConf['speed'] > 0) {
 				$this->conf['speed'] = $this->lConf['speed'];
 			}
-			if (is_numeric($this->lConf['FPS'])) {
+			if ($this->lConf['FPS'] > 0) {
 				$this->conf['FPS'] = $this->lConf['FPS'];
 			}
 			if ($this->lConf['autoRotate']) {
 				$this->conf['autoRotate'] = $this->lConf['autoRotate'];
 			}
-			if (is_numeric($this->lConf['autoRotateDelay'])) {
+			if ($this->lConf['autoRotateDelay'] > 0) {
 				$this->conf['autoRotateDelay'] = $this->lConf['autoRotateDelay'];
 			}
-			$this->conf['mouseWheel']   = $this->lConf['mouseWheel'];
-			$this->conf['bringToFront'] = $this->lConf['bringToFront'];
-			$this->conf['buttonLeft']   = $this->lConf['buttonLeft'];
-			$this->conf['buttonRight']  = $this->lConf['buttonRight'];
-			$this->conf['titleBox']     = $this->lConf['titleBox'];
-			$this->conf['altBox']       = $this->lConf['altBox'];
+			// Will be overridden, if not "from TS"
+			if ($this->lConf['mouseWheel'] < 2) {
+				$this->conf['mouseWheel'] = $this->lConf['mouseWheel'];
+			}
+			if ($this->lConf['bringToFront'] < 2) {
+				$this->conf['bringToFront'] = $this->lConf['bringToFront'];
+			}
+			if ($this->lConf['buttonLeft'] < 2) {
+				$this->conf['buttonLeft'] = $this->lConf['buttonLeft'];
+			}
+			if ($this->lConf['buttonRight'] < 2) {
+				$this->conf['buttonRight'] = $this->lConf['buttonRight'];
+			}
+			if ($this->lConf['titleBox'] < 2) {
+				$this->conf['titleBox'] = $this->lConf['titleBox'];
+			}
+			if ($this->lConf['altBox'] < 2) {
+				$this->conf['altBox'] = $this->lConf['altBox'];
+			}
 
 			return $this->parseTemplate();
 		}

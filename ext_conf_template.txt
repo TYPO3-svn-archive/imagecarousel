@@ -1,6 +1,10 @@
 
-# cat=basic; type=string; label=jCarousel skin folder: Location of the jCarousel skin folder (EXT:imagecarousel/res/skins/)
+# cat=basic/enable/10; type=string; label=jCarousel skin folder: Location of the jCarousel skin folder (EXT:imagecarousel/res/skins/)
 skinFolder = EXT:imagecarousel/res/skins/
+
+# cat=basic/enable/20; type=boolean; label=Enable select instead of checkbox: If set, most of checkboxes will turn into selectboxes, so you can choose "from TS"
+useSelectInsteadCheckbox = 0
+
 
 # cat=basic/dev/1000; type=user[EXT:imagecarousel/lib/class.tx_imagecarousel_tsparserext.php:tx_imagecarousel_tsparserext->displayMessage]; label=Updater
 updateMessage = 0

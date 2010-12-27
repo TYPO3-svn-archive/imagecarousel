@@ -132,7 +132,7 @@
 								<maxitems>1</maxitems>
 								<items type="array">
 									<numIndex index="0" type="array">
-										<numIndex index="0"></numIndex>
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 								</items>
@@ -145,8 +145,9 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.vertical</label>
 							<config>
-								<type>check</type>
-								<default>0</default>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:imagecarousel/lib/class.tx_imagecarousel_tceFunc.php:&tx_imagecarousel_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
 							</config>
 						</TCEforms>
 					</vertical>
@@ -155,8 +156,9 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.rtl</label>
 							<config>
-								<type>check</type>
-								<default>0</default>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:imagecarousel/lib/class.tx_imagecarousel_tceFunc.php:&tx_imagecarousel_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
 							</config>
 						</TCEforms>
 					</rtl>
@@ -165,8 +167,9 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.random</label>
 							<config>
-								<type>check</type>
-								<default>0</default>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:imagecarousel/lib/class.tx_imagecarousel_tceFunc.php:&tx_imagecarousel_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
 							</config>
 						</TCEforms>
 					</random>
@@ -175,8 +178,9 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.externalcontrol</label>
 							<config>
-								<type>check</type>
-								<default>0</default>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:imagecarousel/lib/class.tx_imagecarousel_tceFunc.php:&tx_imagecarousel_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
 							</config>
 						</TCEforms>
 					</externalcontrol>
@@ -185,8 +189,9 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.hidenextbutton</label>
 							<config>
-								<type>check</type>
-								<default>0</default>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:imagecarousel/lib/class.tx_imagecarousel_tceFunc.php:&tx_imagecarousel_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
 							</config>
 						</TCEforms>
 					</hidenextbutton>
@@ -195,8 +200,9 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.hidepreviousbutton</label>
 							<config>
-								<type>check</type>
-								<default>0</default>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:imagecarousel/lib/class.tx_imagecarousel_tceFunc.php:&tx_imagecarousel_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
 							</config>
 						</TCEforms>
 					</hidepreviousbutton>
@@ -268,8 +274,9 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.showCaption</label>
 							<config>
-								<type>check</type>
-								<default>0</default>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:imagecarousel/lib/class.tx_imagecarousel_tceFunc.php:&tx_imagecarousel_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
 							</config>
 						</TCEforms>
 					</showCaption>
@@ -394,7 +401,8 @@
 								<size>5</size>
 								<max>5</max>
 								<default>500</default>
-								<eval>integer</eval>
+								<checkbox>0</checkbox>
+								<eval>int</eval>
 							</config>
 						</TCEforms>
 					</hideDelay>
@@ -407,6 +415,7 @@
 								<size>10</size>
 								<max>10</max>
 								<default>100%</default>
+								<checkbox>0</checkbox>
 								<eval>nospace</eval>
 							</config>
 						</TCEforms>
@@ -431,7 +440,8 @@
 								<size>6</size>
 								<max>6</max>
 								<default>5000</default>
-								<eval>int,nospace</eval>
+								<checkbox>0</checkbox>
+								<eval>int</eval>
 							</config>
 						</TCEforms>
 					</auto>
@@ -440,8 +450,9 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.stoponmouseover</label>
 							<config>
-								<type>check</type>
-								<default>0</default>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:imagecarousel/lib/class.tx_imagecarousel_tceFunc.php:&tx_imagecarousel_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
 							</config>
 						</TCEforms>
 					</stoponmouseover>
@@ -455,50 +466,54 @@
 								<maxitems>1</maxitems>
 								<items type="array">
 									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
 										<numIndex index="0">Swing</numIndex>
 										<numIndex index="1">swing</numIndex>
 									</numIndex>
-									<numIndex index="1" type="array">
+									<numIndex index="2" type="array">
 										<numIndex index="0">Linear</numIndex>
 										<numIndex index="1">linear</numIndex>
 									</numIndex>
-									<numIndex index="2" type="array">
+									<numIndex index="3" type="array">
 										<numIndex index="0">Quad</numIndex>
 										<numIndex index="1">Quad</numIndex>
 									</numIndex>
-									<numIndex index="3" type="array">
+									<numIndex index="4" type="array">
 										<numIndex index="0">Cubic</numIndex>
 										<numIndex index="1">Cubic</numIndex>
 									</numIndex>
-									<numIndex index="4" type="array">
+									<numIndex index="5" type="array">
 										<numIndex index="0">Quart</numIndex>
 										<numIndex index="1">Quart</numIndex>
 									</numIndex>
-									<numIndex index="5" type="array">
+									<numIndex index="6" type="array">
 										<numIndex index="0">Quint</numIndex>
 										<numIndex index="1">Quint</numIndex>
 									</numIndex>
-									<numIndex index="6" type="array">
+									<numIndex index="7" type="array">
 										<numIndex index="0">Sine</numIndex>
 										<numIndex index="1">Sine</numIndex>
 									</numIndex>
-									<numIndex index="7" type="array">
+									<numIndex index="8" type="array">
 										<numIndex index="0">Expo</numIndex>
 										<numIndex index="1">Expo</numIndex>
 									</numIndex>
-									<numIndex index="8" type="array">
+									<numIndex index="9" type="array">
 										<numIndex index="0">Circ</numIndex>
 										<numIndex index="1">Circ</numIndex>
 									</numIndex>
-									<numIndex index="9" type="array">
+									<numIndex index="10" type="array">
 										<numIndex index="0">Back</numIndex>
 										<numIndex index="1">Back</numIndex>
 									</numIndex>
-									<numIndex index="10" type="array">
+									<numIndex index="11" type="array">
 										<numIndex index="0">Bounce</numIndex>
 										<numIndex index="1">Bounce</numIndex>
 									</numIndex>
-									<numIndex index="11" type="array">
+									<numIndex index="12" type="array">
 										<numIndex index="0">Elastic</numIndex>
 										<numIndex index="1">Elastic</numIndex>
 									</numIndex>
@@ -516,14 +531,18 @@
 								<maxitems>1</maxitems>
 								<items type="array">
 									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
 										<numIndex index="0">In</numIndex>
 										<numIndex index="1">In</numIndex>
 									</numIndex>
-									<numIndex index="1" type="array">
+									<numIndex index="2" type="array">
 										<numIndex index="0">Out</numIndex>
 										<numIndex index="1">Out</numIndex>
 									</numIndex>
-									<numIndex index="2" type="array">
+									<numIndex index="3" type="array">
 										<numIndex index="0">InOut</numIndex>
 										<numIndex index="1">InOut</numIndex>
 									</numIndex>
@@ -540,7 +559,8 @@
 								<size>6</size>
 								<max>6</max>
 								<default>3000</default>
-								<eval>int,nospace</eval>
+								<checkbox>0</checkbox>
+								<eval>int</eval>
 							</config>
 						</TCEforms>
 					</transitionduration>
@@ -553,7 +573,8 @@
 								<size>5</size>
 								<max>2</max>
 								<default>1</default>
-								<eval>int,nospace</eval>
+								<checkbox>0</checkbox>
+								<eval>int</eval>
 							</config>
 						</TCEforms>
 					</scroll>

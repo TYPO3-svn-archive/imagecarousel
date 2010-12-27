@@ -49,16 +49,16 @@ plugin.tx_imagecarousel_pi1 {
 	# cat=plugin.tx_imagecarousel/dims/020; type=boolean; label=Revers (horizontal only):
 	rtl = 0
 
-	# cat=plugin.tx_imagecarousel/typo/030; type=boolean; label=Random: Show the images in random order
+	# cat=plugin.tx_imagecarousel/dims/030; type=boolean; label=Random: Show the images in random order
 	random = 0
 
-	# cat=plugin.tx_imagecarousel/typo/040; type=boolean; label=External control: Show the navigation for the images
+	# cat=plugin.tx_imagecarousel/dims/040; type=boolean; label=External control: Show the navigation for the images
 	externalcontrol = 0
 
-	# cat=plugin.tx_imagecarousel/typo/050; type=boolean; label=Hide next button: The next button will be hidden
+	# cat=plugin.tx_imagecarousel/dims/050; type=boolean; label=Hide next button: The next button will be hidden
 	hidenextbutton = 0
 
-	# cat=plugin.tx_imagecarousel/typo/060; type=boolean; label=Hide previous button: The previous button will be hidden
+	# cat=plugin.tx_imagecarousel/dims/060; type=boolean; label=Hide previous button: The previous button will be hidden
 	hidepreviousbutton = 0
 
 	# cat=plugin.tx_imagecarousel/dims/070; type=string; label=Image width: Width of the images
@@ -98,35 +98,35 @@ plugin.tx_imagecarousel_pi1 {
 
 
 
-	# cat=plugin.tx_imagecarousel.caption/enable/010; type=boolean; label=Show caption: If set, the captions will be displayed
+	# cat=plugin.tx_imagecarousel.caption/typo/010; type=boolean; label=Show caption: If set, the captions will be displayed
 	showCaption = 0
 
-	# cat=plugin.tx_imagecarousel.caption/typo/040; type=options[fade,slide,always-on]; label=Animation: Used animation for caption
+	# cat=plugin.tx_imagecarousel.caption/typo/020; type=options[fade,slide,always-on]; label=Animation: Used animation for caption
 	animation = slide
 
-	# cat=plugin.tx_imagecarousel.caption/typo/080; type=options[top,bottom]; label=Position: Position of the caption
+	# cat=plugin.tx_imagecarousel.caption/typo/030; type=options[top,bottom]; label=Position: Position of the caption
 	position = bottom
 
-	# cat=plugin.tx_imagecarousel.caption/typo/010; type=options[fast,normal,slow]; label=Speed over: Speed of the mouseover effect
+	# cat=plugin.tx_imagecarousel.caption/typo/040; type=options[fast,normal,slow]; label=Speed over: Speed of the mouseover effect
 	speedOver = fast
 
-	# cat=plugin.tx_imagecarousel.caption/typo/020; type=options[fast,normal,slow]; label=Speed out: Speed of the mouseout effect
+	# cat=plugin.tx_imagecarousel.caption/typo/050; type=options[fast,normal,slow]; label=Speed out: Speed of the mouseout effect
 	speedOut = normal
 
-	# cat=plugin.tx_imagecarousel.caption/typo/030; type=int; label=Hide delay: How long to delay the hiding of the caption after mouseout (in ms)
+	# cat=plugin.tx_imagecarousel.caption/typo/060; type=int; label=Hide delay: How long to delay the hiding of the caption after mouseout (in ms)
 	hideDelay = 500
 
-	# cat=plugin.tx_imagecarousel.caption/typo/050; type=string; label=Prefix: text/html to be placed at the beginning of every caption
+	# cat=plugin.tx_imagecarousel.caption/typo/070; type=string; label=Span width: Caption span percentage of the image
+	spanWidth = 100%
+
+	# cat=plugin.tx_imagecarousel.caption/typo/080; type=string; label=Prefix: text/html to be placed at the beginning of every caption
 	prefix = 
 
-	# cat=plugin.tx_imagecarousel.caption/typo/060; type=string; label=Opacity: Opacity of the caption on mouse over
+	# cat=plugin.tx_imagecarousel.caption/typo/090; type=string; label=Opacity: Opacity of the caption on mouse over
 	opacity = 0.7
 
-	# cat=plugin.tx_imagecarousel.caption/typo/070; type=string; label=Class name: The name of the CSS class to apply to the caption box
+	# cat=plugin.tx_imagecarousel.caption/typo/100; type=string; label=Class name: The name of the CSS class to apply to the caption box
 	className = caption-bottom
-
-	# cat=plugin.tx_imagecarousel.caption/typo/090; type=string; label=Span width: Caption span percentage of the image
-	spanWidth = 100%
 
 
 

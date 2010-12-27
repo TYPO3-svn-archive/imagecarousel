@@ -80,7 +80,7 @@
 			<label index="tt_content.pi_flexform.autoRotate">Direction of autorotate</label>
 			<label index="tt_content.pi_flexform.autoRotateDelay">Delay of autorotate</label>
 			<label index="tt_content.pi_flexform.mouseWheel">Activate the mouseweel</label>
-			<label index="tt_content.pi_flexform.bringToFront">Bring th image to front</label>
+			<label index="tt_content.pi_flexform.bringToFront">Bring the image to front</label>
 			<label index="tt_content.pi_flexform.sheet_reflection">Reflection</label>
 			<label index="tt_content.pi_flexform.reflHeight">Reflection height</label>
 			<label index="tt_content.pi_flexform.reflGap">Reflection gap</label>
@@ -92,6 +92,9 @@
 			<label index="tt_content.pi_flexform.altBox">Show alt box</label>
 
 			<label index="tt_content.pi_flexform.from_ts">From Typoscript</label>
+			<label index="tt_content.pi_flexform.no">No</label>
+			<label index="tt_content.pi_flexform.yes">Yes</label>
+
 		</languageKey>
 	</data>
 	<orig_hash type="array">
