@@ -120,8 +120,8 @@ plugin.tx_imagecarousel_pi2 {
 		chgallery < .normal
 	}
 	_CSS_DEFAULT_STYLE (
-.cloudcarousel-left, .cloudcarousel-right { display: none; background: url(/typo3conf/ext/imagecarousel/pi2/images/rotate-left.png); width: 40px; height: 40px; background-position: 0px 0px; position: absolute; top: 20px; right: 64px; }
-.cloudcarousel-right { background: url(/typo3conf/ext/imagecarousel/pi2/images/rotate-right.png); right: 20px; }
+.cloudcarousel-left, .cloudcarousel-right { display: none; background: url(../typo3conf/ext/imagecarousel/pi2/images/rotate-left.png); width: 40px; height: 40px; background-position: 0px 0px; position: absolute; top: 20px; right: 64px; }
+.cloudcarousel-right { background: url(../typo3conf/ext/imagecarousel/pi2/images/rotate-right.png); right: 20px; }
 .cloudcarousel-left:hover, .cloudcarousel-right:hover { background-position: 0px 40px; cursor: auto; }
 .cloudcarousel-title { display: block; margin: 20px; text-transform: uppercase; margin-bottom: 10px; width: 80%; }
 .cloudcarousel-alt { display: block; color: #000; margin: 20px; margin-top: 0px; }
