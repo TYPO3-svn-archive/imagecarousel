@@ -58,16 +58,38 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 		if ($this->cObj->data['list_type'] == $this->extKey.'_pi2') {
 			$this->type = 'normal';
 			// It's a content, al data from flexform
-			// Set the Flexform information
-			$this->pi_initPIflexForm();
-			$piFlexForm = $this->cObj->data['pi_flexform'];
-			foreach ($piFlexForm['data'] as $sheet => $data) {
-				foreach ($data as $lang => $value) {
-					foreach ($value as $key => $val) {
-						$this->lConf[$key] = $this->pi_getFFvalue($piFlexForm, $key, $sheet);
-					}
-				}
-			}
+
+			$this->lConf['mode']            = $this->getFlexformData('general', 'mode');
+			$this->lConf['images']          = $this->getFlexformData('general', 'images');
+			$this->lConf['hrefs']           = $this->getFlexformData('general', 'hrefs');
+			$this->lConf['captions']        = $this->getFlexformData('general', 'captions');
+			
+			$this->lConf['imagewidth']      = $this->getFlexformData('control', 'imagewidth');
+			$this->lConf['imageheight']     = $this->getFlexformData('control', 'imageheight');
+			$this->lConf['carouselwidth']   = $this->getFlexformData('control', 'carouselwidth');
+			$this->lConf['carouselheight']  = $this->getFlexformData('control', 'carouselheight');
+			$this->lConf['minScale']        = $this->getFlexformData('control', 'minScale');
+			$this->lConf['xRadius']         = $this->getFlexformData('control', 'xRadius');
+			$this->lConf['yRadius']         = $this->getFlexformData('control', 'yRadius');
+			$this->lConf['xPos']            = $this->getFlexformData('control', 'xPos');
+			$this->lConf['yPos']            = $this->getFlexformData('control', 'yPos');
+			
+			$this->lConf['buttonLeft']      = $this->getFlexformData('buttons', 'buttonLeft');
+			$this->lConf['buttonRight']     = $this->getFlexformData('buttons', 'buttonRight');
+			$this->lConf['titleBox']        = $this->getFlexformData('buttons', 'titleBox');
+			$this->lConf['altBox']          = $this->getFlexformData('buttons', 'altBox');
+			
+			$this->lConf['reflHeight']      = $this->getFlexformData('reflection', 'reflHeight');
+			$this->lConf['reflGap']         = $this->getFlexformData('reflection', 'reflGap');
+			$this->lConf['reflOpacity']     = $this->getFlexformData('reflection', 'reflOpacity');
+			
+			$this->lConf['speed']           = $this->getFlexformData('movement', 'speed');
+			$this->lConf['FPS']             = $this->getFlexformData('movement', 'FPS');
+			$this->lConf['autoRotate']      = $this->getFlexformData('movement', 'autoRotate');
+			$this->lConf['autoRotateDelay'] = $this->getFlexformData('movement', 'autoRotateDelay');
+			$this->lConf['mouseWheel']      = $this->getFlexformData('movement', 'mouseWheel');
+			$this->lConf['bringToFront']    = $this->getFlexformData('movement', 'bringToFront');
+
 			// define the key of the element
 			$this->setContentKey($this->extKey . "_c" . $this->cObj->data['uid']);
 
@@ -121,10 +143,10 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 			if (is_numeric($this->lConf['reflOpacity'])) {
 				$this->conf['reflOpacity'] = $this->lConf['reflOpacity'];
 			}
-			if ($this->lConf['xRadius'] > 0) {
+			if (is_numeric($this->lConf['xRadius'])) {
 				$this->conf['xRadius'] = $this->lConf['xRadius'];
 			}
-			if ($this->lConf['yRadius'] > 0) {
+			if (is_numeric($this->lConf['yRadius'])) {
 				$this->conf['yRadius'] = $this->lConf['yRadius'];
 			}
 			if ($this->lConf['speed'] > 0) {

@@ -205,8 +205,7 @@
 								<size>5</size>
 								<max>5</max>
 								<default></default>
-								<checkbox>0</checkbox>
-								<eval>int</eval>
+								<eval>nospace</eval>
 							</config>
 						</TCEforms>
 					</xRadius>
@@ -219,8 +218,7 @@
 								<size>5</size>
 								<max>5</max>
 								<default></default>
-								<checkbox>0</checkbox>
-								<eval>int</eval>
+								<eval>nospace</eval>
 							</config>
 						</TCEforms>
 					</yRadius>

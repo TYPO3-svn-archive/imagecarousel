@@ -75,16 +75,40 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 		if ($this->cObj->data['list_type'] == $this->extKey.'_pi1') {
 			$this->type = 'normal';
 			// It's a content, al data from flexform
-			// Set the Flexform information
-			$this->pi_initPIflexForm();
-			$piFlexForm = $this->cObj->data['pi_flexform'];
-			foreach ($piFlexForm['data'] as $sheet => $data) {
-				foreach ($data as $lang => $value) {
-					foreach ($value as $key => $val) {
-						$this->lConf[$key] = $this->pi_getFFvalue($piFlexForm, $key, $sheet);
-					}
-				}
-			}
+
+			$this->lConf['mode']               = $this->getFlexformData('general', 'mode');
+			$this->lConf['images']             = $this->getFlexformData('general', 'images');
+			$this->lConf['hrefs']              = $this->getFlexformData('general', 'hrefs');
+			$this->lConf['captions']           = $this->getFlexformData('general', 'captions');
+			
+			$this->lConf['skin']               = $this->getFlexformData('control', 'skin');
+			$this->lConf['vertical']           = $this->getFlexformData('control', 'vertical');
+			$this->lConf['rtl']                = $this->getFlexformData('control', 'rtl');
+			$this->lConf['random']             = $this->getFlexformData('control', 'random');
+			$this->lConf['externalcontrol']    = $this->getFlexformData('control', 'externalcontrol');
+			$this->lConf['hidenextbutton']     = $this->getFlexformData('control', 'hidenextbutton');
+			$this->lConf['hidepreviousbutton'] = $this->getFlexformData('control', 'hidepreviousbutton');
+			$this->lConf['imagewidth']         = $this->getFlexformData('control', 'imagewidth');
+			$this->lConf['imageheight']        = $this->getFlexformData('control', 'imageheight');
+			$this->lConf['carouselwidth']      = $this->getFlexformData('control', 'carouselwidth');
+			$this->lConf['carouselheight']     = $this->getFlexformData('control', 'carouselheight');
+			
+			$this->lConf['showCaption']        = $this->getFlexformData('captions', 'showCaption');
+			$this->lConf['animation']          = $this->getFlexformData('captions', 'animation');
+			$this->lConf['position']           = $this->getFlexformData('captions', 'position');
+			$this->lConf['speedOver']          = $this->getFlexformData('captions', 'speedOver');
+			$this->lConf['speedOut']           = $this->getFlexformData('captions', 'speedOut');
+			$this->lConf['hideDelay']          = $this->getFlexformData('captions', 'hideDelay');
+			$this->lConf['spanWidth']          = $this->getFlexformData('captions', 'spanWidth');
+			
+			$this->lConf['auto']               = $this->getFlexformData('movement', 'auto');
+			$this->lConf['stoponmouseover']    = $this->getFlexformData('movement', 'stoponmouseover');
+			$this->lConf['transition']         = $this->getFlexformData('movement', 'transition');
+			$this->lConf['transitiondir']      = $this->getFlexformData('movement', 'transitiondir');
+			$this->lConf['transitionduration'] = $this->getFlexformData('movement', 'transitionduration');
+			$this->lConf['scroll']             = $this->getFlexformData('movement', 'scroll');
+			$this->lConf['wrap']               = $this->getFlexformData('movement', 'wrap');
+
 			// define the key of the element
 			$this->setContentKey($this->extKey . "_c" . $this->cObj->data['uid']);
 
@@ -773,6 +797,30 @@ jQuery(document).ready(function() { {$random_script}
 		$_EXTKEY = $key;
 		include(t3lib_extMgm::extPath($key) . 'ext_emconf.php');
 		return $EM_CONF[$key]['version'];
+	}
+
+	/**
+	 * Extract the requested information from flexform
+	 * @param string $sheet
+	 * @param string $name
+	 * @return string
+	 */
+	protected function getFlexformData($sheet='', $name='')
+	{
+		$this->pi_initPIflexForm();
+		$piFlexForm = $this->cObj->data['pi_flexform'];
+		if (! isset($piFlexForm['data'])) {
+			t3lib_div::devLog("Flexform Data not set", $this->extKey, 1);
+			return null;
+		}
+		if (! isset($piFlexForm['data'][$sheet])) {
+			t3lib_div::devLog("Flexform sheet '{$sheet}' not defined", $this->extKey, 1);
+			return null;
+		}
+		if (! isset($piFlexForm['data'][$sheet]['lDEF'][$name]['vDEF'])) {
+			t3lib_div::devLog("Flexform Data [{$sheet}][{$name}] does not exist", $this->extKey, 1);
+		}
+		return $this->pi_getFFvalue($piFlexForm, $name, $sheet);
 	}
 }
 
