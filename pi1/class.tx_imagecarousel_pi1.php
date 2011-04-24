@@ -74,13 +74,15 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 		$pageID = false;
 		if ($this->cObj->data['list_type'] == $this->extKey.'_pi1') {
 			$this->type = 'normal';
-			// It's a content, al data from flexform
 
-			$this->lConf['mode']               = $this->getFlexformData('general', 'mode');
-			$this->lConf['images']             = $this->getFlexformData('general', 'images');
-			$this->lConf['hrefs']              = $this->getFlexformData('general', 'hrefs');
-			$this->lConf['captions']           = $this->getFlexformData('general', 'captions');
-			
+			// It's a content, al data from flexform
+			$this->lConf['mode']              = $this->getFlexformData('general', 'mode');
+			$this->lConf['images']            = $this->getFlexformData('general', 'images', ($this->lConf['mode'] == 'upload'));
+			$this->lConf['hrefs']             = $this->getFlexformData('general', 'hrefs', ($this->lConf['mode'] == 'upload'));
+			$this->lConf['captions']          = $this->getFlexformData('general', 'captions', ($this->lConf['mode'] == 'upload'));
+			$this->lConf['damimages']         = $this->getFlexformData('general', 'damimages', ($this->lConf['mode'] == 'dam'));
+			$this->lConf['damcategories']     = $this->getFlexformData('general', 'damcategories', ($this->lConf['mode'] == 'dam_catedit'));
+
 			$this->lConf['skin']               = $this->getFlexformData('control', 'skin');
 			$this->lConf['vertical']           = $this->getFlexformData('control', 'vertical');
 			$this->lConf['rtl']                = $this->getFlexformData('control', 'rtl');
@@ -92,7 +94,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			$this->lConf['imageheight']        = $this->getFlexformData('control', 'imageheight');
 			$this->lConf['carouselwidth']      = $this->getFlexformData('control', 'carouselwidth');
 			$this->lConf['carouselheight']     = $this->getFlexformData('control', 'carouselheight');
-			
+
 			$this->lConf['showCaption']        = $this->getFlexformData('captions', 'showCaption');
 			$this->lConf['animation']          = $this->getFlexformData('captions', 'animation');
 			$this->lConf['position']           = $this->getFlexformData('captions', 'position');
@@ -100,7 +102,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			$this->lConf['speedOut']           = $this->getFlexformData('captions', 'speedOut');
 			$this->lConf['hideDelay']          = $this->getFlexformData('captions', 'hideDelay');
 			$this->lConf['spanWidth']          = $this->getFlexformData('captions', 'spanWidth');
-			
+
 			$this->lConf['auto']               = $this->getFlexformData('movement', 'auto');
 			$this->lConf['stoponmouseover']    = $this->getFlexformData('movement', 'stoponmouseover');
 			$this->lConf['transition']         = $this->getFlexformData('movement', 'transition');
@@ -803,22 +805,30 @@ jQuery(document).ready(function() { {$random_script}
 	 * Extract the requested information from flexform
 	 * @param string $sheet
 	 * @param string $name
+	 * @param boolean $devlog
 	 * @return string
 	 */
-	protected function getFlexformData($sheet='', $name='')
+	protected function getFlexformData($sheet='', $name='', $devlog=true)
 	{
 		$this->pi_initPIflexForm();
 		$piFlexForm = $this->cObj->data['pi_flexform'];
 		if (! isset($piFlexForm['data'])) {
-			t3lib_div::devLog("Flexform Data not set", $this->extKey, 1);
+			if ($devlog === true) {
+				t3lib_div::devLog("Flexform Data not set", $this->extKey, 1);
+			}
 			return null;
 		}
 		if (! isset($piFlexForm['data'][$sheet])) {
-			t3lib_div::devLog("Flexform sheet '{$sheet}' not defined", $this->extKey, 1);
+			if ($devlog === true) {
+				t3lib_div::devLog("Flexform sheet '{$sheet}' not defined", $this->extKey, 1);
+			}
 			return null;
 		}
 		if (! isset($piFlexForm['data'][$sheet]['lDEF'][$name]['vDEF'])) {
-			t3lib_div::devLog("Flexform Data [{$sheet}][{$name}] does not exist", $this->extKey, 1);
+			if ($devlog === true) {
+				t3lib_div::devLog("Flexform Data [{$sheet}][{$name}] does not exist", $this->extKey, 1);
+			}
+			return null;
 		}
 		return $this->pi_getFFvalue($piFlexForm, $name, $sheet);
 	}
