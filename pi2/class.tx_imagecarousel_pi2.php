@@ -59,10 +59,12 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 			$this->type = 'normal';
 			// It's a content, al data from flexform
 
-			$this->lConf['mode']            = $this->getFlexformData('general', 'mode');
-			$this->lConf['images']          = $this->getFlexformData('general', 'images');
-			$this->lConf['hrefs']           = $this->getFlexformData('general', 'hrefs');
-			$this->lConf['captions']        = $this->getFlexformData('general', 'captions');
+			$this->lConf['mode']          = $this->getFlexformData('general', 'mode');
+			$this->lConf['images']        = $this->getFlexformData('general', 'images', ($this->lConf['mode'] == 'upload'));
+			$this->lConf['hrefs']         = $this->getFlexformData('general', 'hrefs', ($this->lConf['mode'] == 'upload'));
+			$this->lConf['captions']      = $this->getFlexformData('general', 'captions', ($this->lConf['mode'] == 'upload'));
+			$this->lConf['damimages']     = $this->getFlexformData('general', 'damimages', ($this->lConf['mode'] == 'dam'));
+			$this->lConf['damcategories'] = $this->getFlexformData('general', 'damcategories', ($this->lConf['mode'] == 'dam_catedit'));
 			
 			$this->lConf['imagewidth']      = $this->getFlexformData('control', 'imagewidth');
 			$this->lConf['imageheight']     = $this->getFlexformData('control', 'imageheight');

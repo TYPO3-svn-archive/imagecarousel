@@ -72,17 +72,19 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 		$this->setContentKey();
 
 		$pageID = false;
+
 		if ($this->cObj->data['list_type'] == $this->extKey.'_pi1') {
 			$this->type = 'normal';
 
 			// It's a content, al data from flexform
-			$this->lConf['mode']              = $this->getFlexformData('general', 'mode');
-			$this->lConf['images']            = $this->getFlexformData('general', 'images', ($this->lConf['mode'] == 'upload'));
-			$this->lConf['hrefs']             = $this->getFlexformData('general', 'hrefs', ($this->lConf['mode'] == 'upload'));
-			$this->lConf['captions']          = $this->getFlexformData('general', 'captions', ($this->lConf['mode'] == 'upload'));
-			$this->lConf['damimages']         = $this->getFlexformData('general', 'damimages', ($this->lConf['mode'] == 'dam'));
-			$this->lConf['damcategories']     = $this->getFlexformData('general', 'damcategories', ($this->lConf['mode'] == 'dam_catedit'));
 
+			$this->lConf['mode']          = $this->getFlexformData('general', 'mode');
+			$this->lConf['images']        = $this->getFlexformData('general', 'images', ($this->lConf['mode'] == 'upload'));
+			$this->lConf['hrefs']         = $this->getFlexformData('general', 'hrefs', ($this->lConf['mode'] == 'upload'));
+			$this->lConf['captions']      = $this->getFlexformData('general', 'captions', ($this->lConf['mode'] == 'upload'));
+			$this->lConf['damimages']     = $this->getFlexformData('general', 'damimages', ($this->lConf['mode'] == 'dam'));
+			$this->lConf['damcategories'] = $this->getFlexformData('general', 'damcategories', ($this->lConf['mode'] == 'dam_catedit'));
+			
 			$this->lConf['skin']               = $this->getFlexformData('control', 'skin');
 			$this->lConf['vertical']           = $this->getFlexformData('control', 'vertical');
 			$this->lConf['rtl']                = $this->getFlexformData('control', 'rtl');
@@ -94,7 +96,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			$this->lConf['imageheight']        = $this->getFlexformData('control', 'imageheight');
 			$this->lConf['carouselwidth']      = $this->getFlexformData('control', 'carouselwidth');
 			$this->lConf['carouselheight']     = $this->getFlexformData('control', 'carouselheight');
-
+			
 			$this->lConf['showCaption']        = $this->getFlexformData('captions', 'showCaption');
 			$this->lConf['animation']          = $this->getFlexformData('captions', 'animation');
 			$this->lConf['position']           = $this->getFlexformData('captions', 'position');
@@ -102,7 +104,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			$this->lConf['speedOut']           = $this->getFlexformData('captions', 'speedOut');
 			$this->lConf['hideDelay']          = $this->getFlexformData('captions', 'hideDelay');
 			$this->lConf['spanWidth']          = $this->getFlexformData('captions', 'spanWidth');
-
+			
 			$this->lConf['auto']               = $this->getFlexformData('movement', 'auto');
 			$this->lConf['stoponmouseover']    = $this->getFlexformData('movement', 'stoponmouseover');
 			$this->lConf['transition']         = $this->getFlexformData('movement', 'transition');
@@ -217,6 +219,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 
 	/**
 	 * Set the contentKey
+	 * 
 	 * @param string $contentKey
 	 */
 	public function setContentKey($contentKey=null)
@@ -226,6 +229,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 
 	/**
 	 * Get the contentKey
+	 * 
 	 * @return string
 	 */
 	public function getContentKey()
@@ -235,6 +239,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 
 	/**
 	 * Set the Information of the images if mode = upload
+	 * 
 	 * @return boolean
 	 */
 	protected function setDataUpload()
@@ -259,6 +264,8 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 
 	/**
 	 * Set the Information of the images if mode = dam
+	 * 
+	 * @param boolean $fromCategory
 	 * @return boolean
 	 */
 	protected function setDataDam($fromCategory=false)
@@ -352,15 +359,16 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 	}
 
 	/**
-	 * return all DAM categories including subcategories
-	 *
+	 * Return all DAM categories including subcategories
+	 * 
+	 * @param string $dam_cat
 	 * @return	array
 	 */
 	protected function getDamcats($dam_cat='')
 	{
 		$damCats = t3lib_div::trimExplode(",", $dam_cat, true);
 		if (count($damCats) < 1) {
-			return;
+			return array();
 		} else {
 			// select subcategories
 			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -381,7 +389,9 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 
 	/**
 	 * Parse all images into the template
-	 * @param $data
+	 * 
+	 * @param string $dir
+	 * @param boolean $onlyJS
 	 * @return string
 	 */
 	public function parseTemplate($dir='', $onlyJS=false)
@@ -720,7 +730,7 @@ jQuery(document).ready(function() { {$random_script}
 	 * Return the webbased path
 	 * 
 	 * @param string $path
-	 * return string
+	 * @return string
 	 */
 	protected function getPath($path="")
 	{
@@ -788,6 +798,7 @@ jQuery(document).ready(function() { {$random_script}
 
 	/**
 	 * Returns the version of an extension (in 4.4 its possible to this with t3lib_extMgm::getExtensionVersion)
+	 * 
 	 * @param string $key
 	 * @return string
 	 */
@@ -803,6 +814,7 @@ jQuery(document).ready(function() { {$random_script}
 
 	/**
 	 * Extract the requested information from flexform
+	 * 
 	 * @param string $sheet
 	 * @param string $name
 	 * @param boolean $devlog
@@ -824,13 +836,17 @@ jQuery(document).ready(function() { {$random_script}
 			}
 			return null;
 		}
-		if (! isset($piFlexForm['data'][$sheet]['lDEF'][$name]['vDEF'])) {
+		if (! isset($piFlexForm['data'][$sheet]['lDEF'][$name])) {
 			if ($devlog === true) {
 				t3lib_div::devLog("Flexform Data [{$sheet}][{$name}] does not exist", $this->extKey, 1);
 			}
 			return null;
 		}
-		return $this->pi_getFFvalue($piFlexForm, $name, $sheet);
+		if (isset($piFlexForm['data'][$sheet]['lDEF'][$name]['vDEF'])) {
+			return $this->pi_getFFvalue($piFlexForm, $name, $sheet);
+		} else {
+			return $piFlexForm['data'][$sheet]['lDEF'][$name];
+		}
 	}
 }
 
