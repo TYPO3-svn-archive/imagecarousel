@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////////
-// CloudCarousel V1.0.5
+// CloudCarousel V1.0.5a
 // (c) 2011 by R Cecco. <http://www.professorcloud.com>
 // MIT License
 //
@@ -44,7 +44,7 @@
 			}
 		}
 		// Store a copy of the alt and title attrs into the reflection
-		$(reflection).attr({ 'alt': $(img).attr('alt'), title: $(img).attr('title')} );
+		$(reflection).attr({ 'rel': $(img).attr('rel'), 'alt': $(img).attr('alt'), title: $(img).attr('title')} );
 	}	//END Reflection object
 
 	// START Item object.
@@ -123,11 +123,14 @@
 			clearInterval(event.data.autoRotateTimer);	// Stop auto rotation if mouse over.
 			var	text = $(event.target).attr('alt');
 			// If we have moved over a carousel item, then show the alt and title text.
-		
 			if ( text !== undefined && text !== null ) {
 				clearTimeout(event.data.showFrontTextTimer);
-				$(options.altBox).html( ($(event.target).attr('alt') ));
-				$(options.titleBox).html( ($(event.target).attr('title') ));
+				$(options.altBox).html($(event.target).attr('alt'));
+				if (typeof($('#'+$(event.target).attr('rel'))) == 'object') {
+					$(options.titleBox).html($('#'+$(event.target).attr('rel')).html());
+				} else {
+					$(options.titleBox).html($(event.target).attr('title'));
+				}
 				if ( options.bringToFront && event.type == 'click' ) {
 					var	idx = $(event.target).data('itemIndex');
 					var	frontIndex = event.data.frontIndex;
@@ -158,8 +161,12 @@
 		// Shows the text from the front most item.
 		this.showFrontText = function() {
 			if ( items[this.frontIndex] === undefined ) { return; }	// Images might not have loaded yet.
-			$(options.titleBox).html( $(items[this.frontIndex].image).attr('title'));
-			$(options.altBox).html( $(items[this.frontIndex].image).attr('alt'));
+			$(options.altBox).html($(items[this.frontIndex].image).attr('alt'));
+			if (typeof($('#'+$(items[this.frontIndex].image).attr('rel'))) == 'object') {
+				$(options.titleBox).html($('#'+$(items[this.frontIndex].image).attr('rel')).html());
+			} else {
+				$(options.titleBox).html($(items[this.frontIndex].image).attr('title'));
+			}
 		};
 		this.go = function() {
 			if(this.controlTimer !== 0) { return; }

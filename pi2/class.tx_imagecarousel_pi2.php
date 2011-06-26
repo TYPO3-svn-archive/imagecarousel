@@ -65,7 +65,22 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 			$this->lConf['captions']      = $this->getFlexformData('general', 'captions', ($this->lConf['mode'] == 'upload'));
 			$this->lConf['damimages']     = $this->getFlexformData('general', 'damimages', ($this->lConf['mode'] == 'dam'));
 			$this->lConf['damcategories'] = $this->getFlexformData('general', 'damcategories', ($this->lConf['mode'] == 'dam_catedit'));
-			
+
+			$imagesRTE = $this->getFlexformData('general', 'imagesRTE', ($this->lConf['mode'] == 'uploadRTE'));
+			$this->lConf['imagesRTE'] = array();
+			if (isset($imagesRTE['el']) && count($imagesRTE['el']) > 0) {
+				foreach ($imagesRTE['el'] as $elKey => $el) {
+					if (is_numeric($elKey)) {
+						$this->lConf['imagesRTE'][] = array(
+							"image"       => $el['data']['el']['image']['vDEF'],
+							"href"        => $el['data']['el']['href']['vDEF'],
+							"caption"     => $el['data']['el']['caption']['vDEF'],
+							"description" => $this->pi_RTEcssText($el['data']['el']['description']['vDEF']),
+						);
+					}
+				}
+			}
+
 			$this->lConf['imagewidth']      = $this->getFlexformData('control', 'imagewidth');
 			$this->lConf['imageheight']     = $this->getFlexformData('control', 'imageheight');
 			$this->lConf['carouselwidth']   = $this->getFlexformData('control', 'carouselwidth');
@@ -75,16 +90,16 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 			$this->lConf['yRadius']         = $this->getFlexformData('control', 'yRadius');
 			$this->lConf['xPos']            = $this->getFlexformData('control', 'xPos');
 			$this->lConf['yPos']            = $this->getFlexformData('control', 'yPos');
-			
+
 			$this->lConf['buttonLeft']      = $this->getFlexformData('buttons', 'buttonLeft');
 			$this->lConf['buttonRight']     = $this->getFlexformData('buttons', 'buttonRight');
 			$this->lConf['titleBox']        = $this->getFlexformData('buttons', 'titleBox');
 			$this->lConf['altBox']          = $this->getFlexformData('buttons', 'altBox');
-			
+
 			$this->lConf['reflHeight']      = $this->getFlexformData('reflection', 'reflHeight');
 			$this->lConf['reflGap']         = $this->getFlexformData('reflection', 'reflGap');
 			$this->lConf['reflOpacity']     = $this->getFlexformData('reflection', 'reflOpacity');
-			
+
 			$this->lConf['speed']           = $this->getFlexformData('movement', 'speed');
 			$this->lConf['FPS']             = $this->getFlexformData('movement', 'FPS');
 			$this->lConf['autoRotate']      = $this->getFlexformData('movement', 'autoRotate');
@@ -101,6 +116,10 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 				case "folder" : {}
 				case "upload" : {
 					$this->setDataUpload();
+					break;
+				}
+				case "uploadRTE" : {
+					$this->setDataUploadRTE();
 					break;
 				}
 				case "dam" : {
@@ -257,7 +276,6 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 		}
 		if ($this->conf['mouseWheel']) {
 			$options[] = "mouseWheel: true";
-			$this->addJsFile($this->conf['jQueryMouseWheel']);
 		}
 		if ($this->conf['bringToFront']) {
 			$options[] = "bringToFront: true";
@@ -273,6 +291,18 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 		}
 		if ($this->conf['altBox']) {
 			$options[] = "altBox: jQuery('#{$this->getContentKey()}-title')";
+		}
+
+		// checks if t3jquery is loaded
+		if (T3JQUERY === TRUE) {
+			tx_t3jquery::addJqJS();
+			if ($this->conf['mouseWheel'] && t3lib_div::int_from_ver($this->getExtensionVersion('t3jquery')) <= 1010003) {
+				$this->addJsFile($this->conf['jQueryMouseWheel']);
+			}
+		} else {
+			if ($this->conf['mouseWheel']) {
+				$this->addJsFile($this->conf['jQueryMouseWheel']);
+			}
 		}
 
 		$this->addJS(
@@ -295,14 +325,16 @@ jQuery(document).ready(function() {
 			return true;
 		}
 
-		$return_string = null;
-		$images = null;
-		$navigation = null;
+		$return_string = NULL;
+		$images = NULL;
+		$descriptions = NULL;
+		$navigation = NULL;
 		$markerArray = array(
-			'BUTTON_LEFT'  => null,
-			'BUTTON_RIGHT' => null,
-			'TITLE_BOX'    => null,
-			'ALT_BOX'      => null,
+			'BUTTON_LEFT'  => NULL,
+			'BUTTON_RIGHT' => NULL,
+			'TITLE_BOX'    => NULL,
+			'ALT_BOX'      => NULL,
+			'DESCRIPTIONS' => NULL,
 		);
 		$GLOBALS['TSFE']->register['key'] = $this->getContentKey();
 		$GLOBALS['TSFE']->register['imagewidth']  = $this->conf['imagewidth'];
@@ -323,6 +355,7 @@ jQuery(document).ready(function() {
 				}
 				$image = $this->cObj->IMAGE($imgConf);
 				$images .= $this->cObj->typolink($image, $imgConf['imageLinkWrap.']);
+				$descriptions .= trim($this->cObj->cObjGetSingle($this->conf['carousel.'][$this->type.'.']['description'], $this->conf['carousel.'][$this->type.'.']['description.']));
 				$GLOBALS['TSFE']->register['IMAGE_NUM_CURRENT'] ++;
 			}
 			if ($this->conf['buttonLeft']) {
@@ -341,6 +374,8 @@ jQuery(document).ready(function() {
 				$altBox = trim($this->cObj->cObjGetSingle($this->conf['carousel.'][$this->type.'.']['altBox'], $this->conf['carousel.'][$this->type.'.']['altBox.']));
 				$markerArray['ALT_BOX'] = $this->cObj->stdWrap($altBox, $this->conf['carousel.'][$this->type.'.']['altBoxWrap.']);
 			}
+			$markerArray['DESCRIPTIONS'] = $this->cObj->stdWrap($descriptions, $this->conf['carousel.'][$this->type.'.']['descriptionWrap.']);
+
 			// the stdWrap
 			$images = $this->cObj->stdWrap($images, $this->conf['carousel.'][$this->type.'.']['stdWrap.']);
 			$return_string = $this->cObj->substituteMarkerArray($images, $markerArray, '###|###', 0);

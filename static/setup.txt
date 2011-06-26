@@ -57,7 +57,36 @@ plugin.tx_imagecarousel_pi1 {
 					width.data = register:imagewidth
 					height.data = register:imageheight
 				}
-				imageLinkWrap < tt_content.image.20.1.imageLinkWrap
+				imageLinkWrap {
+					bodyTag = <body style="margin:0; background:#fff;">
+					wrap = <a href="javascript:close();"> | </a>
+					width = {$styles.content.imgtext.linkWrap.width}
+					height = {$styles.content.imgtext.linkWrap.height}
+					effects = {$styles.content.imgtext.linkWrap.effects}
+					JSwindow = 1
+					JSwindow {
+						newWindow = {$styles.content.imgtext.linkWrap.newWindow}
+						if.isFalse = {$styles.content.imgtext.linkWrap.lightboxEnabled}
+					}
+					directImageLink = {$styles.content.imgtext.linkWrap.lightboxEnabled}
+					enable {
+						field = image_zoom
+						ifEmpty.typolink.parameter.field = image_link
+						ifEmpty.typolink.parameter.listNum.splitChar = 10
+						ifEmpty.typolink.parameter.listNum.stdWrap.data = register : IMAGE_NUM_CURRENT
+						ifEmpty.typolink.returnLast = url
+					}
+					typolink {
+						parameter {
+							field = image_link
+							listNum.splitChar = 10
+							listNum.stdWrap.data = register : IMAGE_NUM_CURRENT
+						}
+						target = {$styles.content.links.target}
+						extTarget = {$styles.content.links.extTarget}
+					}
+					linkParams.ATagParams.dataWrap =  class="{$styles.content.imgtext.linkWrap.lightboxCssClass}" rel="{$styles.content.imgtext.linkWrap.lightboxRelAttribute}"
+				}
 				imageHrefWrap {
 					enable.data = register:href
 					typolink {
@@ -73,7 +102,7 @@ plugin.tx_imagecarousel_pi1 {
 					stripHtml = 1
 				}
 				titleText < .altText
-				longdescURL < .altText
+				longdescURL >
 				wrap = <li> | </li>
 			}
 			navigation = TEXT

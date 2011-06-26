@@ -14,11 +14,17 @@
 			<label index="tt_content.pi_flexform.mode">Image carousel mode</label>
 			<label index="tt_content.pi_flexform.mode.I.upload">Upload Images</label>
 			<label index="tt_content.pi_flexform.mode.I.folder">Folder</label>
+			<label index="tt_content.pi_flexform.mode.I.rte">Upload with RTE</label>
 			<label index="tt_content.pi_flexform.mode.I.dam">DAM (dam)</label>
 			<label index="tt_content.pi_flexform.mode.I.dam_catedit">DAM category (dam_catedit)</label>
 			<label index="tt_content.pi_flexform.damimages">Images in DAM (dam)</label>
 			<label index="tt_content.pi_flexform.damcategories">Images from DAM category (dam_catedit)</label>
 			<label index="tt_content.pi_flexform.folder">Image folder</label>
+			<label index="tt_content.pi_flexform.uploadRTE">Images</label>
+			<label index="tt_content.pi_flexform.image">Image</label>
+			<label index="tt_content.pi_flexform.href">Image link</label>
+			<label index="tt_content.pi_flexform.title">Image Title</label>
+			<label index="tt_content.pi_flexform.caption">Image Caption</label>
 			<label index="tt_content.pi_flexform.images">Images</label>
 			<label index="tt_content.pi_flexform.hrefs">Image links</label>
 			<label index="tt_content.pi_flexform.captions">Image Captions</label>

@@ -14,7 +14,6 @@
 					<mode>
 						<TCEforms>
 							<onChange>reload</onChange>
-							<displayCond>EXT:dam:LOADED:true</displayCond>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.mode</label>
 							<config>
 								<type>select</type>
@@ -27,7 +26,7 @@
 					<images>
 						<TCEforms>
 							<exclude>1</exclude>
-							<displayCond>FIELD:mode:!IN:dam,dam_catedit</displayCond>
+							<displayCond>FIELD:mode:!IN:dam,dam_catedit,uploadRTE</displayCond>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.images</label>
 							<config>
 								<type>group</type>
@@ -46,7 +45,7 @@
 					<hrefs>
 						<TCEforms>
 							<exclude>1</exclude>
-							<displayCond>FIELD:mode:!IN:dam,dam_catedit</displayCond>
+							<displayCond>FIELD:mode:!IN:dam,dam_catedit,uploadRTE</displayCond>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.hrefs</label>
 							<config>
 								<type>text</type>
@@ -59,7 +58,7 @@
 					<captions>
 						<TCEforms>
 							<exclude>1</exclude>
-							<displayCond>FIELD:mode:!IN:dam,dam_catedit</displayCond>
+							<displayCond>FIELD:mode:!IN:dam,dam_catedit,uploadRTE</displayCond>
 							<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.captions</label>
 							<config>
 								<type>text</type>
@@ -69,6 +68,7 @@
 							</config>
 						</TCEforms>
 					</captions>
+
 					<damimages>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -97,6 +97,7 @@
 							</config>
 						</TCEforms>
 					</damimages>
+
 					<damcategories>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -116,6 +117,93 @@
 							</config>
 						</TCEforms>
 					</damcategories>
+
+					<imagesRTE>
+						<tx_templavoila>
+							<title>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.uploadRTE</title>
+						</tx_templavoila>
+						<type>array</type>
+						<section>1</section>
+						<el>
+							<data>
+								<type>array</type>
+								<el>
+									<image>
+										<TCEforms>
+											<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.image</label>
+											<config>
+												<type>group</type>
+												<internal_type>file</internal_type>
+												<allowed>files</allowed>
+												<size>1</size>
+												<maxitems>1</maxitems>
+												<minitems>0</minitems>
+												<show_thumbs>1</show_thumbs>
+												<allowed>gif,jpg,jpeg,png</allowed>
+												<max_size>10240</max_size>
+												<uploadfolder>uploads/tx_imagecarousel</uploadfolder>
+											</config>
+										</TCEforms>
+									</image>
+									<href>
+										<TCEforms>
+											<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.href</label>
+											<config>
+												<type>input</type>
+												<size>15</size>
+												<max>255</max>
+												<eval>trim</eval>
+												<wizards>
+													<_PADDING>2</_PADDING>
+													<link>
+														<type>popup</type>
+														<title>Link</title>
+														<icon>link_popup.gif</icon>
+														<script>browse_links.php?mode=wizard</script>
+														<JSopenParams>height=500,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
+													</link>
+												</wizards>
+											</config>
+										</TCEforms>
+									</href>
+									<caption>
+										<TCEforms>
+											<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.caption</label>
+											<config>
+												<type>input</type>
+												<size>50</size>
+												<max>255</max>
+												<default></default>
+												<eval>string</eval>
+											</config>
+										</TCEforms>
+									</caption>
+									<description>
+										<TCEforms>
+											<label>LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.description</label>
+											<config>
+												<type>text</type>
+												<cols>30</cols>
+												<rows>5</rows>
+											</config>
+											<defaultExtras>richtext[]:rte_transform[mode=ts_css]</defaultExtras>
+										</TCEforms>
+									</description>
+								</el>
+							</data>
+						</el>
+					</imagesRTE>
+					<hideRTE>
+						<TCEforms>
+							<displayCond>FIELD:mode:!=:uploadRTE</displayCond>
+							<label></label>
+							<config>
+								<type>user</type>
+								<userFunc>tx_imagecarousel_TCAform->hideRTE</userFunc>
+							</config>
+						</TCEforms>
+					</hideRTE>
+
 				</el>
 			</ROOT>
 		</general>

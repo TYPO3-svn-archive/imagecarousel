@@ -84,7 +84,21 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			$this->lConf['captions']      = $this->getFlexformData('general', 'captions', ($this->lConf['mode'] == 'upload'));
 			$this->lConf['damimages']     = $this->getFlexformData('general', 'damimages', ($this->lConf['mode'] == 'dam'));
 			$this->lConf['damcategories'] = $this->getFlexformData('general', 'damcategories', ($this->lConf['mode'] == 'dam_catedit'));
-			
+
+			$imagesRTE = $this->getFlexformData('general', 'imagesRTE', ($this->lConf['mode'] == 'uploadRTE'));
+			$this->lConf['imagesRTE'] = array();
+			if (isset($imagesRTE['el']) && count($imagesRTE['el']) > 0) {
+				foreach ($imagesRTE['el'] as $elKey => $el) {
+					if (is_numeric($elKey)) {
+						$this->lConf['imagesRTE'][] = array(
+							"image"       => $el['data']['el']['image']['vDEF'],
+							"href"        => $el['data']['el']['href']['vDEF'],
+							"caption"     => $el['data']['el']['caption']['vDEF'],
+						);
+					}
+				}
+			}
+
 			$this->lConf['skin']               = $this->getFlexformData('control', 'skin');
 			$this->lConf['vertical']           = $this->getFlexformData('control', 'vertical');
 			$this->lConf['rtl']                = $this->getFlexformData('control', 'rtl');
@@ -96,7 +110,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			$this->lConf['imageheight']        = $this->getFlexformData('control', 'imageheight');
 			$this->lConf['carouselwidth']      = $this->getFlexformData('control', 'carouselwidth');
 			$this->lConf['carouselheight']     = $this->getFlexformData('control', 'carouselheight');
-			
+
 			$this->lConf['showCaption']        = $this->getFlexformData('captions', 'showCaption');
 			$this->lConf['animation']          = $this->getFlexformData('captions', 'animation');
 			$this->lConf['position']           = $this->getFlexformData('captions', 'position');
@@ -104,7 +118,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			$this->lConf['speedOut']           = $this->getFlexformData('captions', 'speedOut');
 			$this->lConf['hideDelay']          = $this->getFlexformData('captions', 'hideDelay');
 			$this->lConf['spanWidth']          = $this->getFlexformData('captions', 'spanWidth');
-			
+
 			$this->lConf['auto']               = $this->getFlexformData('movement', 'auto');
 			$this->lConf['stoponmouseover']    = $this->getFlexformData('movement', 'stoponmouseover');
 			$this->lConf['transition']         = $this->getFlexformData('movement', 'transition');
@@ -122,6 +136,10 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 				case "folder" : {}
 				case "upload" : {
 					$this->setDataUpload();
+					break;
+				}
+				case "uploadRTE" : {
+					$this->setDataUploadRTE();
 					break;
 				}
 				case "dam" : {
@@ -260,6 +278,21 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Set the information of the images if mode = uploadRTE
+	 */
+	protected function setDataUploadRTE()
+	{
+		if (count($this->lConf['imagesRTE']) > 0) {
+			foreach ($this->lConf['imagesRTE'] as $key => $image) {
+				$this->images[]      = $image['image'];
+				$this->hrefs[]       = $image['href'];
+				$this->captions[]    = $image['caption'];
+				$this->description[] = $image['description'];
+			}
+		}
 	}
 
 	/**
