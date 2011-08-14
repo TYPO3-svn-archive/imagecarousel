@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////////
-// CloudCarousel V1.0.5a
+// CloudCarousel V1.0.5b
 // (c) 2011 by R Cecco. <http://www.professorcloud.com>
 // MIT License
 //
@@ -160,12 +160,16 @@
 		this.innerWrapper = $(container).wrapInner('<div style="position:absolute;width:100%;height:100%;"/>').children()[0];
 		// Shows the text from the front most item.
 		this.showFrontText = function() {
-			if ( items[this.frontIndex] === undefined ) { return; }	// Images might not have loaded yet.
-			$(options.altBox).html($(items[this.frontIndex].image).attr('alt'));
-			if (typeof($('#'+$(items[this.frontIndex].image).attr('rel'))) == 'object') {
-				$(options.titleBox).html($('#'+$(items[this.frontIndex].image).attr('rel')).html());
+			var frontIndex = this.frontIndex;
+			if (frontIndex < 0) {
+				frontIndex = items.length + this.frontIndex;
+			}
+			if ( items[frontIndex] === undefined ) { return; }	// Images might not have loaded yet.
+			$(options.altBox).html($(items[frontIndex].image).attr('alt'));
+			if (typeof($('#'+$(items[frontIndex].image).attr('rel'))) == 'object') {
+				$(options.titleBox).html($('#'+$(items[frontIndex].image).attr('rel')).html());
 			} else {
-				$(options.titleBox).html($(items[this.frontIndex].image).attr('title'));
+				$(options.titleBox).html($(items[frontIndex].image).attr('title'));
 			}
 		};
 		this.go = function() {
