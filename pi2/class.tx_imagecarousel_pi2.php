@@ -213,7 +213,9 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 	 */
 	public function parseTemplate($dir='', $onlyJS=false)
 	{
-		
+		$this->pagerenderer = t3lib_div::makeInstance('tx_imagecarousel_pagerenderer');
+		$this->pagerenderer->setConf($this->conf);
+
 		// define the directory of images
 		if ($dir == '') {
 			$dir = $this->imageDir;
@@ -238,7 +240,7 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 		$css_height = (is_numeric($reg_height[1]) ? $reg_height[1]."px" : $this->conf['imageheight']);
 
 		// define the js files
-		$this->addJsFile($this->conf['jQueryCloudCarousel']);
+		$this->pagerenderer->addJsFile($this->conf['jQueryCloudCarousel']);
 
 		// get the options from config
 		$options = array();
@@ -296,21 +298,21 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 		// checks if t3jquery is loaded
 		if (T3JQUERY === TRUE) {
 			tx_t3jquery::addJqJS();
-			if ($this->conf['mouseWheel'] && t3lib_div::int_from_ver($this->getExtensionVersion('t3jquery')) <= 1010003) {
-				$this->addJsFile($this->conf['jQueryMouseWheel']);
+			if ($this->conf['mouseWheel'] && t3lib_div::int_from_ver($this->pagerenderer->getExtensionVersion('t3jquery')) <= 1010003) {
+				$this->pagerenderer->addJsFile($this->conf['jQueryMouseWheel']);
 			}
 		} else {
 			if ($this->conf['mouseWheel']) {
-				$this->addJsFile($this->conf['jQueryMouseWheel']);
+				$this->pagerenderer->addJsFile($this->conf['jQueryMouseWheel']);
 			}
 		}
 
-		$this->addJS(
+		$this->pagerenderer->addJS(
 $jQueryNoConflict . "
 jQuery(document).ready(function() {
 	jQuery('#{$this->getContentKey()}').CloudCarousel(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "").");
 });");
-		$this->addCSS("
+		$this->pagerenderer->addCSS("
 #{$this->getContentKey()} {
 	width: {$this->conf['carouselwidth']}px;
 	height: {$this->conf['carouselheight']}px;
@@ -319,7 +321,7 @@ jQuery(document).ready(function() {
 }");
 
 		// Add the ressources
-		$this->addResources();
+		$this->pagerenderer->addResources();
 
 		if ($onlyJS === true) {
 			return true;

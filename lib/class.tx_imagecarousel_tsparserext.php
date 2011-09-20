@@ -35,11 +35,42 @@
 class tx_imagecarousel_tsparserext
 {
 	/**
+	 * Return the dropdown with all skins for constant editor
+	 * 
+	 * @param array $params
+	 * @param object $tsObj
+	 */
+	public function getSkins(&$params, &$tsObj)
+	{
+		$itemsProcFunc = t3lib_div::makeInstance('tx_imagecarousel_itemsProcFunc');
+		$config = $itemsProcFunc->getSkins(array('items'=> array()), array());
+		$items = $config['items'];
+
+		$raname = substr(md5($params['fieldName']), 0, 10);
+		$aname = '\'' . $raname . '\'';
+		$fN = $params['fieldName'];
+
+		$p_field = '';
+		foreach ($items as $var) {
+			$label = $var[0];
+			$value = isset($var[1]) ? $var[1] : $var[0];
+			$sel = '';
+			if ($value == $params['value']) {
+				$sel = ' selected';
+			}
+			$p_field .= '<option value="' . htmlspecialchars($value) . '"' . $sel . '>' . $GLOBALS['LANG']->sL($label) . '</option>';
+		}
+		$p_field = '<select id="' . $fN . '" name="' . $fN . '" onChange="uFormUrl(' . $aname . ')">' . $p_field . '</select>';
+
+		return $p_field;
+	}
+
+	/**
 	 * Shows the update Message
 	 *
 	 * @return	string
 	 */
-	function displayMessage(&$params, &$tsObj)
+	public function displayMessage(&$params, &$tsObj)
 	{
 		$out = '';
 
@@ -73,7 +104,7 @@ class tx_imagecarousel_tsparserext
 	 * 
 	 * @return boolean
 	 */
-	function checkConfig()
+	public function checkConfig()
 	{
 		$confDefault = array(
 			'skinFolder',
