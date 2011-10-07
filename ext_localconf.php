@@ -9,4 +9,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php'][
 
 t3lib_extMgm::addPItoST43($_EXTKEY, 'pi1/class.tx_imagecarousel_pi1.php', '_pi1', 'list_type', 1);
 t3lib_extMgm::addPItoST43($_EXTKEY, 'pi2/class.tx_imagecarousel_pi2.php', '_pi2', 'list_type', 1);
+
+$TYPO3_CONF_VARS['FE']['addRootLineFields'] .= ',tx_imagecarousel_mode,tx_imagecarousel_damimages,tx_imagecarousel_damcategories,tx_imagecarousel_images,tx_imagecarousel_hrefs,tx_imagecarousel_captions,tx_imagecarousel_skin,tx_imagecarousel_stoprecursion';
+
 ?>

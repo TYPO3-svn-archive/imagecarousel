@@ -201,9 +201,63 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 			if ($this->lConf['altBox'] < 2) {
 				$this->conf['altBox'] = $this->lConf['altBox'];
 			}
-
-			return $this->parseTemplate();
+		} else {
+			$this->type = 'header';
+			// It's the header
+			$used_page = array();
+			$pageID    = false;
+			foreach ($GLOBALS['TSFE']->rootLine as $page) {
+				if (! $pageID) {
+					if (
+						(($page['tx_imagecarousel_mode'] == 'upload' || ! $page['tx_imagecarousel_mode']) && trim($page['tx_imagecarousel_images']) != '') ||
+						($page['tx_imagecarousel_mode'] == 'dam'         && trim($page['tx_imagecarousel_damimages']) != '') ||
+						($page['tx_imagecarousel_mode'] == 'dam_catedit' && trim($page['tx_imagecarousel_damcategories']) != '') ||
+						$this->conf['disableRecursion'] ||
+						$page['tx_imagecarousel_stoprecursion']
+					) {
+						$used_page = $page;
+						$pageID    = $used_page['uid'];
+						$this->lConf['mode']          = $used_page['tx_imagecarousel_mode'];
+						$this->lConf['damcategories'] = $used_page['tx_imagecarousel_damcategories'];
+					}
+				}
+			}
+			if ($pageID) {
+				if ($this->sys_language_uid) {
+					$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('tx_imagecarousel_images, tx_imagecarousel_hrefs, tx_imagecarousel_captions','pages_language_overlay','pid='.intval($pageID).' AND sys_language_uid='.$this->sys_language_uid,'','',1);
+					$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+				}
+				// define the images
+				switch ($this->lConf['mode']) {
+					case "" : {}
+					case "folder" : {}
+					case "upload" : {
+						$this->images   = t3lib_div::trimExplode(',',     $used_page['tx_imagecarousel_images']);
+						$this->hrefs    = t3lib_div::trimExplode(chr(10), $used_page['tx_imagecarousel_hrefs']);
+						$this->captions = t3lib_div::trimExplode(chr(10), $used_page['tx_imagecarousel_captions']);
+						// Language overlay
+						if ($this->sys_language_uid) {
+							if (trim($row['tx_imagecarousel_images']) != '') {
+								$this->images   = t3lib_div::trimExplode(',',     $row['tx_imagecarousel_images']);
+								$this->hrefs    = t3lib_div::trimExplode(chr(10), $row['tx_imagecarousel_hrefs']);
+								$this->captions = t3lib_div::trimExplode(chr(10), $row['tx_imagecarousel_captions']);
+							}
+						}
+						break;
+					}
+					case "dam" : {
+						$this->setDataDam(false, 'pages', $pageID);
+						break;
+					}
+					case "dam_catedit" : {
+						$this->setDataDam(true, 'pages', $pageID);
+						break;
+					}
+				}
+			}
 		}
+
+		return $this->parseTemplate();
 	}
 
 	/**

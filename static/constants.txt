@@ -21,6 +21,9 @@ plugin.tx_imagecarousel_pi1 {
 	# cat=plugin.tx_imagecarousel/enable/070; type=boolean; label=Minify CSS: If set, the CSS will be minified
 	cssMinify = 0
 
+	# cat=plugin.tx_imagecarousel/enable/080; type=boolean; label=Disable Recursion:Disable the root line fetching if there are no images
+	disableRecursion = 0
+
 
 
 	# cat=plugin.tx_imagecarousel/file/010; type=file[js]; label=jQuery Library: Location of the jQuery Lib

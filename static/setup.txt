@@ -7,6 +7,7 @@ plugin.tx_imagecarousel_pi1 {
 	jsMinify = {$plugin.tx_imagecarousel_pi1.jsMinify}
 	jsInline = {$plugin.tx_imagecarousel_pi1.jsInline}
 	cssMinify = {$plugin.tx_imagecarousel_pi1.cssMinify}
+	disableRecursion = {$plugin.tx_imagecarousel_pi1.disableRecursion}
 
 	jQueryLibrary = {$plugin.tx_imagecarousel_pi1.file.jQueryLibrary}
 	jQueryEasing = {$plugin.tx_imagecarousel_pi1.file.jQueryEasing}
@@ -44,7 +45,6 @@ plugin.tx_imagecarousel_pi1 {
 	opacity = {$plugin.tx_imagecarousel_pi1.opacity}
 	className = {$plugin.tx_imagecarousel_pi1.className}
 	spanWidth = {$plugin.tx_imagecarousel_pi1.spanWidth}
-
 
 	damCaptionFields = {$plugin.tx_imagecarousel_pi1.damCaptionFields}
 	damHrefFields = {$plugin.tx_imagecarousel_pi1.damHrefFields}
@@ -91,7 +91,11 @@ plugin.tx_imagecarousel_pi1 {
 			}
 			childElem = li
 		}
+
+		header < .normal
+
 		content < .normal
+
 	}
 	_CSS_DEFAULT_STYLE (
 .jcarousel-container { position: relative; }

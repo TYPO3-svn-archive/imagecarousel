@@ -7,6 +7,14 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index="tx_dam.tx_jfdam_link">Link</label>
+			<label index="pages.tx_imagecarousel_mode">Imagecarousel mode</label>
+			<label index="pages.tx_imagecarousel_damimages">Images in DAM (dam)</label>
+			<label index="pages.tx_imagecarousel_damcategories">Images from DAM category (dam_catedit)</label>
+			<label index="pages.tx_imagecarousel_images">Images from Upload</label>
+			<label index="pages.tx_imagecarousel_hrefs">Image links</label>
+			<label index="pages.tx_imagecarousel_captions">Image Captions</label>
+			<label index="pages.tx_imagecarousel_stoprecursion">Stop Recursion (Reset)</label>
+			<label index="pages.tx_imagecarousel_skin">Skin</label>
 			<label index="tt_content.list_type_pi1">Image carousel</label>
 			<label index="tt_content.tx_imagecarousel_title">Image Carousel</label>
 			<label index="tt_content.tx_imagecarousel_activate">Activate</label>

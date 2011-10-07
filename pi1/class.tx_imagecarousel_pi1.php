@@ -225,9 +225,71 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			if ($this->lConf['spanWidth']) {
 				$this->conf['spanWidth'] = $this->lConf['spanWidth'];
 			}
-
-			return $this->parseTemplate();
+		} else {
+			$this->type = 'header';
+			// It's the header
+			$used_page = array();
+			$pageID    = false;
+			$skinChanged = false;
+			foreach ($GLOBALS['TSFE']->rootLine as $page) {
+				if (! $pageID) {
+					if ($skinChanged === false && trim($page['tx_imagecarousel_skin']) && ! $this->conf['disableRecursion']) {
+						$this->conf['skin'] = $page['tx_imagecarousel_skin'];
+						$skinChanged = true;
+					}
+					if (
+						(($page['tx_imagecarousel_mode'] == 'upload' || ! $page['tx_imagecarousel_mode']) && trim($page['tx_imagecarousel_images']) != '') ||
+						($page['tx_imagecarousel_mode'] == 'dam'         && trim($page['tx_imagecarousel_damimages']) != '') ||
+						($page['tx_imagecarousel_mode'] == 'dam_catedit' && trim($page['tx_imagecarousel_damcategories']) != '') ||
+						$this->conf['disableRecursion'] ||
+						$page['tx_imagecarousel_stoprecursion']
+					) {
+						$used_page = $page;
+						$pageID    = $used_page['uid'];
+						$this->lConf['mode']          = $used_page['tx_imagecarousel_mode'];
+						$this->lConf['damcategories'] = $used_page['tx_imagecarousel_damcategories'];
+					}
+				}
+			}
+			if ($pageID) {
+				if ($this->sys_language_uid) {
+					$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('tx_imagecarousel_images, tx_imagecarousel_hrefs, tx_imagecarousel_captions, tx_imagecarousel_skin','pages_language_overlay','pid='.intval($pageID).' AND sys_language_uid='.$this->sys_language_uid,'','',1);
+					$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+					if (trim($used_page['tx_imagecarousel_skin'])) {
+						$this->conf['skin'] = $row['tx_imagecarousel_skin'];
+					}
+				}
+				// define the images
+				switch ($this->lConf['mode']) {
+					case "" : {}
+					case "folder" : {}
+					case "upload" : {
+						$this->images   = t3lib_div::trimExplode(',',     $used_page['tx_imagecarousel_images']);
+						$this->hrefs    = t3lib_div::trimExplode(chr(10), $used_page['tx_imagecarousel_hrefs']);
+						$this->captions = t3lib_div::trimExplode(chr(10), $used_page['tx_imagecarousel_captions']);
+						// Language overlay
+						if ($this->sys_language_uid) {
+							if (trim($row['tx_imagecarousel_images']) != '') {
+								$this->images   = t3lib_div::trimExplode(',',     $row['tx_imagecarousel_images']);
+								$this->hrefs    = t3lib_div::trimExplode(chr(10), $row['tx_imagecarousel_hrefs']);
+								$this->captions = t3lib_div::trimExplode(chr(10), $row['tx_imagecarousel_captions']);
+							}
+						}
+						break;
+					}
+					case "dam" : {
+						$this->setDataDam(false, 'pages', $pageID);
+						break;
+					}
+					case "dam_catedit" : {
+						$this->setDataDam(true, 'pages', $pageID);
+						break;
+					}
+				}
+			}
 		}
+
+		return $this->parseTemplate();
 	}
 
 	/**
@@ -296,17 +358,22 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 	 * @param boolean $fromCategory
 	 * @return boolean
 	 */
-	protected function setDataDam($fromCategory=false)
+	protected function setDataDam($fromCategory=false, $table='tt_content', $uid=0)
 	{
 		// clear the imageDir
 		$this->imageDir = '';
 		// get all fields for captions
-		$damCaptionFields = t3lib_div::trimExplode(',', $this->conf['damCaptionFields'], true);
-		$damDescFields    = t3lib_div::trimExplode(',', $this->conf['damDescFields'], true);
-		$damHrefFields    = t3lib_div::trimExplode(',', $this->conf['damHrefFields'], true);
-		$fields  = (count($damCaptionFields) > 0 ? ','.implode(',tx_dam.', $damCaptionFields) : '');
-		$fields .= (count($damDescFields) > 0    ? ','.implode(',tx_dam.', $damDescFields)    : '');
-		$fields .= (count($damHrefFields) > 0    ? ','.implode(',tx_dam.', $damHrefFields)    : '');
+		$fieldsArray = array_merge(
+			t3lib_div::trimExplode(',', $this->conf['damCaptionFields'], true),
+			t3lib_div::trimExplode(',', $this->conf['damDescFields'], true),
+			t3lib_div::trimExplode(',', $this->conf['damHrefFields'], true)
+		);
+		$fields = NULL;
+		if (count($fieldsArray) > 0) {
+			foreach ($fieldsArray as $field) {
+				$fields .= ',tx_dam.' . $field;
+			}
+		}
 		if ($fromCategory === true) {
 			// Get the images from dam category
 			$damcategories = $this->getDamcats($this->lConf['damcategories']);
@@ -326,8 +393,8 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 		} else {
 			// Get the images from dam
 			$images = tx_dam_db::getReferencedFiles(
-				'tt_content',
-				$this->cObj->data['uid'],
+				$table,
+				$uid,
 				'imagecarousel',
 				'tx_dam_mm_ref',
 				tx_dam_db::getMetaInfoFieldList() . $fields,
