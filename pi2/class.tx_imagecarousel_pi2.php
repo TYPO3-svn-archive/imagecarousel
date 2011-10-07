@@ -123,11 +123,11 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 					break;
 				}
 				case "dam" : {
-					$this->setDataDam(false);
+					$this->setDataDam(false, 'tt_content', $this->cObj->data['uid']);
 					break;
 				}
 				case "dam_catedit" : {
-					$this->setDataDam(true);
+					$this->setDataDam(true, 'tt_content', $this->cObj->data['uid']);
 					break;
 				}
 			}
