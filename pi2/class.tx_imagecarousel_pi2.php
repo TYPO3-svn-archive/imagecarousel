@@ -356,6 +356,7 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 				$this->pagerenderer->addJsFile($this->conf['jQueryMouseWheel']);
 			}
 		} else {
+			$this->pagerenderer->addJsFile($this->conf['jQueryLibrary'], true);
 			if ($this->conf['mouseWheel']) {
 				$this->pagerenderer->addJsFile($this->conf['jQueryMouseWheel']);
 			}
