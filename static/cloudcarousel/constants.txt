@@ -4,7 +4,7 @@ plugin.tx_imagecarousel_pi2 {
 	file.jQueryCloudCarousel = EXT:imagecarousel/res/jquery/js/jquery.cloudcarousel-1.0.5b.min.js
 
 	# cat=plugin.tx_imagecarousel.cloud/file/020; type=file[js]; label=Mousewheel: Location of the Mousewheel
-	file.jQueryMouseWheel = EXT:imagecarousel/res/jquery/js/jquery.mousewheel-3.0.4.min.js
+	file.jQueryMouseWheel = EXT:imagecarousel/res/jquery/js/jquery.mousewheel-3.0.6.min.js
 
 
 

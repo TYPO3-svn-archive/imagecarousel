@@ -89,7 +89,7 @@ plugin.tx_imagecarousel_pi1 {
 				dataWrap = <div id="{register:key}-outer"><div id="{register:key}" class="{register:class}">###NAVIGATION###<ul> | </ul></div></div>
 				required = 1
 			}
-			childElem = li
+			childElem = ul,li
 		}
 
 		header < .normal
