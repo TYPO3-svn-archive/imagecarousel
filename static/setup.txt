@@ -47,6 +47,13 @@ plugin.tx_imagecarousel_pi1 {
 	spanWidth = {$plugin.tx_imagecarousel_pi1.spanWidth}
 
 	damCaptionFields = {$plugin.tx_imagecarousel_pi1.damCaptionFields}
+	damCaptionObject = TEXT
+	damCaptionObject {
+		data = register:dam_caption
+		ifEmpty {
+			data = register:dam_title
+		}
+	}
 	damHrefFields = {$plugin.tx_imagecarousel_pi1.damHrefFields}
 
 	carousel {

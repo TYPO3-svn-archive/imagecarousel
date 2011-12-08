@@ -41,7 +41,21 @@ plugin.tx_imagecarousel_pi2 {
 	bringToFront = {$plugin.tx_imagecarousel_pi2.bringToFront}
 
 	damCaptionFields = {$plugin.tx_imagecarousel_pi1.damCaptionFields}
+	damCaptionObject = TEXT
+	damCaptionObject {
+		data = register:dam_caption
+		ifEmpty {
+			data = register:dam_description
+			ifEmpty {
+				data = register:dam_title
+			}
+		}
+	}
 	damDescFields = {$plugin.tx_imagecarousel_pi1.damDescFields}
+	damDescObject = TEXT
+	damDescObject {
+		data = register:dam_description
+	}
 	damHrefFields = {$plugin.tx_imagecarousel_pi1.damHrefFields}
 
 	carousel {

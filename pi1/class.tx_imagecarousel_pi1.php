@@ -363,17 +363,18 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 		// clear the imageDir
 		$this->imageDir = '';
 		// get all fields for captions
+		$damCaptionFields = t3lib_div::trimExplode(',', $this->conf['damCaptionFields'], true);
+		$damDescFields    = t3lib_div::trimExplode(',', $this->conf['damDescFields'], true);
+		$damHrefFields    = t3lib_div::trimExplode(',', $this->conf['damHrefFields'], true);
 		$fieldsArray = array_merge(
-			t3lib_div::trimExplode(',', $this->conf['damCaptionFields'], true),
-			t3lib_div::trimExplode(',', $this->conf['damDescFields'], true),
-			t3lib_div::trimExplode(',', $this->conf['damHrefFields'], true)
+			$damCaptionFields,
+			$damDescFields,
+			$damHrefFields
 		);
 		$fields = NULL;
-		$damCaptionFields = array();
 		if (count($fieldsArray) > 0) {
 			foreach ($fieldsArray as $field) {
 				$fields .= ',tx_dam.' . $field;
-				$damCaptionFields[] = $field;
 			}
 		}
 		if ($fromCategory === true) {
@@ -426,11 +427,24 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 					}
 				}
 				$this->hrefs[] = $href;
+
 				// set the caption
 				$caption = '';
 				unset($caption);
 				if (count($damCaptionFields) > 0) {
-					foreach ($damCaptionFields as $damCaptionField) {
+					if (isset($this->conf['damCaptionObject'])) {
+						foreach ($damCaptionFields as $damCaptionField) {
+							if (isset($row[$damCaptionField])) {
+								$GLOBALS['TSFE']->register['dam_'.$damCaptionField] = $row[$damCaptionField];
+							}
+						}
+						$caption = trim($this->cObj->cObjGetSingle($this->conf['damCaptionObject'], $this->conf['damCaptionObject.']));
+						// Unset the registered values
+						foreach ($damCaptionFields as $damCaptionField) {
+							unset($GLOBALS['TSFE']->register['dam_'.$damCaptionField]);
+						}
+					} else {
+						// the old way
 						if (! isset($caption) && trim($row[$damCaptionField])) {
 							$caption = $row[$damCaptionField];
 							break;
@@ -438,11 +452,24 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 					}
 				}
 				$this->captions[] = $caption;
+
 				// set the description
 				$description = '';
 				unset($description);
 				if (count($damDescFields) > 0) {
-					foreach ($damDescFields as $damDescField) {
+					if (isset($this->conf['damCaptionObject'])) {
+						foreach ($damDescFields as $damDescField) {
+							if (isset($row[$damDescField])) {
+								$GLOBALS['TSFE']->register['dam_'.$damDescField] = $row[$damDescField];
+							}
+						}
+						$description = trim($this->cObj->cObjGetSingle($this->conf['damDescObject'], $this->conf['damDescObject.']));
+						// Unset the registered values
+						foreach ($damDescFields as $damDescField) {
+							unset($GLOBALS['TSFE']->register['dam_'.$damDescField]);
+						}
+					} else {
+						// the old way
 						if (! isset($description) && trim($row[$damDescField])) {
 							$description = $row[$damDescField];
 							break;
