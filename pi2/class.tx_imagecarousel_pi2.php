@@ -54,6 +54,9 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 		// define the key of the element
 		$this->setContentKey();
 
+		// set the system language
+		$this->sys_language_uid = $GLOBALS['TSFE']->sys_language_content;
+
 		$pageID = false;
 		if ($this->cObj->data['list_type'] == $this->extKey.'_pi2') {
 			$this->type = 'normal';

@@ -66,6 +66,9 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 		// define the key of the element
 		$this->setContentKey();
 
+		// set the system language
+		$this->sys_language_uid = $GLOBALS['TSFE']->sys_language_content;
+
 		$pageID = false;
 
 		if ($this->cObj->data['list_type'] == $this->extKey.'_pi1') {
@@ -445,9 +448,11 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 						}
 					} else {
 						// the old way
-						if (! isset($caption) && trim($row[$damCaptionField])) {
-							$caption = $row[$damCaptionField];
-							break;
+						foreach ($damCaptionFields as $damCaptionField) {
+							if (! isset($caption) && trim($row[$damCaptionField])) {
+								$caption = $row[$damCaptionField];
+								break;
+							}
 						}
 					}
 				}
@@ -457,7 +462,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 				$description = '';
 				unset($description);
 				if (count($damDescFields) > 0) {
-					if (isset($this->conf['damCaptionObject'])) {
+					if (isset($this->conf['damDescObject'])) {
 						foreach ($damDescFields as $damDescField) {
 							if (isset($row[$damDescField])) {
 								$GLOBALS['TSFE']->register['dam_'.$damDescField] = $row[$damDescField];
@@ -470,9 +475,11 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 						}
 					} else {
 						// the old way
-						if (! isset($description) && trim($row[$damDescField])) {
-							$description = $row[$damDescField];
-							break;
+						foreach ($damDescFields as $damDescField) {
+							if (! isset($description) && trim($row[$damDescField])) {
+								$description = $row[$damDescField];
+								break;
+							}
 						}
 					}
 				}
