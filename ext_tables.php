@@ -14,6 +14,7 @@ if (t3lib_extMgm::isLoaded('dam')) {
 		'config' => array(
 			'type' => 'select',
 			'itemsProcFunc' => 'tx_imagecarousel_itemsProcFunc->getModes',
+			'displayMode' => 'page',
 			'size' => 1,
 			'maxitems' => 1,
 		)

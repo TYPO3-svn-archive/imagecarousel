@@ -74,11 +74,13 @@ class tx_imagecarousel_itemsProcFunc
 			"upload",
 			"EXT:imagecarousel/mode_upload.gif"
 		);
-		$optionList[] = array(
-			$GLOBALS['LANG']->sL('LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.mode.I.rte'),
-			"uploadRTE",
-			"EXT:imagecarousel/mode_rte.gif"
-		);
+		if ($config['config']['displayMode'] != 'page') {
+			$optionList[] = array(
+				$GLOBALS['LANG']->sL('LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.mode.I.rte'),
+				"uploadRTE",
+				"EXT:imagecarousel/mode_rte.gif"
+			);
+		}
 		if (t3lib_extMgm::isLoaded("dam")) {
 			$optionList[] = array(
 				$GLOBALS['LANG']->sL('LLL:EXT:imagecarousel/locallang_db.xml:tt_content.pi_flexform.mode.I.dam'),
