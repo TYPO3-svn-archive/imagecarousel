@@ -126,11 +126,11 @@ $tempColumns['tx_imagecarousel_stoprecursion'] = array(
 
 t3lib_div::loadTCA('pages');
 t3lib_extMgm::addTCAcolumns('pages', $tempColumns, 1);
-t3lib_extMgm::addToAllTCAtypes('pages','tx_imagecarousel_mode;;;;1-1-1, tx_imagecarousel_damimages, tx_imagecarousel_damcategories, tx_imagecarousel_images, tx_imagecarousel_hrefs, tx_imagecarousel_captions, tx_imagecarousel_skin, tx_imagecarousel_stoprecursion');
+t3lib_extMgm::addToAllTCAtypes('pages', '--div--;LLL:EXT:imagecarousel/locallang_db.xml:pages.tx_imagecarousel_div, tx_imagecarousel_mode;;;;3-3-3, tx_imagecarousel_damimages, tx_imagecarousel_damcategories, tx_imagecarousel_images, tx_imagecarousel_hrefs, tx_imagecarousel_captions, tx_imagecarousel_skin, tx_imagecarousel_stoprecursion');
 
 t3lib_div::loadTCA('pages_language_overlay');
 t3lib_extMgm::addTCAcolumns('pages_language_overlay', $tempColumns, 1);
-t3lib_extMgm::addToAllTCAtypes('pages_language_overlay','tx_imagecarousel_mode;;;;1-1-1, tx_imagecarousel_damimages, tx_imagecarousel_damcategories, tx_imagecarousel_images, tx_imagecarousel_hrefs, tx_imagecarousel_captions, tx_imagecarousel_skin, tx_imagecarousel_stoprecursion');
+t3lib_extMgm::addToAllTCAtypes('pages_language_overlay', '--div--;LLL:EXT:imagecarousel/locallang_db.xml:pages.tx_imagecarousel_div, tx_imagecarousel_mode;;;;3-3-3, tx_imagecarousel_damimages, tx_imagecarousel_damcategories, tx_imagecarousel_images, tx_imagecarousel_hrefs, tx_imagecarousel_captions, tx_imagecarousel_skin, tx_imagecarousel_stoprecursion');
 
 $TCA['pages']['ctrl']['requestUpdate'] .= ($TCA['pages']['ctrl']['requestUpdate'] ? ',' : ''). 'tx_imagecarousel_mode';
 $TCA['pages_language_overlay']['ctrl']['requestUpdate'] .= ($TCA['pages_language_overlay']['ctrl']['requestUpdate'] ? ',' : ''). 'tx_imagecarousel_mode';
