@@ -388,7 +388,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 				'tx_dam',
 				'tx_dam_mm_cat',
 				'tx_dam_cat',
-				" AND tx_dam_cat.uid IN (".implode(",", $damcategories).") AND tx_dam.file_mime_type='image'",
+				" AND tx_dam_cat.uid IN (".implode(",", $damcategories).")",
 				'',
 				'tx_dam.sorting',
 				''
@@ -404,7 +404,9 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 				'imagecarousel',
 				'tx_dam_mm_ref',
 				tx_dam_db::getMetaInfoFieldList() . $fields,
-				"tx_dam.file_mime_type = 'image'"
+				'',
+				'',
+				'tx_dam_mm_ref.sorting_foreign'
 			);
 		}
 		if (count($images['rows']) > 0) {
@@ -416,74 +418,78 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			// add image
 			foreach ($images['rows'] as $key => $row) {
 				$row = tx_dam_db::getRecordOverlay('tx_dam', $row, $conf);
-				// set the data
-				$this->images[] = $row['file_path'].$row['file_name'];$
-				// set the href
-				$href = '';
-				unset($href);
-				if (count($damHrefFields) > 0) {
-					foreach ($damHrefFields as $damHrefField) {
-						if (! isset($href) && trim($row[$damHrefField])) {
-							$href = $row[$damHrefField];
-							break;
-						}
-					}
-				}
-				$this->hrefs[] = $href;
-
-				// set the caption
-				$caption = '';
-				unset($caption);
-				if (count($damCaptionFields) > 0) {
-					if (isset($this->conf['damCaptionObject'])) {
-						foreach ($damCaptionFields as $damCaptionField) {
-							if (isset($row[$damCaptionField])) {
-								$GLOBALS['TSFE']->register['dam_'.$damCaptionField] = $row[$damCaptionField];
-							}
-						}
-						$caption = trim($this->cObj->cObjGetSingle($this->conf['damCaptionObject'], $this->conf['damCaptionObject.']));
-						// Unset the registered values
-						foreach ($damCaptionFields as $damCaptionField) {
-							unset($GLOBALS['TSFE']->register['dam_'.$damCaptionField]);
-						}
-					} else {
-						// the old way
-						foreach ($damCaptionFields as $damCaptionField) {
-							if (! isset($caption) && trim($row[$damCaptionField])) {
-								$caption = $row[$damCaptionField];
+				$absFileName = t3lib_div::getFileAbsFileName($row['file_path'] . $row['file_name']);
+				$size = @getimagesize($absFileName);
+				if (preg_match("/^image\//i", $size['mime'])) {
+					// set the data
+					$this->images[] = $row['file_path'] . $row['file_name'];$
+					// set the href
+					$href = '';
+					unset($href);
+					if (count($damHrefFields) > 0) {
+						foreach ($damHrefFields as $damHrefField) {
+							if (! isset($href) && trim($row[$damHrefField])) {
+								$href = $row[$damHrefField];
 								break;
 							}
 						}
 					}
-				}
-				$this->captions[] = $caption;
+					$this->hrefs[] = $href;
 
-				// set the description
-				$description = '';
-				unset($description);
-				if (count($damDescFields) > 0) {
-					if (isset($this->conf['damDescObject'])) {
-						foreach ($damDescFields as $damDescField) {
-							if (isset($row[$damDescField])) {
-								$GLOBALS['TSFE']->register['dam_'.$damDescField] = $row[$damDescField];
+					// set the caption
+					$caption = '';
+					unset($caption);
+					if (count($damCaptionFields) > 0) {
+						if (isset($this->conf['damCaptionObject'])) {
+							foreach ($damCaptionFields as $damCaptionField) {
+								if (isset($row[$damCaptionField])) {
+									$GLOBALS['TSFE']->register['dam_'.$damCaptionField] = $row[$damCaptionField];
+								}
 							}
-						}
-						$description = trim($this->cObj->cObjGetSingle($this->conf['damDescObject'], $this->conf['damDescObject.']));
-						// Unset the registered values
-						foreach ($damDescFields as $damDescField) {
-							unset($GLOBALS['TSFE']->register['dam_'.$damDescField]);
-						}
-					} else {
-						// the old way
-						foreach ($damDescFields as $damDescField) {
-							if (! isset($description) && trim($row[$damDescField])) {
-								$description = $row[$damDescField];
-								break;
+							$caption = trim($this->cObj->cObjGetSingle($this->conf['damCaptionObject'], $this->conf['damCaptionObject.']));
+							// Unset the registered values
+							foreach ($damCaptionFields as $damCaptionField) {
+								unset($GLOBALS['TSFE']->register['dam_'.$damCaptionField]);
+							}
+						} else {
+							// the old way
+							foreach ($damCaptionFields as $damCaptionField) {
+								if (! isset($caption) && trim($row[$damCaptionField])) {
+									$caption = $row[$damCaptionField];
+									break;
+								}
 							}
 						}
 					}
+					$this->captions[] = $caption;
+
+					// set the description
+					$description = '';
+					unset($description);
+					if (count($damDescFields) > 0) {
+						if (isset($this->conf['damDescObject'])) {
+							foreach ($damDescFields as $damDescField) {
+								if (isset($row[$damDescField])) {
+									$GLOBALS['TSFE']->register['dam_'.$damDescField] = $row[$damDescField];
+								}
+							}
+							$description = trim($this->cObj->cObjGetSingle($this->conf['damDescObject'], $this->conf['damDescObject.']));
+							// Unset the registered values
+							foreach ($damDescFields as $damDescField) {
+								unset($GLOBALS['TSFE']->register['dam_'.$damDescField]);
+							}
+						} else {
+							// the old way
+							foreach ($damDescFields as $damDescField) {
+								if (! isset($description) && trim($row[$damDescField])) {
+									$description = $row[$damDescField];
+									break;
+								}
+							}
+						}
+					}
+					$this->description[] = $description;
 				}
-				$this->description[] = $description;
 			}
 		}
 		return true;
