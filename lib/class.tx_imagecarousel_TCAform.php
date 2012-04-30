@@ -39,7 +39,7 @@ class tx_imagecarousel_TCAform
 	 */
 	function hideRTE($PA, $fobj)
 	{
-		if (t3lib_div::int_from_ver(TYPO3_version) >= 4004000) {
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4004000) {
 			$classes = array (
 				'.t3-form-field-label-flexsection',
 				'.t3-form-field-toggle-flexsection',
@@ -47,7 +47,7 @@ class tx_imagecarousel_TCAform
 				'.t3-form-field-add-flexsection',
 			);
 			return t3lib_div::wrapJS("$$('".implode(',', $classes)."').each(function(n){n.hide();});");
-		} elseif (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
+		} elseif (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4003000) {
 			return t3lib_div::wrapJS("$$('div.bgColor2').each(function(n){n.next(0).hide();n.next(1).hide();n.next(2).hide();n.hide();})");
 		}
 	}
