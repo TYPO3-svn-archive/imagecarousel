@@ -612,12 +612,6 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			}
 			$options[] = "scroll: {$this->conf['scroll']}";
 		}
-		if (! $this->conf['externalcontrol']) {
-			if ($this->conf['movewrap'] == "circular") {
-				$options[] = "itemVisibleInCallback:  {onBeforeAnimation: imagecarousel.itemVisibleInCallback}";
-				$options[] = "itemVisibleOutCallback: {onAfterAnimation:  imagecarousel.itemVisibleOutCallback}";
-			}
-		}
 		// init Callback
 		$initCallback[] = "imagecarousel.initCallback('#{$this->getContentKey()}',carousel,state)";
 		if ($this->conf['stoponmouseover'] == 1) {

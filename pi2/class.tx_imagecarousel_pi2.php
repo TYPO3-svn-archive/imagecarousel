@@ -355,7 +355,7 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 		// checks if t3jquery is loaded
 		if (T3JQUERY === TRUE) {
 			tx_t3jquery::addJqJS();
-			if ($this->conf['mouseWheel'] && t3lib_utility_VersionNumber::convertVersionNumberToInteger($this->pagerenderer->getExtensionVersion('t3jquery')) <= 1010003) {
+			if ($this->conf['mouseWheel'] && class_exists(t3lib_utility_VersionNumber) && t3lib_utility_VersionNumber::convertVersionNumberToInteger($this->pagerenderer->getExtensionVersion('t3jquery')) <= 1010003) {
 				$this->pagerenderer->addJsFile($this->conf['jQueryMouseWheel']);
 			}
 		} else {

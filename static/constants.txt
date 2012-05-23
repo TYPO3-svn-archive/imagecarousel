@@ -39,7 +39,7 @@ plugin.tx_imagecarousel_pi1 {
 	file.jQueryCarousel = EXT:imagecarousel/res/jquery/js/jquery.jcarousel-0.2.8.min.js
 
 	# cat=plugin.tx_imagecarousel/file/050; type=file[js]; label=Script file: Location of the additional JS (needed for init)
-	file.jsScript = EXT:imagecarousel/res/jquery/js/imagecarousel-1.4.1.js
+	file.jsScript = EXT:imagecarousel/res/jquery/js/imagecarousel-1.9.6.js
 
 	# cat=plugin.tx_imagecarousel/file/060; type=user[EXT:imagecarousel/lib/class.tx_imagecarousel_tsparserext.php:tx_imagecarousel_tsparserext->getSkins]; label=Skin: Skin to use as default
 	skin = tango
