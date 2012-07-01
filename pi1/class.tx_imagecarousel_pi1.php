@@ -382,7 +382,7 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 		}
 		if ($fromCategory === true) {
 			// Get the images from dam category
-			$damcategories = $this->getDamcats($this->lConf['damcategories']);
+			$damcategories = $this->getDamcats($this->conf['damcategories']);
 			$res = $GLOBALS['TYPO3_DB']->exec_SELECT_mm_query(
 				tx_dam_db::getMetaInfoFieldList() . $fields,
 				'tx_dam',
@@ -551,6 +551,14 @@ class tx_imagecarousel_pi1 extends tslib_pibase
 			$jQueryNoConflict = "jQuery.noConflict();";
 		} else {
 			$jQueryNoConflict = "";
+		}
+
+		// wrap if integer
+		if (is_numeric($this->conf['imagewidth'])) {
+			$this->conf['imagewidth'] = $this->cObj->stdWrap($this->conf['imagewidth'], $this->conf['integerWidthWrap.']);
+		}
+		if (is_numeric($this->conf['imageheight'])) {
+			$this->conf['imageheight'] = $this->cObj->stdWrap($this->conf['imageheight'], $this->conf['integerHeightWrap.']);
 		}
 
 		preg_match("/^([0-9]*)/i", $this->conf['imagewidth'],  $reg_width);

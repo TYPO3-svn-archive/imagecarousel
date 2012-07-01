@@ -56,6 +56,13 @@ plugin.tx_imagecarousel_pi1 {
 	}
 	damHrefFields = {$plugin.tx_imagecarousel_pi1.damHrefFields}
 
+	integerWidthWrap {
+		wrap = |
+	}
+	integerHeightWrap {
+		wrap = |
+	}
+
 	carousel {
 		normal {
 			image {

@@ -290,6 +290,14 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 			$jQueryNoConflict = "";
 		}
 
+		// wrap if integer
+		if (is_numeric($this->conf['imagewidth'])) {
+			$this->conf['imagewidth'] = $this->cObj->stdWrap($this->conf['imagewidth'], $this->conf['integerWidthWrap.']);
+		}
+		if (is_numeric($this->conf['imageheight'])) {
+			$this->conf['imageheight'] = $this->cObj->stdWrap($this->conf['imageheight'], $this->conf['integerHeightWrap.']);
+		}
+
 		preg_match("/^([0-9]*)/i", $this->conf['imagewidth'],  $reg_width);
 		preg_match("/^([0-9]*)/i", $this->conf['imageheight'], $reg_height);
 
