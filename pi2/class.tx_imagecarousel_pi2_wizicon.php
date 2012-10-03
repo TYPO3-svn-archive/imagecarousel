@@ -36,16 +36,14 @@ class tx_imagecarousel_pi2_wizicon {
 	 * @param	array		$wizardItems: The wizard items
 	 * @return	Modified array with wizard items
 	 */
-	function proc($wizardItems)	{
-		global $LANG;
-
+	function proc($wizardItems)
+	{
 		$LL = $this->includeLocalLang();
-
 		$wizardItems['plugins_tx_imagecarousel_pi2'] = array(
-			'icon'=>t3lib_extMgm::extRelPath('imagecarousel').'pi2/ce_wiz.gif',
-			'title'=>$LANG->getLLL('pi2_title',$LL),
-			'description'=>$LANG->getLLL('pi2_plus_wiz_description',$LL),
-			'params'=>'&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=imagecarousel_pi2'
+			'icon' => t3lib_extMgm::extRelPath('imagecarousel').'pi2/ce_wiz.gif',
+			'title' => $GLOBALS['LANG']->getLLL('pi2_title', $LL),
+			'description' => $GLOBALS['LANG']->getLLL('pi2_plus_wiz_description', $LL),
+			'params' => '&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=imagecarousel_pi2'
 		);
 
 		return $wizardItems;
@@ -56,9 +54,14 @@ class tx_imagecarousel_pi2_wizicon {
 	 *
 	 * @return	The array with language labels
 	 */
-	function includeLocalLang()	{
+	function includeLocalLang()
+	{
 		$llFile = t3lib_extMgm::extPath('imagecarousel').'locallang.xml';
-		$LOCAL_LANG = t3lib_div::readLLXMLfile($llFile, $GLOBALS['LANG']->lang);
+		if (class_exists(t3lib_l10n_parser_Llxml)) {
+			$LOCAL_LANG = t3lib_l10n_parser_Llxml::getParsedData($llFile, $GLOBALS['LANG']->lang);
+		} else {
+			$LOCAL_LANG = t3lib_div::readLLXMLfile($llFile, $GLOBALS['LANG']->lang);
+		}
 
 		return $LOCAL_LANG;
 	}

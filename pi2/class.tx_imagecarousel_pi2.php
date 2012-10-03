@@ -62,19 +62,19 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 			$this->type = 'normal';
 			// It's a content, al data from flexform
 
-			$this->lConf['mode']          = $this->getFlexformData('general', 'mode');
-			$this->lConf['images']        = $this->getFlexformData('general', 'images', ($this->lConf['mode'] == 'upload'));
-			$this->lConf['hrefs']         = $this->getFlexformData('general', 'hrefs', ($this->lConf['mode'] == 'upload'));
-			$this->lConf['captions']      = $this->getFlexformData('general', 'captions', ($this->lConf['mode'] == 'upload'));
-			$this->lConf['damimages']     = $this->getFlexformData('general', 'damimages', ($this->lConf['mode'] == 'dam'));
-			$this->lConf['damcategories'] = $this->getFlexformData('general', 'damcategories', ($this->lConf['mode'] == 'dam_catedit'));
+			$this->conf['mode']          = $this->getFlexformData('general', 'mode');
+			$this->conf['images']        = $this->getFlexformData('general', 'images', ($this->conf['mode'] == 'upload'));
+			$this->conf['hrefs']         = $this->getFlexformData('general', 'hrefs', ($this->conf['mode'] == 'upload'));
+			$this->conf['captions']      = $this->getFlexformData('general', 'captions', ($this->conf['mode'] == 'upload'));
+			$this->conf['damimages']     = $this->getFlexformData('general', 'damimages', ($this->conf['mode'] == 'dam'));
+			$this->conf['damcategories'] = $this->getFlexformData('general', 'damcategories', ($this->conf['mode'] == 'dam_catedit'));
 
-			$imagesRTE = $this->getFlexformData('general', 'imagesRTE', ($this->lConf['mode'] == 'uploadRTE'));
-			$this->lConf['imagesRTE'] = array();
+			$imagesRTE = $this->getFlexformData('general', 'imagesRTE', ($this->conf['mode'] == 'uploadRTE'));
+			$this->conf['imagesRTE'] = array();
 			if (isset($imagesRTE['el']) && count($imagesRTE['el']) > 0) {
 				foreach ($imagesRTE['el'] as $elKey => $el) {
 					if (is_numeric($elKey)) {
-						$this->lConf['imagesRTE'][] = array(
+						$this->conf['imagesRTE'][] = array(
 							"image"       => $el['data']['el']['image']['vDEF'],
 							"href"        => $el['data']['el']['href']['vDEF'],
 							"caption"     => $el['data']['el']['caption']['vDEF'],
@@ -114,7 +114,7 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 			$this->setContentKey($this->extKey . "_c" . $this->cObj->data['uid']);
 
 			// define the images
-			switch ($this->lConf['mode']) {
+			switch ($this->conf['mode']) {
 				case "" : {}
 				case "folder" : {}
 				case "upload" : {
@@ -220,8 +220,8 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 					) {
 						$used_page = $page;
 						$pageID    = $used_page['uid'];
-						$this->lConf['mode']          = $used_page['tx_imagecarousel_mode'];
-						$this->lConf['damcategories'] = $used_page['tx_imagecarousel_damcategories'];
+						$this->conf['mode']          = $used_page['tx_imagecarousel_mode'];
+						$this->conf['damcategories'] = $used_page['tx_imagecarousel_damcategories'];
 					}
 				}
 			}
@@ -231,7 +231,7 @@ class tx_imagecarousel_pi2 extends tx_imagecarousel_pi1
 					$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 				}
 				// define the images
-				switch ($this->lConf['mode']) {
+				switch ($this->conf['mode']) {
 					case "" : {}
 					case "folder" : {}
 					case "upload" : {
